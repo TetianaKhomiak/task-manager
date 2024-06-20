@@ -1,0 +1,12 @@
+.column__wrapper {
+    width: 200px;
+    border: 1px solid rgb(244, 220, 220);
+    min-height: 100px;
+    background-color: rgb(240, 248, 245);
+    cursor: grab;
+}
+
+.column__title {
+    display: flex;
+    justify-content: space-between;
+}

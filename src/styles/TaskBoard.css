@@ -1,0 +1,6 @@
+.board__wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin: 25px;
+}
