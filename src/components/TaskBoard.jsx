@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import TaskColumn from "./TaskColumn";
 import "../styles/TaskBoard.css";
 import DropAreaTaskColumn from "./DropAreaTaskColumn";

@@ -2,18 +2,11 @@ import React, { useState } from "react";
 import "../styles/TaskColumn.css";
 import TaskForm from "./TaskForm";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addColumn,
-  setActiveCard,
-  deleteColum,
-} from "../redux/slices/taskColumnsSlice";
-import TaskCard from "./TaskCard";
+import { setActiveCard, deleteColum } from "../redux/slices/taskColumnsSlice";
+import TaskCards from "./TaskCards";
 
 const TaskColumn = ({ title, columnIndex }) => {
   const [isAddingTask, setIsAddingTask] = useState(false);
-
-  const tasks = useSelector((state) => state.tasksList.task);
-
   const { columns } = useSelector((state) => state.taskColumns);
   const dispatch = useDispatch();
 
@@ -49,12 +42,12 @@ const TaskColumn = ({ title, columnIndex }) => {
 
       {isAddingTask ? (
         <>
-          <TaskCard columnName={title} />
+          <TaskCards columnName={title} />
           <TaskForm setIsAddingTask={setIsAddingTask} columnName={title} />
         </>
       ) : (
         <>
-          <TaskCard columnName={title} />
+          <TaskCards columnName={title} />
           <button onClick={handleCreateTask}>+ Create Task</button>
         </>
       )}
