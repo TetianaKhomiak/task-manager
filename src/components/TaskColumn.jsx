@@ -7,6 +7,8 @@ const TaskColumn = ({
   columnIndex,
   taskColumnList,
   setTaskColumnList,
+  setActiveCard,
+  index,
 }) => {
   const [isAddingTask, setIsAddingTask] = useState(false);
 
@@ -22,12 +24,14 @@ const TaskColumn = ({
   };
 
   return (
-    <div className="column__wrapper">
+    <div
+      className="column__wrapper"
+      draggable
+      onDragStart={() => setActiveCard(index)}
+      onDragEnd={() => setActiveCard(null)}>
       <div className="column__title">
         <h3>{title}</h3>
-        {title !== "awaiting" && (
-          <button onClick={handleDeleteColumn}>X</button>
-        )}
+        {title !== "To do" && <button onClick={handleDeleteColumn}>X</button>}
       </div>
 
       {isAddingTask ? (

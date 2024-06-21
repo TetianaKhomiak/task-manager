@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import TaskColumn from "./TaskColumn";
 import "../styles/TaskBoard.css";
+import DropAreaTaskColumn from "./DropAreaTaskColumn";
 
 const TaskBoard = () => {
   const [isAddingColumn, setIsAddingColumn] = useState(false);
-  const [taskColumnList, setTaskColumnList] = useState(["awaiting"]);
-  const [selectValue, setSelectValue] = useState("To Do");
+  const [taskColumnList, setTaskColumnList] = useState(["To do"]);
+  const [selectValue, setSelectValue] = useState("In Progress");
+  const [activeCard, setActiveCard] = useState(null);
 
   const handleAddColumn = () => {
     setIsAddingColumn(true);
@@ -19,18 +21,31 @@ const TaskBoard = () => {
     e.preventDefault();
     if (selectValue) {
       setTaskColumnList([...taskColumnList, selectValue]);
-      setSelectValue("To do");
+      setSelectValue("In Progress");
       setIsAddingColumn(false);
     }
   };
 
   const handleCancel = () => {
     setIsAddingColumn(false);
-    setSelectValue("To Do");
+    setSelectValue("In Progress");
+  };
+
+  const onDrop = (position) => {
+    if (activeCard == null || activeCard === undefined) {
+      return;
+    }
+    const taskToMove = taskColumnList[activeCard];
+    const updatedTasks = taskColumnList.filter(
+      (_, index) => index !== activeCard
+    );
+    updatedTasks.splice(position, 0, taskToMove);
+    setTaskColumnList(updatedTasks);
   };
 
   return (
     <div className="board__wrapper">
+      <DropAreaTaskColumn onDrop={() => onDrop(0)} />
       {taskColumnList &&
         taskColumnList.length > 0 &&
         taskColumnList.map((item, index) => (
@@ -41,8 +56,11 @@ const TaskBoard = () => {
                 columnIndex={index}
                 taskColumnList={taskColumnList}
                 setTaskColumnList={setTaskColumnList}
+                setActiveCard={setActiveCard}
+                index={index}
               />
             </div>
+            <DropAreaTaskColumn onDrop={() => onDrop(index + 1)} />
           </React.Fragment>
         ))}
       {isAddingColumn ? (
@@ -52,7 +70,6 @@ const TaskBoard = () => {
               name="category"
               onChange={handleSelectChange}
               value={selectValue}>
-              <option value="To Do">To Do</option>
               <option value="In Progress">In Progress</option>
               <option value="On Hold">On Hold</option>
               <option value="Completed">Completed</option>
@@ -66,7 +83,9 @@ const TaskBoard = () => {
         </>
       ) : (
         taskColumnList.length < 4 && (
-          <button onClick={handleAddColumn}>+</button>
+          <button onClick={handleAddColumn} className="board__btn_add-column">
+            + add new category
+          </button>
         )
       )}
     </div>

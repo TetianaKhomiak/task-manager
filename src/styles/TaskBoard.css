@@ -1,6 +1,10 @@
 .board__wrapper {
     display: flex;
-    align-items: flex-start;
     gap: 15px;
     margin: 25px;
+}
+
+.board__btn_add-column {
+
+    height: 25px;
 }
