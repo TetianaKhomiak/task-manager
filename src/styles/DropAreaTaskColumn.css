@@ -1,5 +1,5 @@
 .drop_area {
-    width: 100%;
+    width: 250px;
     min-height: 100px;
     color: #dcdcdc;
     border: 1px dashed #dcdcdc;
@@ -12,4 +12,5 @@
 
 .hide_drop {
     opacity: 0;
+    width: 0;
 }

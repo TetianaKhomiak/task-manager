@@ -4,7 +4,7 @@ import "../styles/TaskBoard.css";
 
 const TaskBoard = () => {
   const [isAddingColumn, setIsAddingColumn] = useState(false);
-  const [taskColumnList, setTaskColumnList] = useState([]);
+  const [taskColumnList, setTaskColumnList] = useState(["awaiting"]);
   const [selectValue, setSelectValue] = useState("To Do");
 
   const handleAddColumn = () => {
@@ -31,11 +31,6 @@ const TaskBoard = () => {
 
   return (
     <div className="board__wrapper">
-      <TaskColumn
-        title="awaiting"
-        taskColumnList={taskColumnList}
-        setTaskColumnList={setTaskColumnList}
-      />
       {taskColumnList &&
         taskColumnList.length > 0 &&
         taskColumnList.map((item, index) => (
@@ -70,7 +65,7 @@ const TaskBoard = () => {
           </form>
         </>
       ) : (
-        taskColumnList.length < 3 && (
+        taskColumnList.length < 4 && (
           <button onClick={handleAddColumn}>+</button>
         )
       )}
