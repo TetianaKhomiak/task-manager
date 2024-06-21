@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TaskColumn from "./TaskColumn";
 import "../styles/TaskBoard.css";
 import DropAreaTaskColumn from "./DropAreaTaskColumn";
@@ -9,7 +9,7 @@ import {
   addColumn,
   cancleAdding,
   dropColumn,
-} from "../redux/slices/TaskColumnsSlice";
+} from "../redux/slices/taskColumnsSlice";
 
 const TaskBoard = () => {
   const { columns, isAddingColumn, selectValue, activeCard } = useSelector(
