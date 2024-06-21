@@ -1,64 +1,57 @@
-import React, { useState } from "react";
+import React from "react";
 import TaskColumn from "./TaskColumn";
 import "../styles/TaskBoard.css";
 import DropAreaTaskColumn from "./DropAreaTaskColumn";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setIsAddingColumn,
+  setSelectValue,
+  addColumn,
+  cancleAdding,
+  dropColumn,
+} from "../redux/slices/TaskColumnsSlice";
 
 const TaskBoard = () => {
-  const [isAddingColumn, setIsAddingColumn] = useState(false);
-  const [taskColumnList, setTaskColumnList] = useState(["To do"]);
-  const [selectValue, setSelectValue] = useState("In Progress");
-  const [activeCard, setActiveCard] = useState(null);
-
-  const handleAddColumn = () => {
-    setIsAddingColumn(true);
-  };
-
-  const handleSelectChange = (e) => {
-    setSelectValue(e.target.value);
-  };
+  const { columns, isAddingColumn, selectValue, activeCard } = useSelector(
+    (state) => state.taskColumns
+  );
+  const dispatch = useDispatch();
 
   const handleAddTaskColumn = (e) => {
     e.preventDefault();
     if (selectValue) {
-      setTaskColumnList([...taskColumnList, selectValue]);
-      setSelectValue("In Progress");
-      setIsAddingColumn(false);
+      dispatch(addColumn(selectValue));
     }
   };
 
-  const handleCancel = () => {
-    setIsAddingColumn(false);
-    setSelectValue("In Progress");
+  const handleSelectChange = (e) => {
+    dispatch(setSelectValue(e.target.value));
+  };
+
+  const handleCancelAdding = () => {
+    dispatch(cancleAdding());
+  };
+
+  const handleAddColumnButtonClick = () => {
+    dispatch(setIsAddingColumn(true));
   };
 
   const onDrop = (position) => {
     if (activeCard == null || activeCard === undefined) {
       return;
     }
-    const taskToMove = taskColumnList[activeCard];
-    const updatedTasks = taskColumnList.filter(
-      (_, index) => index !== activeCard
-    );
-    updatedTasks.splice(position, 0, taskToMove);
-    setTaskColumnList(updatedTasks);
+    dispatch(dropColumn({ fromIndex: activeCard, toIndex: position }));
   };
 
   return (
     <div className="board__wrapper">
       <DropAreaTaskColumn onDrop={() => onDrop(0)} />
-      {taskColumnList &&
-        taskColumnList.length > 0 &&
-        taskColumnList.map((item, index) => (
+      {columns &&
+        columns.length > 0 &&
+        columns.map((item, index) => (
           <React.Fragment key={index}>
             <div>
-              <TaskColumn
-                title={item}
-                columnIndex={index}
-                taskColumnList={taskColumnList}
-                setTaskColumnList={setTaskColumnList}
-                setActiveCard={setActiveCard}
-                index={index}
-              />
+              <TaskColumn title={item} columnIndex={index} />
             </div>
             <DropAreaTaskColumn onDrop={() => onDrop(index + 1)} />
           </React.Fragment>
@@ -75,16 +68,18 @@ const TaskBoard = () => {
               <option value="Completed">Completed</option>
             </select>
 
-            <button type="submit">add</button>
-            <button type="button" onClick={handleCancel}>
-              cancel
+            <button type="submit">Add</button>
+            <button type="button" onClick={handleCancelAdding}>
+              Cancel
             </button>
           </form>
         </>
       ) : (
-        taskColumnList.length < 4 && (
-          <button onClick={handleAddColumn} className="board__btn_add-column">
-            + add new category
+        columns.length < 4 && (
+          <button
+            onClick={handleAddColumnButtonClick}
+            className="board__btn_add-column">
+            + Add New Category
           </button>
         )
       )}
