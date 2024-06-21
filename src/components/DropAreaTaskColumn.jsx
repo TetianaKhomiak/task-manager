@@ -15,7 +15,7 @@ const DropAreaTaskColumn = ({ onDrop }) => {
       }}
       onDragOver={(e) => e.preventDefault()}
       className={showDrop ? "drop_area" : "hide_drop"}>
-      Drop Here
+      "Drop Here"
     </section>
   );
 };
