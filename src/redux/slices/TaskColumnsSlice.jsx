@@ -34,6 +34,9 @@ export const taskColumnsSlice = createSlice({
     setActiveCard: (state, action) => {
       state.activeCard = action.payload;
     },
+    deleteColum: (state, action) => {
+      state.columns = action.payload;
+    },
   },
 });
 
@@ -45,4 +48,5 @@ export const {
   cancleAdding,
   dropColumn,
   setActiveCard,
+  deleteColum,
 } = taskColumnsSlice.actions;

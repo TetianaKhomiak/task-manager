@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import "../styles/TaskColumn.css";
 import TaskForm from "./TaskForm";
 import { useSelector, useDispatch } from "react-redux";
-import { addColumn, setActiveCard } from "../redux/slices/taskColumnsSlice";
+import {
+  addColumn,
+  setActiveCard,
+  deleteColum,
+} from "../redux/slices/taskColumnsSlice";
 import TaskCard from "./TaskCard";
 
 const TaskColumn = ({ title, columnIndex }) => {
@@ -21,7 +25,7 @@ const TaskColumn = ({ title, columnIndex }) => {
     const filteredTaskColumnList = columns.filter(
       (task, index) => columnIndex !== index
     );
-    dispatch(addColumn(filteredTaskColumnList));
+    dispatch(deleteColum(filteredTaskColumnList));
   };
 
   const handleDragStart = () => {

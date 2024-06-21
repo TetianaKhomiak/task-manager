@@ -43,6 +43,10 @@ const TaskBoard = () => {
     dispatch(dropColumn({ fromIndex: activeCard, toIndex: position }));
   };
 
+  const isOptionDisabled = (option) => {
+    return columns.includes(option);
+  };
+
   return (
     <div className="board__wrapper">
       <DropAreaTaskColumn onDrop={() => onDrop(0)} />
@@ -63,9 +67,19 @@ const TaskBoard = () => {
               name="category"
               onChange={handleSelectChange}
               value={selectValue}>
-              <option value="In Progress">In Progress</option>
-              <option value="On Hold">On Hold</option>
-              <option value="Completed">Completed</option>
+              <option
+                value="In Progress"
+                disabled={isOptionDisabled("In Progress")}>
+                In Progress
+              </option>
+              <option value="On Hold" disabled={isOptionDisabled("On Hold")}>
+                On Hold
+              </option>
+              <option
+                value="Completed"
+                disabled={isOptionDisabled("Completed")}>
+                Completed
+              </option>
             </select>
 
             <button type="submit">Add</button>
