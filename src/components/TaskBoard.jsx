@@ -82,7 +82,9 @@ const TaskBoard = () => {
               </option>
             </select>
 
-            <button type="submit">Add</button>
+            <button type="submit" disabled={isOptionDisabled(selectValue)}>
+              Add
+            </button>
             <button type="button" onClick={handleCancelAdding}>
               Cancel
             </button>
