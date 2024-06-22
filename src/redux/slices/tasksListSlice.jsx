@@ -22,6 +22,17 @@ export const tasksListSlice = createSlice({
       });
       state.task = updatedTasks;
     },
+    updateDeadline: (state, action) => {
+      const { name, deadline } = action.payload;
+      const updatedTasks = state.task.map((item) => {
+        if (item.name === name) {
+          item.deadline = deadline;
+        }
+        return item;
+      });
+      state.task = updatedTasks;
+    },
+
     updateTasks: (state, action) => {
       state.task = action.payload;
     },
@@ -38,5 +49,11 @@ export const tasksListSlice = createSlice({
 });
 
 export default tasksListSlice.reducer;
-export const { addTask, updateTasks, setActiveCard, deleteCard, updateTask } =
-  tasksListSlice.actions;
+export const {
+  addTask,
+  updateTasks,
+  setActiveCard,
+  deleteCard,
+  updateTask,
+  updateDeadline,
+} = tasksListSlice.actions;

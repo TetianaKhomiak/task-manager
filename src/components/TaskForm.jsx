@@ -13,6 +13,8 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
       addTask({
         name: inputValue,
         columnName,
+        creationDate: new Date().toISOString(),
+        deadline: null,
       })
     );
     setInputValue("");
