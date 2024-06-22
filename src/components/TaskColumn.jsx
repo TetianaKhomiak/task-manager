@@ -4,10 +4,12 @@ import TaskForm from "./TaskForm";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveCard, deleteColum } from "../redux/slices/taskColumnsSlice";
 import TaskCards from "./TaskCards";
+import { updateTasks } from "../redux/slices/tasksListSlice";
 
 const TaskColumn = ({ title, columnIndex }) => {
   const [isAddingTask, setIsAddingTask] = useState(false);
   const { columns } = useSelector((state) => state.taskColumns);
+  const tasks = useSelector((state) => state.tasksList.task);
   const dispatch = useDispatch();
 
   const handleCreateTask = () => {
@@ -15,10 +17,18 @@ const TaskColumn = ({ title, columnIndex }) => {
   };
 
   const handleDeleteColumn = () => {
+    if (!columns || !tasks) {
+      console.error("Columns or tasks are undefined");
+      return;
+    }
+
     const filteredTaskColumnList = columns.filter(
-      (task, index) => columnIndex !== index
+      (_, index) => columnIndex !== index
     );
+    const filteredTaskCards = tasks.filter((task) => task.columnName !== title);
+
     dispatch(deleteColum(filteredTaskColumnList));
+    dispatch(updateTasks(filteredTaskCards));
   };
 
   const handleDragStart = () => {
