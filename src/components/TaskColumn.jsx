@@ -11,7 +11,7 @@ const TaskColumn = ({ title, columnIndex }) => {
   const { columns } = useSelector((state) => state.taskColumns);
   const tasks = useSelector((state) => state.tasksList.task);
   const dispatch = useDispatch();
-
+  console.log(columns);
   const handleCreateTask = () => {
     setIsAddingTask(true);
   };
