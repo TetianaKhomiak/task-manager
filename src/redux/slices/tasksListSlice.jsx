@@ -18,8 +18,15 @@ export const tasksListSlice = createSlice({
     setActiveCard: (state, action) => {
       state.activeCard = action.payload;
     },
+    deleteCard: (state, action) => {
+      const updatedTasks = state.task.filter(
+        (item) => item.name !== action.payload
+      );
+      state.task = updatedTasks;
+    },
   },
 });
 
 export default tasksListSlice.reducer;
-export const { addTask, updateTasks, setActiveCard } = tasksListSlice.actions;
+export const { addTask, updateTasks, setActiveCard, deleteCard } =
+  tasksListSlice.actions;

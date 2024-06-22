@@ -30,17 +30,18 @@ const TaskCards = ({ columnName }) => {
   return (
     <div>
       <DropAreaTask onDrop={() => onDrop(columnName, 0)} />
-      {tasks.map(
-        (task, index) =>
-          task.columnName === columnName && (
-            <div key={index}>
-              <div className="task__wrapper">
-                <TaskCard task={task} index={index} />
+      {tasks &&
+        tasks.map(
+          (task, index) =>
+            task.columnName === columnName && (
+              <div key={index}>
+                <div className="task__wrapper">
+                  <TaskCard task={task} index={index} />
+                </div>
+                <DropAreaTask onDrop={() => onDrop(columnName, index + 1)} />
               </div>
-              <DropAreaTask onDrop={() => onDrop(columnName, index + 1)} />
-            </div>
-          )
-      )}
+            )
+        )}
     </div>
   );
 };

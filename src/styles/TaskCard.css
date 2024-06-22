@@ -3,3 +3,8 @@
     padding: 20px;
     margin: 20px;
 }
+
+.card__wrapper {
+    display: flex;
+    justify-content: space-around;
+}
