@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import { CiEdit } from "react-icons/ci";
+import { IoEllipsisVerticalOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { formatDate, getMinDate } from "../../utils";
 import {
@@ -7,9 +9,7 @@ import {
   updateDeadline,
   updateTask,
 } from "../redux/slices/tasksListSlice";
-import { PiDotsSixVerticalBold } from "react-icons/pi";
 import DropdownMenu from "./DropdownMenu";
-import { CiEdit } from "react-icons/ci";
 
 const TaskCard = ({ task, index }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -25,6 +25,7 @@ const TaskCard = ({ task, index }) => {
   const [minDate, setMinDate] = useState("");
   const date = formatDate(task.creationDate);
   const [deadlineValue, setDeadlineValue] = useState(task.deadline || "");
+  const [leftCharacterLenght, setLeftCharacterLenght] = useState(20);
 
   const dispatch = useDispatch();
   const dropdownRef = useRef(null);
@@ -57,6 +58,10 @@ const TaskCard = ({ task, index }) => {
     };
   }, [dropdownRef, deadlineRef]);
 
+  useEffect(() => {
+    setLeftCharacterLenght(20 - inputValue.length);
+  }, [inputValue]);
+
   const dragStart = (e) => {
     dispatch(setActiveCard(index));
   };
@@ -81,10 +86,6 @@ const TaskCard = ({ task, index }) => {
 
   const handleSelectDeadline = () => {
     setIsDeadline(true);
-  };
-
-  const handleCancelDeadline = () => {
-    setIsDeadline(false);
   };
 
   const handleDateChange = (e) => {
@@ -118,7 +119,7 @@ const TaskCard = ({ task, index }) => {
             handleSelectDeadline={handleSelectDeadline}
           />
         ) : (
-          <PiDotsSixVerticalBold
+          <IoEllipsisVerticalOutline
             className="card__dots"
             onClick={handleDropdownMenu}
           />
@@ -132,49 +133,52 @@ const TaskCard = ({ task, index }) => {
               <textarea
                 className="card__textarea"
                 type="text"
+                maxLength={20}
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}></textarea>
+              <p>{leftCharacterLenght}</p>
               <button type="submit">save</button>
             </form>
           </>
         ) : (
           <>
-            <div>
-              {isSelectDeadline ? (
-                <input
-                  ref={deadlineRef}
-                  type="date"
-                  min={minDate}
-                  value={deadlineValue}
-                  onChange={handleDateChange}
-                />
-              ) : (
-                <button
-                  onClick={handleSelectDeadline}
-                  className={
-                    deadlineValue
-                      ? "card__deadline-btn_show"
-                      : "card__deadline-btn_hide"
-                  }
-                  style={
-                    isDropdownMenu && !deadlineValue ? { opacity: 0 } : {}
-                  }>
-                  {/* to hide hover effect of deadline-btn */}
-                  {deadlineValue ? `deadline ${deadlineValue}` : "deadline"}
-                </button>
-              )}
-            </div>
-
             <div className="card__wrapper">
-              <p>{task.name}</p>
-              <button className="card__btn_edit" onClick={handleEditCard}>
-                <CiEdit />
-              </button>
+              <div className="card__header">
+                <p className="card__title">{task.name}</p>
+                <button className="card__btn_edit" onClick={handleEditCard}>
+                  <CiEdit />
+                </button>
+              </div>
+              <div>
+                {isSelectDeadline ? (
+                  <input
+                    ref={deadlineRef}
+                    type="date"
+                    min={minDate}
+                    value={deadlineValue}
+                    onChange={handleDateChange}
+                  />
+                ) : (
+                  <button
+                    onClick={handleSelectDeadline}
+                    className={
+                      deadlineValue
+                        ? "card__deadline-btn_show"
+                        : "card__deadline-btn_hide"
+                    }
+                    style={
+                      isDropdownMenu && !deadlineValue ? { opacity: 0 } : {}
+                    }>
+                    {/* to hide hover effect of deadline-btn */}
+                    {deadlineValue ? `deadline ${deadlineValue}` : "deadline"}
+                  </button>
+                )}
+              </div>
             </div>
           </>
         )}
       </div>
-      <div>Created {date}</div>
+      <div className="card__created-date">Created {date}</div>
     </>
   );
 };
