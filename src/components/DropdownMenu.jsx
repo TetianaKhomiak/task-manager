@@ -5,6 +5,7 @@ import { updateDeadline } from "../redux/slices/tasksListSlice";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { GoMoveToEnd } from "react-icons/go";
 import ColorIcon from "../assets/color.svg";
+import { IoIosAddCircleOutline } from "react-icons/io";
 import SubDropdownMenu from "./SubDropdownMenu";
 
 const DropdownMenu = ({
@@ -13,10 +14,17 @@ const DropdownMenu = ({
   setIsDropdownMenu,
   deadlineValue,
   handleDeleteCard,
-  isDeadlineButtonDisabled,
+  isDeadlineDeleteDisabled,
+  isDeadlineAddDisabled,
+  handleSelectDeadline,
 }) => {
   const [isMovingTask, setIsMovingTask] = useState(false);
   const dispatch = useDispatch();
+
+  const handleAddDeadline = () => {
+    setIsDropdownMenu(false);
+    handleSelectDeadline();
+  };
 
   const handleDeleteDeadline = () => {
     if (deadlineValue) {
@@ -36,16 +44,24 @@ const DropdownMenu = ({
   return (
     <div className="dropdown-menu">
       <button className="dropdown-menu__btn">
-        <img src={ColorIcon} alt="color-switch" />
         Change Color
+        <img src={ColorIcon} alt="color-switch" />
       </button>
       <button
         className="dropdown-menu__btn"
-        disabled={isDeadlineButtonDisabled}
+        disabled={isDeadlineAddDisabled}
+        onClick={handleAddDeadline}
+        style={isDeadlineAddDisabled ? { opacity: 0.4 } : {}}>
+        Add Deadline
+        <IoIosAddCircleOutline />
+      </button>
+      <button
+        className="dropdown-menu__btn"
+        disabled={isDeadlineDeleteDisabled}
         onClick={handleDeleteDeadline}
-        style={isDeadlineButtonDisabled ? { opacity: 0.4 } : {}}>
-        <RiDeleteBinLine className="delete__icon" />
+        style={isDeadlineDeleteDisabled ? { opacity: 0.4 } : {}}>
         Delete Deadline
+        <RiDeleteBinLine className="delete__icon" />
       </button>
       <button
         className="dropdown-menu__btn_move"
@@ -58,7 +74,8 @@ const DropdownMenu = ({
       <button
         className="dropdown-menu__btn dropdown-menu__btn_red"
         onClick={handleDeleteCard}>
-        <RiDeleteBinLine className="delete__icon" /> <span>Delete Task</span>
+        <span>Delete Task</span>
+        <RiDeleteBinLine className="delete__icon" />
       </button>
     </div>
   );

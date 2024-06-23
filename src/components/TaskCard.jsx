@@ -15,8 +15,11 @@ const TaskCard = ({ task, index }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isSelectDeadline, setIsDeadline] = useState(false);
   const [isDropdownMenu, setIsDropdownMenu] = useState(false);
-  const [isDeadlineButtonDisabled, setIsDeadlineButtonDisabled] = useState(
+  const [isDeadlineDeleteDisabled, setIsDeadlineDeleteDisabled] = useState(
     !task.deadline
+  );
+  const [isDeadlineAddDisabled, setIsDeadlineAddDisabled] = useState(
+    task.deadline
   );
   const [inputValue, setInputValue] = useState(task.name);
   const [minDate, setMinDate] = useState("");
@@ -25,11 +28,13 @@ const TaskCard = ({ task, index }) => {
 
   const dispatch = useDispatch();
   const dropdownRef = useRef(null);
+  const deadlineRef = useRef(null);
 
   useEffect(() => {
     setInputValue(task.name);
     setDeadlineValue(task.deadline || "");
-    setIsDeadlineButtonDisabled(!task.deadline);
+    setIsDeadlineDeleteDisabled(!task.deadline);
+    setIsDeadlineAddDisabled(task.deadline);
   }, [task]);
 
   useEffect(() => {
@@ -41,13 +46,16 @@ const TaskCard = ({ task, index }) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownMenu(false);
       }
+      if (deadlineRef.current && !deadlineRef.current.contains(event.target)) {
+        setIsDeadline(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [dropdownRef]);
+  }, [dropdownRef, deadlineRef]);
 
   const dragStart = (e) => {
     dispatch(setActiveCard(index));
@@ -85,7 +93,7 @@ const TaskCard = ({ task, index }) => {
     setDeadlineValue(formattedDate);
     setIsDeadline(false);
     dispatch(updateDeadline({ name: task.name, deadline: formattedDate }));
-    setIsDeadlineButtonDisabled(false);
+    setIsDeadlineDeleteDisabled(false);
   };
 
   const handleDropdownMenu = () => {
@@ -105,7 +113,9 @@ const TaskCard = ({ task, index }) => {
             setIsDropdownMenu={setIsDropdownMenu}
             deadlineValue={deadlineValue}
             handleDeleteCard={handleDeleteCard}
-            isDeadlineButtonDisabled={isDeadlineButtonDisabled}
+            isDeadlineDeleteDisabled={isDeadlineDeleteDisabled}
+            isDeadlineAddDisabled={isDeadlineAddDisabled}
+            handleSelectDeadline={handleSelectDeadline}
           />
         ) : (
           <PiDotsSixVerticalBold
@@ -131,19 +141,13 @@ const TaskCard = ({ task, index }) => {
           <>
             <div>
               {isSelectDeadline ? (
-                <>
-                  {/* <form action=""> */}
-                  <input
-                    type="date"
-                    min={minDate}
-                    value={deadlineValue}
-                    onChange={handleDateChange}
-                  />
-                  <button type="button" onClick={handleCancelDeadline}>
-                    cancel
-                  </button>
-                  {/* </form> */}
-                </>
+                <input
+                  ref={deadlineRef}
+                  type="date"
+                  min={minDate}
+                  value={deadlineValue}
+                  onChange={handleDateChange}
+                />
               ) : (
                 <button
                   onClick={handleSelectDeadline}
