@@ -87,12 +87,16 @@ const TaskCard = ({ task, index }) => {
 
   return (
     <>
-      <div ref={dropdownRef}>
+      {isDropdownMenu && (
+        <div className="overlay" onClick={() => setIsDropdownMenu(false)}></div>
+      )}
+      <div ref={dropdownRef} className="dropdown-container">
         {isDropdownMenu ? (
           <DropdownMenu
             setDeadlineValue={setDeadlineValue}
             task={task}
             setIsDropdownMenu={setIsDropdownMenu}
+            deadlineValue={deadlineValue}
           />
         ) : (
           <PiDotsSixVerticalBold
@@ -138,7 +142,11 @@ const TaskCard = ({ task, index }) => {
                     deadlineValue
                       ? "card__deadline-btn_show"
                       : "card__deadline-btn_hide"
+                  }
+                  style={
+                    isDropdownMenu && !deadlineValue ? { opacity: 0 } : {}
                   }>
+                  {/* to hide hover effect of deadline-btn */}
                   {deadlineValue ? `deadline ${deadlineValue}` : "deadline"}
                 </button>
               )}
