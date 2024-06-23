@@ -12,10 +12,15 @@
     gap: 5px;
 }
 
-.dropdown-menu__btn {
+.dropdown-menu__btn,
+.dropdown-menu__btn_move {
     all: unset;
     cursor: pointer;
     width: 100%;
+}
+
+.dropdown-menu__btn_move {
+    position: relative;
 }
 
 .dropdown-menu__btn:hover {

@@ -16,7 +16,7 @@ const TaskCard = ({ task, index }) => {
   const [isSelectDeadline, setIsDeadline] = useState(false);
   const [isDropdownMenu, setIsDropdownMenu] = useState(false);
   const [isDeadlineButtonDisabled, setIsDeadlineButtonDisabled] = useState(
-    !task.deadline // Initially disabled if no deadline is set
+    !task.deadline
   );
   const [inputValue, setInputValue] = useState(task.name);
   const [minDate, setMinDate] = useState("");
@@ -28,8 +28,8 @@ const TaskCard = ({ task, index }) => {
 
   useEffect(() => {
     setInputValue(task.name);
-    setDeadlineValue(task.deadline || ""); // Update deadline value from task
-    setIsDeadlineButtonDisabled(!task.deadline); // Update deadline button disabled state
+    setDeadlineValue(task.deadline || "");
+    setIsDeadlineButtonDisabled(!task.deadline);
   }, [task]);
 
   useEffect(() => {

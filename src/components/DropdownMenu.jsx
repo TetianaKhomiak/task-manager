@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/DropdownMenu.css";
 import { useDispatch } from "react-redux";
 import { updateDeadline } from "../redux/slices/tasksListSlice";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { GoMoveToEnd } from "react-icons/go";
 import ColorIcon from "../assets/color.svg";
+import SubDropdownMenu from "./SubDropdownMenu";
 
 const DropdownMenu = ({
   setDeadlineValue,
@@ -14,6 +15,7 @@ const DropdownMenu = ({
   handleDeleteCard,
   isDeadlineButtonDisabled,
 }) => {
+  const [isMovingTask, setIsMovingTask] = useState(false);
   const dispatch = useDispatch();
 
   const handleDeleteDeadline = () => {
@@ -24,6 +26,13 @@ const DropdownMenu = ({
     }
   };
 
+  const handleMoveTaskEnter = () => {
+    setIsMovingTask(true);
+  };
+
+  const handleMoveTaskLeave = () => {
+    setIsMovingTask(false);
+  };
   return (
     <div className="dropdown-menu">
       <button className="dropdown-menu__btn">
@@ -38,9 +47,13 @@ const DropdownMenu = ({
         <RiDeleteBinLine className="delete__icon" />
         Delete Deadline
       </button>
-      <button className="dropdown-menu__btn">
+      <button
+        className="dropdown-menu__btn_move"
+        onMouseEnter={handleMoveTaskEnter}
+        onMouseLeave={handleMoveTaskLeave}>
         Move to
         <GoMoveToEnd />
+        {isMovingTask && <SubDropdownMenu />}
       </button>
       <button
         className="dropdown-menu__btn dropdown-menu__btn_red"

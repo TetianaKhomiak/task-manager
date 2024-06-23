@@ -1,0 +1,21 @@
+.subdropdown-menu {
+    position: absolute;
+    width: 120px;
+    height: 100px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 1px 2px 0px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    left: 119px;
+    top: 0;
+}
+
+.subdropdown-menu__btn {
+    all: unset;
+}
+
+.subdropdown-menu__btn:hover {
+    background-color: #eef1f4;
+}
