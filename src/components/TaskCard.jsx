@@ -89,7 +89,11 @@ const TaskCard = ({ task, index }) => {
     <>
       <div ref={dropdownRef}>
         {isDropdownMenu ? (
-          <DropdownMenu />
+          <DropdownMenu
+            setDeadlineValue={setDeadlineValue}
+            task={task}
+            setIsDropdownMenu={setIsDropdownMenu}
+          />
         ) : (
           <PiDotsSixVerticalBold
             className="card__dots"
@@ -128,7 +132,13 @@ const TaskCard = ({ task, index }) => {
                   </form>
                 </>
               ) : (
-                <button onClick={handleSelectDeadline}>
+                <button
+                  onClick={handleSelectDeadline}
+                  className={
+                    deadlineValue
+                      ? "card__deadline-btn_show"
+                      : "card__deadline-btn_hide"
+                  }>
                   {deadlineValue ? `deadline ${deadlineValue}` : "deadline"}
                 </button>
               )}

@@ -29,6 +29,16 @@
 }
 
 .card__dots:hover {
-
     opacity: 1;
+}
+
+.card__deadline-btn_show,
+.card__deadline-btn_hide:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.card__deadline-btn_hide {
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
 }
