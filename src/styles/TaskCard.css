@@ -2,6 +2,7 @@
     border: 2px solid black;
     padding: 20px;
     margin: 20px;
+    position: relative;
 }
 
 .card__wrapper {
@@ -18,4 +19,16 @@
     box-shadow: 1px 1px 1px #999;
     resize: none;
     outline: none;
+}
+
+.card__dots {
+    font-size: 25px;
+    float: right;
+    opacity: 0.2;
+    cursor: pointer;
+}
+
+.card__dots:hover {
+
+    opacity: 1;
 }

@@ -1,21 +1,26 @@
-import React, { useState, useEffect } from "react";
-import {
-  setActiveCard,
-  deleteCard,
-  updateTask,
-  updateDeadline,
-} from "../redux/slices/tasksListSlice";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { formatDate, getMinDate } from "../../utils";
+import {
+  deleteCard,
+  setActiveCard,
+  updateDeadline,
+  updateTask,
+} from "../redux/slices/tasksListSlice";
+import { PiDotsSixVerticalBold } from "react-icons/pi";
+import DropdownMenu from "./DropdownMenu";
 
 const TaskCard = ({ task, index }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isSelectDeadline, setIsDeadline] = useState(false);
+  const [isDropdownMenu, setIsDropdownMenu] = useState(false);
   const [inputValue, setInputValue] = useState(task.name);
-  const [deadlineValue, setDeadlineValue] = useState(task.deadline || "");
   const [minDate, setMinDate] = useState("");
   const date = formatDate(task.creationDate);
+  const [deadlineValue, setDeadlineValue] = useState(task.deadline || "");
+
   const dispatch = useDispatch();
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     setInputValue(task.name);
@@ -24,6 +29,19 @@ const TaskCard = ({ task, index }) => {
   useEffect(() => {
     setMinDate(getMinDate());
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
 
   const dragStart = (e) => {
     dispatch(setActiveCard(index));
@@ -56,15 +74,30 @@ const TaskCard = ({ task, index }) => {
   };
 
   const handleDateChange = (e) => {
-    const selectedDate = new Date(e.target.value);
+    const selectedDate = e.target.value;
     const formattedDate = formatDate(selectedDate);
     setDeadlineValue(formattedDate);
     setIsDeadline(false);
     dispatch(updateDeadline({ name: task.name, deadline: formattedDate }));
   };
 
+  const handleDropdownMenu = () => {
+    setIsDropdownMenu(!isDropdownMenu);
+  };
+
   return (
     <>
+      <div ref={dropdownRef}>
+        {isDropdownMenu ? (
+          <DropdownMenu />
+        ) : (
+          <PiDotsSixVerticalBold
+            className="card__dots"
+            onClick={handleDropdownMenu}
+          />
+        )}
+      </div>
+
       <div draggable onDragStart={dragStart} onDragEnd={dragEnd}>
         {isEditing ? (
           <>
@@ -74,11 +107,6 @@ const TaskCard = ({ task, index }) => {
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}></textarea>
-              {/* <input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-              /> */}
               <button type="submit">save</button>
             </form>
           </>
@@ -91,7 +119,7 @@ const TaskCard = ({ task, index }) => {
                     <input
                       type="date"
                       min={minDate}
-                      value={deadlineValue ? formatDate(deadlineValue) : ""}
+                      value={deadlineValue}
                       onChange={handleDateChange}
                     />
                     <button type="button" onClick={handleCancelDeadline}>
@@ -101,7 +129,7 @@ const TaskCard = ({ task, index }) => {
                 </>
               ) : (
                 <button onClick={handleSelectDeadline}>
-                  {deadlineValue ? deadlineValue : "deadline"}
+                  {deadlineValue ? `deadline ${deadlineValue}` : "deadline"}
                 </button>
               )}
             </div>
