@@ -1,9 +1,33 @@
 .dropdown-menu {
     background-color: #FFFFFF;
-    width: 110px;
+    width: 120px;
     height: 100px;
-    border: 1px solid rgb(164, 161, 161);
+    box-shadow: 0px 1px 2px 0px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+    border-radius: 2px;
     position: absolute;
     left: 100px;
     top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.dropdown-menu__btn {
+    all: unset;
+    cursor: pointer;
+    width: 100%;
+}
+
+.dropdown-menu__btn:hover {
+    background-color: #eef1f4;
+}
+
+.delete__icon {
+    width: 15px;
+}
+
+.dropdown-menu__btn_red {
+    display: flex;
+    gap: 5px;
+    color: red;
 }

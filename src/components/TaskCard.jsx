@@ -9,11 +9,15 @@ import {
 } from "../redux/slices/tasksListSlice";
 import { PiDotsSixVerticalBold } from "react-icons/pi";
 import DropdownMenu from "./DropdownMenu";
+import { CiEdit } from "react-icons/ci";
 
 const TaskCard = ({ task, index }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isSelectDeadline, setIsDeadline] = useState(false);
   const [isDropdownMenu, setIsDropdownMenu] = useState(false);
+  const [isDeadlineButtonDisabled, setIsDeadlineButtonDisabled] = useState(
+    !task.deadline // Initially disabled if no deadline is set
+  );
   const [inputValue, setInputValue] = useState(task.name);
   const [minDate, setMinDate] = useState("");
   const date = formatDate(task.creationDate);
@@ -24,7 +28,9 @@ const TaskCard = ({ task, index }) => {
 
   useEffect(() => {
     setInputValue(task.name);
-  }, [task.name]);
+    setDeadlineValue(task.deadline || ""); // Update deadline value from task
+    setIsDeadlineButtonDisabled(!task.deadline); // Update deadline button disabled state
+  }, [task]);
 
   useEffect(() => {
     setMinDate(getMinDate());
@@ -79,6 +85,7 @@ const TaskCard = ({ task, index }) => {
     setDeadlineValue(formattedDate);
     setIsDeadline(false);
     dispatch(updateDeadline({ name: task.name, deadline: formattedDate }));
+    setIsDeadlineButtonDisabled(false);
   };
 
   const handleDropdownMenu = () => {
@@ -97,6 +104,8 @@ const TaskCard = ({ task, index }) => {
             task={task}
             setIsDropdownMenu={setIsDropdownMenu}
             deadlineValue={deadlineValue}
+            handleDeleteCard={handleDeleteCard}
+            isDeadlineButtonDisabled={isDeadlineButtonDisabled}
           />
         ) : (
           <PiDotsSixVerticalBold
@@ -123,17 +132,17 @@ const TaskCard = ({ task, index }) => {
             <div>
               {isSelectDeadline ? (
                 <>
-                  <form action="">
-                    <input
-                      type="date"
-                      min={minDate}
-                      value={deadlineValue}
-                      onChange={handleDateChange}
-                    />
-                    <button type="button" onClick={handleCancelDeadline}>
-                      cancel
-                    </button>
-                  </form>
+                  {/* <form action=""> */}
+                  <input
+                    type="date"
+                    min={minDate}
+                    value={deadlineValue}
+                    onChange={handleDateChange}
+                  />
+                  <button type="button" onClick={handleCancelDeadline}>
+                    cancel
+                  </button>
+                  {/* </form> */}
                 </>
               ) : (
                 <button
@@ -154,8 +163,9 @@ const TaskCard = ({ task, index }) => {
 
             <div className="card__wrapper">
               <p>{task.name}</p>
-              <button onClick={handleEditCard}>edit</button>
-              <button onClick={handleDeleteCard}>X</button>
+              <button className="card__btn_edit" onClick={handleEditCard}>
+                <CiEdit />
+              </button>
             </div>
           </>
         )}
