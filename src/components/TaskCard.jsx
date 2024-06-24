@@ -6,18 +6,11 @@ import {
   deleteCard,
   setActiveCard,
   updateDeadline,
-  updateTaskName,
-  updateTaskDescription,
 } from "../redux/slices/tasksListSlice";
 import DropdownMenu from "./DropdownMenu";
+import TaskEdit from "./TaskEdit";
 
 const TaskCard = ({ task, index }) => {
-  const [isEditingName, setIsEditingName] = useState(false);
-  const [isEditingDescription, setIsEditingDescription] = useState(false);
-  const [editedName, setEditedName] = useState(task.name);
-  const [editedDescription, setEditedDescription] = useState(task.description);
-  const [leftCharacterLenght, setLeftCharacterLenght] = useState(20);
-
   const [isSelectDeadline, setIsDeadline] = useState(false);
   const [deadlineValue, setDeadlineValue] = useState(task.deadline || "");
   const [isDeadlineDeleteDisabled, setIsDeadlineDeleteDisabled] = useState(
@@ -38,8 +31,6 @@ const TaskCard = ({ task, index }) => {
 
   useEffect(() => {
     const updateTaskProp = () => {
-      setEditedName(task.name);
-      setEditedDescription(task.description);
       setDeadlineValue(task.deadline || "");
       setIsDeadlineDeleteDisabled(!task.deadline);
       setIsDeadlineAddDisabled(task.deadline);
@@ -73,13 +64,6 @@ const TaskCard = ({ task, index }) => {
     addEvent();
   }, [dropdownRef, deadlineRef]);
 
-  useEffect(() => {
-    const setCharactersLengh = () => {
-      setLeftCharacterLenght(20 - editedName.length);
-    };
-    setCharactersLengh();
-  }, [editedName]);
-
   const dragStart = (e) => {
     dispatch(setActiveCard(index));
   };
@@ -90,28 +74,6 @@ const TaskCard = ({ task, index }) => {
 
   const handleDeleteCard = () => {
     dispatch(deleteCard(task.name));
-  };
-
-  const handleEditName = () => {
-    setIsEditingName(true);
-  };
-
-  const handleSaveEditedName = (e) => {
-    e.preventDefault();
-    setIsEditingName(false);
-    dispatch(updateTaskName({ name: task.name, editedTask: editedName }));
-  };
-
-  const handleEditDescription = () => {
-    setIsEditingDescription(true);
-  };
-
-  const handleSaveEditedDescription = (e) => {
-    e.preventDefault();
-    setIsEditingDescription(false);
-    dispatch(
-      updateTaskDescription({ name: task.name, description: editedDescription })
-    );
   };
 
   const handleSelectDeadline = () => {
@@ -186,52 +148,7 @@ const TaskCard = ({ task, index }) => {
             )}
           </div>
         </div>
-        <>
-          {isEditingName ? (
-            <>
-              <form onSubmit={handleSaveEditedName}>
-                <textarea
-                  className="card__textarea"
-                  type="text"
-                  maxLength={20}
-                  value={editedName}
-                  onChange={(e) => setEditedName(e.target.value)}></textarea>
-                <p>{leftCharacterLenght}</p>
-                <button type="submit">save</button>
-              </form>
-            </>
-          ) : (
-            <>
-              <div className="card__name" onDoubleClick={handleEditName}>
-                {task.name}
-              </div>
-            </>
-          )}
-        </>
-        <>
-          {isEditingDescription ? (
-            <>
-              <form onSubmit={handleSaveEditedDescription}>
-                <textarea
-                  className="card__textarea"
-                  type="text"
-                  value={editedDescription}
-                  onChange={(e) =>
-                    setEditedDescription(e.target.value)
-                  }></textarea>
-                <button type="submit">save</button>
-              </form>
-            </>
-          ) : (
-            <>
-              <div
-                className="card__descr"
-                onDoubleClick={handleEditDescription}>
-                {task.description}
-              </div>
-            </>
-          )}
-        </>
+        <TaskEdit task={task} />
         <div className="card__created-date">Created {date}</div>
       </div>
     </>
