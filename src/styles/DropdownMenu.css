@@ -5,8 +5,8 @@
     box-shadow: 0px 1px 2px 0px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
     border-radius: 2px;
     position: absolute;
-    left: 100px;
-    top: 20px;
+    left: 10px;
+    top: 0px;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -19,7 +19,7 @@
     width: 100%;
 }
 
-.dropdown-menu__btn_move {
+.dropdown-menu__item {
     position: relative;
 }
 

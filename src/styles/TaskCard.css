@@ -4,7 +4,6 @@
     padding: 10px;
     margin: 20px;
     position: relative;
-
 }
 
 .card__wrapper {
@@ -65,14 +64,12 @@
     cursor: auto;
 }
 
-.card__header {
-    display: flex;
-    justify-content: space-around;
-
+.card__name {
+    cursor: pointer;
 }
 
-.card__title {
-    width: 120px;
+.card__descr {
+    cursor: pointer;
 }
 
 .card__btn_edit {
@@ -83,4 +80,11 @@
 
 .card__created-date {
     font-size: 12px;
+}
+
+
+
+.topper__wrapper {
+    display: flex;
+    justify-content: space-between;
 }

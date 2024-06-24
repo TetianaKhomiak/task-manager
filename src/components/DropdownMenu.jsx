@@ -41,42 +41,53 @@ const DropdownMenu = ({
   const handleMoveTaskLeave = () => {
     setIsMovingTask(false);
   };
+
   return (
     <div className="dropdown-menu">
-      <button className="dropdown-menu__btn">
-        Change Color
-        <img src={ColorIcon} alt="color-switch" />
-      </button>
-      <button
-        className="dropdown-menu__btn"
-        disabled={isDeadlineAddDisabled}
-        onClick={handleAddDeadline}
-        style={isDeadlineAddDisabled ? { opacity: 0.4 } : {}}>
-        Add Deadline
-        <IoIosAddCircleOutline />
-      </button>
-      <button
-        className="dropdown-menu__btn"
-        disabled={isDeadlineDeleteDisabled}
-        onClick={handleDeleteDeadline}
-        style={isDeadlineDeleteDisabled ? { opacity: 0.4 } : {}}>
-        Delete Deadline
-        <RiDeleteBinLine className="delete__icon" />
-      </button>
-      <button
-        className="dropdown-menu__btn_move"
+      <div className="dropdown-menu__item">
+        <button className="dropdown-menu__btn">
+          Change Color
+          <img src={ColorIcon} alt="color-switch" />
+        </button>
+      </div>
+      <div className="dropdown-menu__item">
+        <button
+          className="dropdown-menu__btn"
+          disabled={isDeadlineAddDisabled}
+          onClick={handleAddDeadline}
+          style={isDeadlineAddDisabled ? { opacity: 0.4 } : {}}>
+          Add Deadline
+          <IoIosAddCircleOutline />
+        </button>
+      </div>
+      <div className="dropdown-menu__item">
+        <button
+          className="dropdown-menu__btn"
+          disabled={isDeadlineDeleteDisabled}
+          onClick={handleDeleteDeadline}
+          style={isDeadlineDeleteDisabled ? { opacity: 0.4 } : {}}>
+          Delete Deadline
+          <RiDeleteBinLine className="delete__icon" />
+        </button>
+      </div>
+      <div
+        className="dropdown-menu__item"
         onMouseEnter={handleMoveTaskEnter}
         onMouseLeave={handleMoveTaskLeave}>
-        Move to
-        <GoMoveToEnd />
+        <div className="dropdown-menu__btn_move">
+          Move to
+          <GoMoveToEnd />
+        </div>
         {isMovingTask && <SubDropdownMenu />}
-      </button>
-      <button
-        className="dropdown-menu__btn dropdown-menu__btn_red"
-        onClick={handleDeleteCard}>
-        <span>Delete Task</span>
-        <RiDeleteBinLine className="delete__icon" />
-      </button>
+      </div>
+      <div className="dropdown-menu__item">
+        <button
+          className="dropdown-menu__btn dropdown-menu__btn_red"
+          onClick={handleDeleteCard}>
+          <span>Delete Task</span>
+          <RiDeleteBinLine className="delete__icon" />
+        </button>
+      </div>
     </div>
   );
 };

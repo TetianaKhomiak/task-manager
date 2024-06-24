@@ -12,11 +12,21 @@ export const tasksListSlice = createSlice({
     addTask: (state, action) => {
       state.task = [...state.task, action.payload];
     },
-    updateTask: (state, action) => {
+    updateTaskName: (state, action) => {
       const { name, editedTask } = action.payload;
       const updatedTasks = state.task.map((item) => {
         if (item.name === name) {
           item.name = editedTask;
+        }
+        return item;
+      });
+      state.task = updatedTasks;
+    },
+    updateTaskDescription: (state, action) => {
+      const { name, description } = action.payload;
+      const updatedTasks = state.task.map((item) => {
+        if (item.name === name) {
+          item.description = description;
         }
         return item;
       });
@@ -54,6 +64,7 @@ export const {
   updateTasks,
   setActiveCard,
   deleteCard,
-  updateTask,
+  updateTaskName,
   updateDeadline,
+  updateTaskDescription,
 } = tasksListSlice.actions;
