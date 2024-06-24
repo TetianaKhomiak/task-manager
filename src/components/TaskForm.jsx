@@ -11,15 +11,18 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    dispatch(
-      addTask({
-        name: taskName,
-        description: taskDescription,
-        columnName,
-        creationDate: new Date().toISOString(),
-        deadline: null,
-      })
-    );
+    if (taskName !== "") {
+      dispatch(
+        addTask({
+          name: taskName,
+          description: taskDescription,
+          columnName,
+          creationDate: new Date().toISOString(),
+          deadline: null,
+        })
+      );
+    }
+
     setTaskName("");
     setTaskDescription("");
     setCharCount(20);

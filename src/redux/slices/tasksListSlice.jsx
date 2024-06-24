@@ -22,6 +22,7 @@ export const tasksListSlice = createSlice({
       });
       state.task = updatedTasks;
     },
+
     updateTaskDescription: (state, action) => {
       const { name, description } = action.payload;
       const updatedTasks = state.task.map((item) => {

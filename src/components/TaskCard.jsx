@@ -20,6 +20,9 @@ const TaskCard = ({ task, index }) => {
     task.deadline
   );
 
+  const [isEditingDescription, setIsEditingDescription] = useState(false);
+  const [editedDescription, setEditedDescription] = useState(task.description);
+
   const [isDropdownMenu, setIsDropdownMenu] = useState(false);
 
   const [minDate, setMinDate] = useState("");
@@ -139,6 +142,7 @@ const TaskCard = ({ task, index }) => {
                 isDeadlineDeleteDisabled={isDeadlineDeleteDisabled}
                 isDeadlineAddDisabled={isDeadlineAddDisabled}
                 handleSelectDeadline={handleSelectDeadline}
+                setIsEditingDescription={setIsEditingDescription}
               />
             ) : (
               <IoEllipsisVerticalOutline
@@ -148,7 +152,13 @@ const TaskCard = ({ task, index }) => {
             )}
           </div>
         </div>
-        <TaskEdit task={task} />
+        <TaskEdit
+          task={task}
+          isEditingDescription={isEditingDescription}
+          setIsEditingDescription={setIsEditingDescription}
+          editedDescription={editedDescription}
+          setEditedDescription={setEditedDescription}
+        />
         <div className="card__created-date">Created {date}</div>
       </div>
     </>
