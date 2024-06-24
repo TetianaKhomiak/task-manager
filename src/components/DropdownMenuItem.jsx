@@ -10,6 +10,7 @@ const DropdownMenuItem = ({
   return (
     <div className="dropdown-menu__item">
       <button
+        type="button"
         className={className}
         disabled={disabled}
         onClick={onClick}

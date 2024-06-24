@@ -1,0 +1,41 @@
+.color-changer__radio {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: auto;
+}
+
+.color-option {
+    all: unset;
+    cursor: pointer;
+}
+
+.circle-dot__gulf-stream {
+    color: #87b69d;
+}
+
+.circle-dot__gulf-stream:hover,
+.circle-dot__smoky-grape:hover,
+.circle-dot__bright-cerulean:hover {
+    border: 1px solid #e3e7e3;
+}
+
+.circle-dot__gulf-stream.active {
+    border: 1px solid #87b69d;
+}
+
+.circle-dot__smoky-grape {
+    color: #675180;
+}
+
+.circle-dot__smoky-grape.active {
+    border: 1px solid #675180;
+}
+
+.circle-dot__bright-cerulean {
+    color: #0e87cc;
+}
+
+.circle-dot__bright-cerulean.active {
+    border: 1px solid #0e87cc;
+}
