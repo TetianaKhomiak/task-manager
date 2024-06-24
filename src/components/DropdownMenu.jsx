@@ -4,11 +4,11 @@ import { useDispatch } from "react-redux";
 import { updateDeadline } from "../redux/slices/tasksListSlice";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { GoMoveToEnd } from "react-icons/go";
-import ColorIcon from "../assets/color.svg";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import SubDropdownMenu from "./SubDropdownMenu";
 import { updateTaskDescription } from "../redux/slices/tasksListSlice";
 import DropdownMenuItem from "./DropdownMenuItem";
+import ColorChanger from "./ColorChanger";
 
 const DropdownMenu = ({
   setDeadlineValue,
@@ -71,10 +71,7 @@ const DropdownMenu = ({
 
   return (
     <div className="dropdown-menu">
-      <DropdownMenuItem className="dropdown-menu__btn">
-        Change Color
-        <img src={ColorIcon} alt="color-switch" />
-      </DropdownMenuItem>
+      <ColorChanger />
       <DropdownMenuItem
         className="dropdown-menu__btn"
         disabled={isDeadlineAddDisabled}
