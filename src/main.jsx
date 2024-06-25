@@ -4,9 +4,12 @@ import App from "./App.jsx";
 import "./index.css";
 import { store } from "./redux/store.jsx";
 import { Provider } from "react-redux";
+import SearchProvider from "./context/SearchProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <App />
+    <SearchProvider>
+      <App />
+    </SearchProvider>
   </Provider>
 );
