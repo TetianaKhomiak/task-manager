@@ -31,11 +31,11 @@
 }
 
 .circle-dot__sky-blue {
-    color: #72c7f8;
+    color: #96d0f2;
 }
 
 .circle-dot__sky-blue.active {
-    border: 1px solid #72c7f8;
+    border: 1px solid #96d0f2;
 }
 
 .circle-dot__pale-gray {

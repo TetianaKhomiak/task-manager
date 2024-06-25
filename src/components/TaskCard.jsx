@@ -93,7 +93,7 @@ const TaskCard = ({ task, index }) => {
     <div
       className="task__wrapper"
       style={{
-        backgroundColor: transformedColor ? transformedColor : "inherit",
+        backgroundColor: transformedColor ? transformedColor : "#F5F6F8",
       }}>
       <div
         draggable
@@ -110,7 +110,7 @@ const TaskCard = ({ task, index }) => {
         <div
           className="topper__wrapper"
           style={{
-            backgroundColor: selectedColor ? selectedColor : "inherit",
+            backgroundColor: selectedColor ? selectedColor : "#CDC5C5",
           }}>
           <div>
             {isSelectDeadline ? (

@@ -81,7 +81,7 @@ const TaskEdit = ({
               className="card__name"
               onDoubleClick={handleEditName}
               style={{
-                backgroundColor: selectedColor ? selectedColor : "inherit",
+                backgroundColor: selectedColor ? selectedColor : "#CDC5C5",
               }}>
               <div className="card__name_text">{task.name}</div>
             </div>

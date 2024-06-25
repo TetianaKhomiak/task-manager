@@ -17,7 +17,7 @@ export const transformColor = (selectedColor) => {
   const colorMapping = {
     "#87B69D": "#EAF5EC",
     "#ab91c7": "#f0e9f8",
-    "#72c7f8": "#ECF7FE",
+    "#72c7f8": "#eff6fa",
     "#cdc5c5": "#F5F6F8",
     "#f8a9b2": "#fbeeef",
     "#EAF68E": "#F4F4E1",
