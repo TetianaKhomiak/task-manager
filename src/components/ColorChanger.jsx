@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ColorIcon from "../assets/color.svg";
 import "../styles/ColorChanger.css";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { setColor } from "../redux/slices/tasksListSlice";
@@ -22,11 +21,10 @@ const ColorChanger = ({ task }) => {
       <div className="dropdown-menu__item">
         <button className="dropdown-menu__btn" type="button">
           Change Color
-          <img src={ColorIcon} alt="color-switch" />
         </button>
       </div>
 
-      <div className="color-changer__radio">
+      <div className="color-changer__wrapper">
         <button
           className="color-option"
           onClick={() => handleColorChange("#87B69D")}>
@@ -38,10 +36,10 @@ const ColorChanger = ({ task }) => {
         </button>
         <button
           className="color-option"
-          onClick={() => handleColorChange("#675180")}>
+          onClick={() => handleColorChange("#ab91c7")}>
           <FaRegCircleDot
             className={`circle-dot__smoky-grape ${
-              selectedColor === "#675180" ? "active" : ""
+              selectedColor === "#ab91c7" ? "active" : ""
             }`}
           />
         </button>
@@ -66,10 +64,10 @@ const ColorChanger = ({ task }) => {
 
         <button
           className="color-option"
-          onClick={() => handleColorChange("#32B67A")}>
+          onClick={() => handleColorChange("#f8a9b2")}>
           <FaRegCircleDot
-            className={`circle-dot__sea-green ${
-              selectedColor === "#32B67A" ? "active" : ""
+            className={`circle-dot__pale-pink ${
+              selectedColor === "#f8a9b2" ? "active" : ""
             }`}
           />
         </button>

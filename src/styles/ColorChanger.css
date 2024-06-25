@@ -1,7 +1,11 @@
-.color-changer__radio {
+.color-changer {
+    border-bottom: 1px solid #EDEEF1;
+}
+
+.color-changer__wrapper {
     display: flex;
     justify-content: space-between;
-    width: 70%;
+    width: 90%;
     margin: auto;
 }
 
@@ -14,22 +18,16 @@
     color: #87b69d;
 }
 
-.circle-dot__gulf-stream:hover,
-.circle-dot__smoky-grape:hover,
-.circle-dot__bright-cerulean:hover {
-    border: 1px solid #e3e7e3;
-}
-
 .circle-dot__gulf-stream.active {
     border: 1px solid #87b69d;
 }
 
 .circle-dot__smoky-grape {
-    color: #675180;
+    color: #ab91c7;
 }
 
 .circle-dot__smoky-grape.active {
-    border: 1px solid #675180;
+    border: 1px solid #ab91c7;
 }
 
 .circle-dot__sky-blue {
@@ -48,12 +46,12 @@
     border: 1px solid #cdc5c5;
 }
 
-.circle-dot__sea-green {
-    color: #32B67A;
+.circle-dot__pale-pink {
+    color: #f8a9b2;
 }
 
-.circle-dot__sea-green.active {
-    border: 1px solid #32B67A;
+.circle-dot__pale-pink.active {
+    border: 1px solid #f8a9b2;
 }
 
 .circle-dot__pale-chartreuse {
@@ -62,4 +60,13 @@
 
 .circle-dot__pale-chartreuse.active {
     border: 1px solid #EAF68E;
+}
+
+.circle-dot__gulf-stream:hover,
+.circle-dot__smoky-grape:hover,
+.circle-dot__sky-blue:hover,
+.circle-dot__pale-gray:hover,
+.circle-dot__pale-pink:hover,
+.circle-dot__pale-chartreuse:hover {
+    border: 1px solid #e3e7e3;
 }

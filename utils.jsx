@@ -16,10 +16,10 @@ export const getMinDate = () => {
 export const transformColor = (selectedColor) => {
   const colorMapping = {
     "#87B69D": "#EAF5EC",
-    "#675180": "#F0ECF3",
+    "#ab91c7": "#f0e9f8",
     "#72c7f8": "#ECF7FE",
-    "#cdc5c5": "#FFFFFF",
-    "#32B67A": "#F3FCF8",
+    "#cdc5c5": "#F5F6F8",
+    "#f8a9b2": "#fbeeef",
     "#EAF68E": "#F4F4E1",
   };
 
