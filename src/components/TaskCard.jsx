@@ -28,6 +28,8 @@ const TaskCard = ({ task, index }) => {
   const [minDate, setMinDate] = useState("");
   const date = formatDate(task.creationDate);
 
+  const [selectedColor, setSelectedColor] = useState("");
+
   const dispatch = useDispatch();
   const dropdownRef = useRef(null);
   const deadlineRef = useRef(null);
@@ -96,8 +98,23 @@ const TaskCard = ({ task, index }) => {
     setIsDropdownMenu(!isDropdownMenu);
   };
 
+  function transformColor(selectedColor) {
+    const colorMapping = {
+      "#87B69D": "#EAF5EC",
+      "#675180": "#F0ECF3",
+      "#0e87cc": "#ECF7FE",
+    };
+
+    return colorMapping[selectedColor] || selectedColor;
+  }
+  const transformedColor = transformColor(selectedColor);
+
   return (
-    <>
+    <div
+      className="task__wrapper"
+      style={{
+        backgroundColor: transformedColor ? transformedColor : "inherit",
+      }}>
       <div draggable onDragStart={dragStart} onDragEnd={dragEnd}>
         <div>
           {isDropdownMenu && (
@@ -107,7 +124,11 @@ const TaskCard = ({ task, index }) => {
           )}
         </div>
 
-        <div className="topper__wrapper">
+        <div
+          className="topper__wrapper"
+          style={{
+            backgroundColor: selectedColor ? selectedColor : "inherit",
+          }}>
           <div>
             {isSelectDeadline ? (
               <input
@@ -143,6 +164,8 @@ const TaskCard = ({ task, index }) => {
                 isDeadlineAddDisabled={isDeadlineAddDisabled}
                 handleSelectDeadline={handleSelectDeadline}
                 setIsEditingDescription={setIsEditingDescription}
+                selectedColor={selectedColor}
+                setSelectedColor={setSelectedColor}
               />
             ) : (
               <IoEllipsisVerticalOutline
@@ -158,10 +181,11 @@ const TaskCard = ({ task, index }) => {
           setIsEditingDescription={setIsEditingDescription}
           editedDescription={editedDescription}
           setEditedDescription={setEditedDescription}
+          selectedColor={selectedColor}
         />
         <div className="card__created-date">Created {date}</div>
       </div>
-    </>
+    </div>
   );
 };
 

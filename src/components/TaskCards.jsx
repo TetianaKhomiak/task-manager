@@ -35,9 +35,8 @@ const TaskCards = ({ columnName }) => {
           (task, index) =>
             task.columnName === columnName && (
               <div key={index}>
-                <div className="task__wrapper">
-                  <TaskCard task={task} index={index} />
-                </div>
+                <TaskCard task={task} index={index} />
+
                 <DropAreaTask onDrop={() => onDrop(columnName, index + 1)} />
               </div>
             )

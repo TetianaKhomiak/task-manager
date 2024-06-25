@@ -11,6 +11,7 @@ const TaskEdit = ({
   setIsEditingDescription,
   editedDescription,
   setEditedDescription,
+  selectedColor,
 }) => {
   const [isEditingName, setIsEditingName] = useState(false);
   const [editedName, setEditedName] = useState(task.name);
@@ -73,7 +74,12 @@ const TaskEdit = ({
           </>
         ) : (
           <>
-            <div className="card__name" onDoubleClick={handleEditName}>
+            <div
+              className="card__name"
+              onDoubleClick={handleEditName}
+              style={{
+                backgroundColor: selectedColor ? selectedColor : "inherit",
+              }}>
               {task.name}
             </div>
           </>

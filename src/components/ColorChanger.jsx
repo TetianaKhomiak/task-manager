@@ -3,10 +3,9 @@ import ColorIcon from "../assets/color.svg";
 import "../styles/ColorChanger.css";
 import { FaRegCircleDot } from "react-icons/fa6";
 
-const ColorChanger = () => {
-  const [selectedColor, setSelectedColor] = useState("");
-
+const ColorChanger = ({ selectedColor, setSelectedColor }) => {
   const handleColorChange = (color) => {
+    setSelectedColor(color);
     setSelectedColor(color);
   };
   console.log(selectedColor);
@@ -23,28 +22,28 @@ const ColorChanger = () => {
       <div className="color-changer__radio">
         <button
           className="color-option"
-          onClick={() => handleColorChange("color1")}>
+          onClick={() => handleColorChange("#87B69D")}>
           <FaRegCircleDot
             className={`circle-dot__gulf-stream ${
-              selectedColor === "color1" ? "active" : ""
+              selectedColor === "#87B69D" ? "active" : ""
             }`}
           />
         </button>
         <button
           className="color-option"
-          onClick={() => handleColorChange("color2")}>
+          onClick={() => handleColorChange("#675180")}>
           <FaRegCircleDot
             className={`circle-dot__smoky-grape ${
-              selectedColor === "color2" ? "active" : ""
+              selectedColor === "#675180" ? "active" : ""
             }`}
           />
         </button>
         <button
           className="color-option"
-          onClick={() => handleColorChange("color3")}>
+          onClick={() => handleColorChange("#0e87cc")}>
           <FaRegCircleDot
             className={`circle-dot__bright-cerulean ${
-              selectedColor === "color3" ? "active" : ""
+              selectedColor === "#0e87cc" ? "active" : ""
             }`}
           />
         </button>
