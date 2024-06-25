@@ -20,8 +20,6 @@ const DropdownMenu = ({
   isDeadlineAddDisabled,
   handleSelectDeadline,
   setIsEditingDescription,
-  selectedColor,
-  setSelectedColor,
 }) => {
   const [isMovingTask, setIsMovingTask] = useState(false);
   const [isDescriptionDeleteDisabled, setIsDescriptionDeleteDisabled] =
@@ -73,10 +71,7 @@ const DropdownMenu = ({
 
   return (
     <div className="dropdown-menu">
-      <ColorChanger
-        selectedColor={selectedColor}
-        setSelectedColor={setSelectedColor}
-      />
+      <ColorChanger task={task} />
       <DropdownMenuItem
         className="dropdown-menu__btn"
         disabled={isDeadlineAddDisabled}

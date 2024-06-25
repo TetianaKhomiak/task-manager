@@ -2,11 +2,18 @@ import React, { useState } from "react";
 import ColorIcon from "../assets/color.svg";
 import "../styles/ColorChanger.css";
 import { FaRegCircleDot } from "react-icons/fa6";
+import { setColor } from "../redux/slices/tasksListSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-const ColorChanger = ({ selectedColor, setSelectedColor }) => {
+const ColorChanger = ({ task }) => {
+  const dispatch = useDispatch();
+  const selectedColor = useSelector((state) => {
+    const task2 = state.tasksList.task.find((item) => item.name === task.name);
+    return task2 ? task2.selectedColor : null;
+  });
+
   const handleColorChange = (color) => {
-    setSelectedColor(color);
-    setSelectedColor(color);
+    dispatch(setColor({ name: task.name, selectedColor: color }));
   };
   console.log(selectedColor);
 

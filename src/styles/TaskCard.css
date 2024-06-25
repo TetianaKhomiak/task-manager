@@ -70,13 +70,22 @@
     width: 100%;
 }
 
+.card__name_text {
+    margin: 0 5px;
+    padding-bottom: 3px;
+}
+
+.card__descr_text {
+    margin-right: 5px;
+}
+
 .card__descr {
     cursor: pointer;
     max-height: 110px;
     word-break: break-all;
     overflow-y: auto;
     overflow-x: hidden;
-    margin-bottom: 20px;
+    margin: 5px;
 }
 
 .card__descr::-webkit-scrollbar-track {

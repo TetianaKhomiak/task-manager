@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { IoEllipsisVerticalOutline } from "react-icons/io5";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { formatDate, getMinDate } from "../../utils";
 import {
   deleteCard,
@@ -27,8 +27,10 @@ const TaskCard = ({ task, index }) => {
 
   const [minDate, setMinDate] = useState("");
   const date = formatDate(task.creationDate);
-
-  const [selectedColor, setSelectedColor] = useState("");
+  const selectedColor = useSelector((state) => {
+    const task2 = state.tasksList.task.find((item) => item.name === task.name);
+    return task2 ? task2.selectedColor : null;
+  });
 
   const dispatch = useDispatch();
   const dropdownRef = useRef(null);
@@ -105,7 +107,7 @@ const TaskCard = ({ task, index }) => {
       "#0e87cc": "#ECF7FE",
     };
 
-    return colorMapping[selectedColor] || selectedColor;
+    return colorMapping[selectedColor];
   }
   const transformedColor = transformColor(selectedColor);
 
@@ -164,8 +166,6 @@ const TaskCard = ({ task, index }) => {
                 isDeadlineAddDisabled={isDeadlineAddDisabled}
                 handleSelectDeadline={handleSelectDeadline}
                 setIsEditingDescription={setIsEditingDescription}
-                selectedColor={selectedColor}
-                setSelectedColor={setSelectedColor}
               />
             ) : (
               <IoEllipsisVerticalOutline
@@ -181,7 +181,6 @@ const TaskCard = ({ task, index }) => {
           setIsEditingDescription={setIsEditingDescription}
           editedDescription={editedDescription}
           setEditedDescription={setEditedDescription}
-          selectedColor={selectedColor}
         />
         <div className="card__created-date">Created {date}</div>
       </div>

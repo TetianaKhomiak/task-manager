@@ -56,6 +56,16 @@ export const tasksListSlice = createSlice({
       );
       state.task = updatedTasks;
     },
+    setColor: (state, action) => {
+      const { name, selectedColor } = action.payload;
+      const updatedSelectedColor = state.task.map((item) => {
+        if (item.name === name) {
+          item.selectedColor = selectedColor;
+        }
+        return item;
+      });
+      state.task = updatedSelectedColor;
+    },
   },
 });
 
@@ -68,4 +78,5 @@ export const {
   updateTaskName,
   updateDeadline,
   updateTaskDescription,
+  setColor,
 } = tasksListSlice.actions;

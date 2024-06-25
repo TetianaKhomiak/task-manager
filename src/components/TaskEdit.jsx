@@ -3,7 +3,7 @@ import {
   updateTaskName,
   updateTaskDescription,
 } from "../redux/slices/tasksListSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const TaskEdit = ({
   task,
@@ -11,12 +11,15 @@ const TaskEdit = ({
   setIsEditingDescription,
   editedDescription,
   setEditedDescription,
-  selectedColor,
 }) => {
   const [isEditingName, setIsEditingName] = useState(false);
   const [editedName, setEditedName] = useState(task.name);
 
   const [leftCharacterLenght, setLeftCharacterLenght] = useState(20);
+  const selectedColor = useSelector((state) => {
+    const task2 = state.tasksList.task.find((item) => item.name === task.name);
+    return task2 ? task2.selectedColor : null;
+  });
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -80,7 +83,7 @@ const TaskEdit = ({
               style={{
                 backgroundColor: selectedColor ? selectedColor : "inherit",
               }}>
-              {task.name}
+              <div className="card__name_text">{task.name}</div>
             </div>
           </>
         )}
@@ -102,7 +105,7 @@ const TaskEdit = ({
         ) : (
           <>
             <div className="card__descr" onDoubleClick={handleEditDescription}>
-              {task.description}
+              <div className="card__descr_text">{task.description}</div>
             </div>
           </>
         )}

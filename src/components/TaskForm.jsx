@@ -19,6 +19,7 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
           columnName,
           creationDate: new Date().toISOString(),
           deadline: null,
+          selectedColor: "",
         })
       );
     }
