@@ -15,9 +15,9 @@ const TaskCards = ({ columnName }) => {
 
   console.log(tasks);
   const onDrop = (category, position) => {
-    console.log(
-      `${activeCard} is going to place inot ${category} at the position ${position}`
-    );
+    // console.log(
+    //   `${activeCard} is going to place inot ${category} at the position ${position}`
+    // );
     if (activeCard == null || activeCard === undefined) {
       return;
     }
@@ -30,22 +30,21 @@ const TaskCards = ({ columnName }) => {
     dispatch(updateTasks(updatedTasks));
   };
 
-  const filteredTasks = searchTask
-    ? tasks.filter(
-        (task) =>
-          task.name.includes(searchTask) && task.columnName === columnName
-      )
-    : tasks.filter((task) => task.columnName === columnName);
+  const filteredTasks = tasks
+    .map((task, index) => ({ ...task, originalIndex: index }))
+    .filter((task) => task.name.includes(searchTask));
 
   return (
     <div>
       <DropAreaTask onDrop={() => onDrop(columnName, 0)} />
-      {filteredTasks.map((task, index) => (
-        <div key={index}>
-          <TaskCard task={task} index={index} />
-          <DropAreaTask onDrop={() => onDrop(columnName, index + 1)} />
-        </div>
-      ))}
+      {filteredTasks
+        .filter((task) => task.columnName === columnName)
+        .map((task, index) => (
+          <div key={task.originalIndex}>
+            <TaskCard task={task} index={task.originalIndex} />
+            <DropAreaTask onDrop={() => onDrop(columnName, index + 1)} />
+          </div>
+        ))}
     </div>
   );
 };
