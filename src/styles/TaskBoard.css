@@ -1,7 +1,8 @@
 .board__wrapper {
     display: flex;
     gap: 15px;
-    margin: 25px;
+    margin: auto;
+    width: 90%;
 }
 
 .board__btn_add-column {

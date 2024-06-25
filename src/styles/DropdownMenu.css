@@ -1,6 +1,6 @@
 .dropdown-menu {
     background-color: #FFFFFF;
-    width: 140px;
+    width: 150px;
     max-height: 300px;
     box-shadow: 0px 1px 2px 0px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
     border-radius: 2px;
@@ -9,16 +9,16 @@
     top: 0px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
-
 }
 
 .dropdown-menu__btn,
 .dropdown-menu__btn_move {
     all: unset;
     cursor: pointer;
-    width: 100%;
-    padding: 5px;
+    width: 94%;
+    padding: 4.5px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .dropdown-menu__item {
@@ -27,6 +27,7 @@
 
 .dropdown-menu__btn:hover {
     background-color: #eef1f4;
+    width: 94%;
 }
 
 .delete__icon {
@@ -37,4 +38,5 @@
     display: flex;
     gap: 5px;
     color: red;
+    border-top: 1px solid #EDEEF1;
 }

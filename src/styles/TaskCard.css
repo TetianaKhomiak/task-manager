@@ -46,6 +46,13 @@
     transition: all 0.2s ease-in-out;
 }
 
+.card__deadline_input {
+    background-color: #F0E9F8;
+    border: 1px solid #DDD7D7;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
 .overlay {
     cursor: auto;
     position: fixed;
@@ -118,5 +125,6 @@
 .topper__wrapper {
     display: flex;
     justify-content: space-between;
-    padding-top: 7px;
+    padding-top: 2px;
+    padding-left: 5px;
 }

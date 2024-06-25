@@ -120,6 +120,7 @@ const TaskCard = ({ task, index }) => {
                 min={minDate}
                 value={deadlineValue}
                 onChange={handleDateChange}
+                className="card__deadline_input"
               />
             ) : (
               <button

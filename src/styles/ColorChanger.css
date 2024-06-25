@@ -1,6 +1,8 @@
 .color-changer {
     border-bottom: 1px solid #EDEEF1;
+    width: 100%;
 }
+
 
 .color-changer__wrapper {
     display: flex;
@@ -86,7 +88,7 @@ details:hover {
 }
 
 .summary-content {
-    width: 90%;
+    width: 95%;
     display: flex;
     justify-content: space-between;
 }
@@ -94,11 +96,13 @@ details:hover {
 details .summary-content {
     cursor: default;
     font-weight: 300;
+
 }
+
 
 details summary {
     list-style: none;
-    padding: 10px;
+    margin: 7px;
 }
 
 details summary:focus {
@@ -117,8 +121,8 @@ details .summary-chevron-up,
 details .summary-chevron-down {
     pointer-events: none;
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 2px;
+    right: 5px;
     background: #ffffff;
 }
 
