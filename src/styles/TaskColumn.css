@@ -19,5 +19,9 @@
 }
 
 .column__delete-icon {
-    opacity: 0.5;
+    opacity: 0.3;
+}
+
+.column__delete-icon:hover {
+    opacity: 0.7;
 }
