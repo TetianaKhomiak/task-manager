@@ -12,3 +12,16 @@ export const getMinDate = () => {
   minDate.setDate(today.getDate());
   return minDate.toISOString().split("T")[0];
 };
+
+export const transformColor = (selectedColor) => {
+  const colorMapping = {
+    "#87B69D": "#EAF5EC",
+    "#675180": "#F0ECF3",
+    "#72c7f8": "#ECF7FE",
+    "#cdc5c5": "#FFFFFF",
+    "#32B67A": "#F3FCF8",
+    "#EAF68E": "#F4F4E1",
+  };
+
+  return colorMapping[selectedColor];
+};

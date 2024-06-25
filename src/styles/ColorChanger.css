@@ -32,10 +32,34 @@
     border: 1px solid #675180;
 }
 
-.circle-dot__bright-cerulean {
-    color: #0e87cc;
+.circle-dot__sky-blue {
+    color: #72c7f8;
 }
 
-.circle-dot__bright-cerulean.active {
-    border: 1px solid #0e87cc;
+.circle-dot__sky-blue.active {
+    border: 1px solid #72c7f8;
+}
+
+.circle-dot__pale-gray {
+    color: #cdc5c5;
+}
+
+.circle-dot__pale-gray.active {
+    border: 1px solid #cdc5c5;
+}
+
+.circle-dot__sea-green {
+    color: #32B67A;
+}
+
+.circle-dot__sea-green.active {
+    border: 1px solid #32B67A;
+}
+
+.circle-dot__pale-chartreuse {
+    color: #EAF68E;
+}
+
+.circle-dot__pale-chartreuse.active {
+    border: 1px solid #EAF68E;
 }

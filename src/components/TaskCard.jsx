@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { IoEllipsisVerticalOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { formatDate, getMinDate } from "../../utils";
+import { formatDate, getMinDate, transformColor } from "../../utils";
 import {
   deleteCard,
   setActiveCard,
@@ -31,6 +31,7 @@ const TaskCard = ({ task, index }) => {
     const task2 = state.tasksList.task.find((item) => item.name === task.name);
     return task2 ? task2.selectedColor : null;
   });
+  const transformedColor = transformColor(selectedColor);
 
   const dispatch = useDispatch();
   const dropdownRef = useRef(null);
@@ -71,18 +72,6 @@ const TaskCard = ({ task, index }) => {
     addEvent();
   }, [dropdownRef, deadlineRef]);
 
-  const dragStart = (e) => {
-    dispatch(setActiveCard(index));
-  };
-
-  const dragEnd = () => {
-    dispatch(setActiveCard(null));
-  };
-
-  const handleDeleteCard = () => {
-    dispatch(deleteCard(task.name));
-  };
-
   const handleSelectDeadline = () => {
     setIsDeadline(true);
   };
@@ -100,24 +89,16 @@ const TaskCard = ({ task, index }) => {
     setIsDropdownMenu(!isDropdownMenu);
   };
 
-  function transformColor(selectedColor) {
-    const colorMapping = {
-      "#87B69D": "#EAF5EC",
-      "#675180": "#F0ECF3",
-      "#0e87cc": "#ECF7FE",
-    };
-
-    return colorMapping[selectedColor];
-  }
-  const transformedColor = transformColor(selectedColor);
-
   return (
     <div
       className="task__wrapper"
       style={{
         backgroundColor: transformedColor ? transformedColor : "inherit",
       }}>
-      <div draggable onDragStart={dragStart} onDragEnd={dragEnd}>
+      <div
+        draggable
+        onDragStart={() => dispatch(setActiveCard(index))}
+        onDragEnd={() => dispatch(setActiveCard(null))}>
         <div>
           {isDropdownMenu && (
             <div
@@ -161,7 +142,7 @@ const TaskCard = ({ task, index }) => {
                 task={task}
                 setIsDropdownMenu={setIsDropdownMenu}
                 deadlineValue={deadlineValue}
-                handleDeleteCard={handleDeleteCard}
+                handleDeleteCard={() => dispatch(deleteCard(task.name))}
                 isDeadlineDeleteDisabled={isDeadlineDeleteDisabled}
                 isDeadlineAddDisabled={isDeadlineAddDisabled}
                 handleSelectDeadline={handleSelectDeadline}

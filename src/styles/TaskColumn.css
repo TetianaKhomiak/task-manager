@@ -1,23 +1,13 @@
 .column__wrapper {
     width: 200px;
-    border: 1px solid rgb(244, 220, 220);
     min-height: 100px;
-    background-color: rgb(240, 248, 245);
+    border-radius: 5px;
     cursor: grab;
+    padding: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
-/* .column__wrapper:active {
-    /* when we press while any action to column these styles work */
-/* opacity: 0.7; */
-/* border: 1px solid #111; */
-/* } */
-
-*/ .column__title {
+.column__title {
     display: flex;
     justify-content: space-between;
 }
-
-/* .card__wrapper {
-    display: flex;
-    flex-direction: column;
-} */

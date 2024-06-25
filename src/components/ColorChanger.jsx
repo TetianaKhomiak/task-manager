@@ -47,10 +47,39 @@ const ColorChanger = ({ task }) => {
         </button>
         <button
           className="color-option"
-          onClick={() => handleColorChange("#0e87cc")}>
+          onClick={() => handleColorChange("#72c7f8")}>
           <FaRegCircleDot
-            className={`circle-dot__bright-cerulean ${
-              selectedColor === "#0e87cc" ? "active" : ""
+            className={`circle-dot__sky-blue ${
+              selectedColor === "#72c7f8" ? "active" : ""
+            }`}
+          />
+        </button>
+        <button
+          className="color-option"
+          onClick={() => handleColorChange("#cdc5c5")}>
+          <FaRegCircleDot
+            className={`circle-dot__pale-gray ${
+              selectedColor === "#cdc5c5" ? "active" : ""
+            }`}
+          />
+        </button>
+
+        <button
+          className="color-option"
+          onClick={() => handleColorChange("#32B67A")}>
+          <FaRegCircleDot
+            className={`circle-dot__sea-green ${
+              selectedColor === "#32B67A" ? "active" : ""
+            }`}
+          />
+        </button>
+
+        <button
+          className="color-option"
+          onClick={() => handleColorChange("#EAF68E")}>
+          <FaRegCircleDot
+            className={`circle-dot__pale-chartreuse ${
+              selectedColor === "#EAF68E" ? "active" : ""
             }`}
           />
         </button>
