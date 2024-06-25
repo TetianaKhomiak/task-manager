@@ -5,9 +5,19 @@
     cursor: grab;
     padding: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    background-color: rgb(237, 249, 232);
 }
 
 .column__title {
     display: flex;
     justify-content: space-between;
+}
+
+.column__delete-btn {
+    all: unset;
+    cursor: pointer;
+}
+
+.column__delete-icon {
+    opacity: 0.5;
 }

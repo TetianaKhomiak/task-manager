@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setActiveCard, deleteColum } from "../redux/slices/taskColumnsSlice";
 import TaskCards from "./TaskCards";
 import { updateTasks } from "../redux/slices/tasksListSlice";
+import { TiDeleteOutline } from "react-icons/ti";
 
 const TaskColumn = ({ title, columnIndex }) => {
   const [isAddingTask, setIsAddingTask] = useState(false);
@@ -47,7 +48,11 @@ const TaskColumn = ({ title, columnIndex }) => {
       onDragEnd={handleDragEnd}>
       <div className="column__title">
         <h3>{title}</h3>
-        {title !== "To do" && <button onClick={handleDeleteColumn}>X</button>}
+        {title !== "To do" && (
+          <button onClick={handleDeleteColumn} className="column__delete-btn">
+            <TiDeleteOutline className="column__delete-icon" />
+          </button>
+        )}
       </div>
 
       {isAddingTask ? (
