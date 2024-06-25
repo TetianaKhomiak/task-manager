@@ -17,7 +17,7 @@ const TaskEdit = ({
 
   const [leftCharacterLenght, setLeftCharacterLenght] = useState(20);
   const selectedColor = useSelector((state) => {
-    const task2 = state.tasksList.task.find((item) => item.name === task.name);
+    const task2 = state.tasksList.task.find((item) => item.id === task.id);
     return task2 ? task2.selectedColor : null;
   });
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const TaskEdit = ({
   const handleSaveEditedName = (e) => {
     e.preventDefault();
     setIsEditingName(false);
-    dispatch(updateTaskName({ name: task.name, editedTask: editedName }));
+    dispatch(updateTaskName({ id: task.id, editedTask: editedName }));
   };
 
   const handleEditDescription = () => {
@@ -55,7 +55,7 @@ const TaskEdit = ({
     e.preventDefault();
     setIsEditingDescription(false);
     dispatch(
-      updateTaskDescription({ name: task.name, description: editedDescription })
+      updateTaskDescription({ id: task.id, description: editedDescription })
     );
   };
 

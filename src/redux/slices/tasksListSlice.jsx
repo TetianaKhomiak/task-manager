@@ -13,9 +13,9 @@ export const tasksListSlice = createSlice({
       state.task = [...state.task, action.payload];
     },
     updateTaskName: (state, action) => {
-      const { name, editedTask } = action.payload;
+      const { id, editedTask } = action.payload;
       const updatedTasks = state.task.map((item) => {
-        if (item.name === name) {
+        if (item.id === id) {
           item.name = editedTask;
         }
         return item;
@@ -24,9 +24,9 @@ export const tasksListSlice = createSlice({
     },
 
     updateTaskDescription: (state, action) => {
-      const { name, description } = action.payload;
+      const { id, description } = action.payload;
       const updatedTasks = state.task.map((item) => {
-        if (item.name === name) {
+        if (item.id === id) {
           item.description = description;
         }
         return item;
@@ -34,9 +34,9 @@ export const tasksListSlice = createSlice({
       state.task = updatedTasks;
     },
     updateDeadline: (state, action) => {
-      const { name, deadline } = action.payload;
+      const { id, deadline } = action.payload;
       const updatedTasks = state.task.map((item) => {
-        if (item.name === name) {
+        if (item.id === id) {
           item.deadline = deadline;
         }
         return item;
@@ -52,14 +52,14 @@ export const tasksListSlice = createSlice({
     },
     deleteCard: (state, action) => {
       const updatedTasks = state.task.filter(
-        (item) => item.name !== action.payload
+        (item) => item.id !== action.payload
       );
       state.task = updatedTasks;
     },
     setColor: (state, action) => {
-      const { name, selectedColor } = action.payload;
+      const { id, selectedColor } = action.payload;
       const updatedSelectedColor = state.task.map((item) => {
-        if (item.name === name) {
+        if (item.id === id) {
           item.selectedColor = selectedColor;
         }
         return item;

@@ -28,7 +28,7 @@ const TaskCard = ({ task, index }) => {
   const [minDate, setMinDate] = useState("");
   const date = formatDate(task.creationDate);
   const selectedColor = useSelector((state) => {
-    const task2 = state.tasksList.task.find((item) => item.name === task.name);
+    const task2 = state.tasksList.task.find((item) => item.id === task.id);
     return task2 ? task2.selectedColor : null;
   });
   const transformedColor = transformColor(selectedColor);
@@ -81,7 +81,7 @@ const TaskCard = ({ task, index }) => {
     const formattedDate = formatDate(selectedDate);
     setDeadlineValue(formattedDate);
     setIsDeadline(false);
-    dispatch(updateDeadline({ name: task.name, deadline: formattedDate }));
+    dispatch(updateDeadline({ id: task.id, deadline: formattedDate }));
     setIsDeadlineDeleteDisabled(false);
   };
 
@@ -142,7 +142,7 @@ const TaskCard = ({ task, index }) => {
                 task={task}
                 setIsDropdownMenu={setIsDropdownMenu}
                 deadlineValue={deadlineValue}
-                handleDeleteCard={() => dispatch(deleteCard(task.name))}
+                handleDeleteCard={() => dispatch(deleteCard(task.id))}
                 isDeadlineDeleteDisabled={isDeadlineDeleteDisabled}
                 isDeadlineAddDisabled={isDeadlineAddDisabled}
                 handleSelectDeadline={handleSelectDeadline}

@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
-import "../styles/DropdownMenu.css";
-import { useDispatch } from "react-redux";
-import { updateDeadline } from "../redux/slices/tasksListSlice";
-import { RiDeleteBinLine } from "react-icons/ri";
+import React, { useEffect, useState } from "react";
 import { GoMoveToEnd } from "react-icons/go";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import SubDropdownMenu from "./SubDropdownMenu";
-import { updateTaskDescription } from "../redux/slices/tasksListSlice";
-import DropdownMenuItem from "./DropdownMenuItem";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { useDispatch } from "react-redux";
+import {
+  updateDeadline,
+  updateTaskDescription,
+} from "../redux/slices/tasksListSlice";
+import "../styles/DropdownMenu.css";
 import ColorChanger from "./ColorChanger";
+import DropdownMenuItem from "./DropdownMenuItem";
+import SubDropdownMenu from "./SubDropdownMenu";
 
 const DropdownMenu = ({
   setDeadlineValue,
@@ -47,7 +49,7 @@ const DropdownMenu = ({
     if (deadlineValue) {
       setIsDropdownMenu(false);
       setDeadlineValue("");
-      dispatch(updateDeadline({ name: task.name, deadline: "" }));
+      dispatch(updateDeadline({ id: task.id, deadline: "" }));
     }
   };
 
@@ -57,7 +59,7 @@ const DropdownMenu = ({
   };
 
   const handleDeleteDescription = () => {
-    dispatch(updateTaskDescription({ name: task.name, description: "" }));
+    dispatch(updateTaskDescription({ id: task.id, description: "" }));
     setIsDropdownMenu(false);
   };
 

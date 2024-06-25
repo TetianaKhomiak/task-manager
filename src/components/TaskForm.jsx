@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import "../styles/TaskForm.css";
 import { addTask } from "../redux/slices/tasksListSlice";
 import { useDispatch } from "react-redux";
+import { useId } from "react";
 
 const TaskForm = ({ setIsAddingTask, columnName }) => {
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [charCount, setCharCount] = useState(20);
+  const id = useId();
   const dispatch = useDispatch();
 
   const handleSubmitForm = (e) => {
@@ -15,6 +17,7 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
       dispatch(
         addTask({
           name: taskName,
+          id,
           description: taskDescription,
           columnName,
           creationDate: new Date().toISOString(),

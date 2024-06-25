@@ -7,12 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 const ColorChanger = ({ task }) => {
   const dispatch = useDispatch();
   const selectedColor = useSelector((state) => {
-    const task2 = state.tasksList.task.find((item) => item.name === task.name);
+    const task2 = state.tasksList.task.find((item) => item.id === task.id);
     return task2 ? task2.selectedColor : null;
   });
 
   const handleColorChange = (color) => {
-    dispatch(setColor({ name: task.name, selectedColor: color }));
+    dispatch(setColor({ id: task.id, selectedColor: color }));
   };
   console.log(selectedColor);
 
