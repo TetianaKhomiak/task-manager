@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GoMoveToEnd } from "react-icons/go";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   updateDeadline,
   updateTaskDescription,
@@ -29,6 +29,12 @@ const DropdownMenu = ({
   const [isDescriptionAddDisabled, setIsDescriptionAddDisabled] = useState(
     task.description
   );
+
+  const tasks = useSelector((state) => state.tasksList.task);
+  const currentTask = tasks.find((item) => item.id === task.id);
+  const currentColumn = currentTask ? currentTask.columnName : "";
+  const columns = useSelector((state) => state.taskColumns.columns);
+  const currentIndexColumn = columns.indexOf(currentColumn);
 
   const dispatch = useDispatch();
 
@@ -72,7 +78,11 @@ const DropdownMenu = ({
   };
 
   return (
-    <div className="dropdown-menu">
+    <div
+      // className="dropdown-menu"
+      className={
+        currentIndexColumn == 3 ? "dropdown-menu__last" : "dropdown-menu"
+      }>
       <ColorChanger task={task} />
       <DropdownMenuItem
         className="dropdown-menu__btn"
@@ -118,7 +128,15 @@ const DropdownMenu = ({
           Move to
           <GoMoveToEnd />
         </div>
-        {isMovingTask && <SubDropdownMenu task={task} />}
+        {isMovingTask && (
+          <SubDropdownMenu
+            tasks={tasks}
+            currentColumn={currentColumn}
+            currentIndexColumn={currentIndexColumn}
+            currentTask={currentTask}
+            columns={columns}
+          />
+        )}
       </div>
 
       <DropdownMenuItem

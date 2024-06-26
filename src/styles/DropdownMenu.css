@@ -11,6 +11,19 @@
     flex-direction: column;
 }
 
+.dropdown-menu__last {
+    background-color: #FFFFFF;
+    width: 180px;
+    max-height: 300px;
+    box-shadow: 0px 1px 2px 0px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+    border-radius: 2px;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
 .dropdown-menu__btn,
 .dropdown-menu__btn_move {
     all: unset;

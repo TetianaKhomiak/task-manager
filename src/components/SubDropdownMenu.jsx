@@ -4,16 +4,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateTasks } from "../redux/slices/tasksListSlice";
 import { addColumn } from "../redux/slices/taskColumnsSlice";
 
-const SubDropdownMenu = ({ task }) => {
-  const tasks = useSelector((state) => state.tasksList.task);
-  const columns = useSelector((state) => state.columns);
-  const buttonsText = ["To Do", "In Progress", "On Hold", "Completed"];
-  const currentTask = tasks.find((item) => item.id === task.id);
-  const currentColumn = currentTask ? currentTask.columnName : "";
+const SubDropdownMenu = ({
+  tasks,
+  currentIndexColumn,
+  currentColumn,
+  currentTask,
+  columns,
+}) => {
   const dispatch = useDispatch();
+  const buttonsText = ["To Do", "In Progress", "On Hold", "Completed"];
 
   const handleMoveTask = (currentTask, newColumn) => {
-    const columnExists = columns?.columns.includes(newColumn);
+    const columnExists = columns.includes(newColumn);
     if (!columnExists) {
       dispatch(addColumn(newColumn));
     }
@@ -26,7 +28,11 @@ const SubDropdownMenu = ({ task }) => {
   };
 
   return (
-    <div className="subdropdown-menu">
+    <div
+      //  className="subdropdown-menu"
+      className={
+        currentIndexColumn == 3 ? "subdropdown-menu__last" : "subdropdown-menu"
+      }>
       {buttonsText.map((buttonText) => (
         <button
           key={buttonText}
