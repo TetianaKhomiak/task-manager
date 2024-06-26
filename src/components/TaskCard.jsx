@@ -28,8 +28,10 @@ const TaskCard = ({ task, index }) => {
   const [minDate, setMinDate] = useState("");
   const date = formatDate(task.creationDate);
   const selectedColor = useSelector((state) => {
-    const task2 = state.tasksList.task.find((item) => item.id === task.id);
-    return task2 ? task2.selectedColor : null;
+    const currentTask = state.tasksList.task.find(
+      (item) => item.id === task.id
+    );
+    return currentTask ? currentTask.selectedColor : null;
   });
   const transformedColor = transformColor(selectedColor);
 
