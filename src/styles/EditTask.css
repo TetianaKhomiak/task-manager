@@ -1,12 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
-.form {
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
-}
-
-.form__textarea {
+.edit__textarea {
     padding: 10px;
     max-width: 100%;
     line-height: 1.5;
@@ -19,7 +13,7 @@
     font-size: 16px;
 }
 
-.form__btn {
+.edit__btn {
     font-family: "Manrope", sans-serif;
     font-size: 16px;
 }

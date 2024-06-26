@@ -4,6 +4,7 @@ import {
   updateTaskDescription,
 } from "../redux/slices/tasksListSlice";
 import { useDispatch, useSelector } from "react-redux";
+import "../styles/EditTask.css";
 
 const TaskEdit = ({
   task,
@@ -66,7 +67,7 @@ const TaskEdit = ({
           <>
             <form onSubmit={handleSaveEditedName}>
               <textarea
-                className="card__textarea"
+                className="edit__textarea"
                 type="text"
                 maxLength={20}
                 value={editedName}
@@ -93,13 +94,15 @@ const TaskEdit = ({
           <>
             <form onSubmit={handleSaveEditedDescription}>
               <textarea
-                className="card__textarea"
+                className="edit__textarea"
                 type="text"
                 value={editedDescription}
                 onChange={(e) =>
                   setEditedDescription(e.target.value)
                 }></textarea>
-              <button type="submit">save</button>
+              <button className="edit__btn" type="submit">
+                save
+              </button>
             </form>
           </>
         ) : (

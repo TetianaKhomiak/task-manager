@@ -62,8 +62,10 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
           value={taskDescription}
           onChange={handleDescriptionChange}></textarea>
         <div>
-          <button type="submit">Add</button>
-          <button type="button" onClick={handleCancel}>
+          <button className="form__btn" type="submit">
+            Add
+          </button>
+          <button className="form__btn" type="button" onClick={handleCancel}>
             Cancel
           </button>
         </div>
