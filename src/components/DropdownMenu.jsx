@@ -118,7 +118,7 @@ const DropdownMenu = ({
           Move to
           <GoMoveToEnd />
         </div>
-        {isMovingTask && <SubDropdownMenu />}
+        {isMovingTask && <SubDropdownMenu task={task} />}
       </div>
 
       <DropdownMenuItem

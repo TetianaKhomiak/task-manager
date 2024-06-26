@@ -48,7 +48,7 @@ const TaskColumn = ({ title, columnIndex }) => {
       onDragEnd={handleDragEnd}>
       <div className="column__title">
         <h3>{title}</h3>
-        {title !== "To do" && (
+        {title !== "To Do" && (
           <button onClick={handleDeleteColumn} className="column__delete-btn">
             <TiDeleteOutline className="column__delete-icon" />
           </button>

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  columns: ["To do"],
+  columns: ["To Do"],
   isAddingColumn: false,
   selectValue: "In Progress",
   activeCard: null,

@@ -23,8 +23,8 @@ const ColorChanger = ({ task }) => {
       <div className="dropdown-menu__item">
         <details className="dropdown-menu__details" type="button">
           <summary>
-            <span class="summary-title">Change Color </span>
-            <div class="summary-chevron-up">
+            <span className="summary-title">Change Color </span>
+            <div className="summary-chevron-up">
               <RiArrowDropDownLine className="icon" />
             </div>
           </summary>
