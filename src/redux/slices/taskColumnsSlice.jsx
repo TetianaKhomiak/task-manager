@@ -12,7 +12,9 @@ export const taskColumnsSlice = createSlice({
   initialState,
   reducers: {
     addColumn: (state, action) => {
-      state.columns = [...state.columns, action.payload];
+      if (!state.columns.includes(action.payload)) {
+        state.columns = [...state.columns, action.payload];
+      }
       state.selectValue = "In Progress";
       state.isAddingColumn = false;
     },
