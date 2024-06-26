@@ -39,7 +39,15 @@ localStorageMiddleware.startListening({
     cancleAdding,
     dropColumn,
     setActiveColumn,
-    deleteColum
+    deleteColum,
+    addTask,
+    updateTasks,
+    setActiveCard,
+    deleteCard,
+    updateTaskName,
+    updateDeadline,
+    updateTaskDescription,
+    setColor
   ),
   effect: (action, listenerApi) => {
     const state = listenerApi.getState();
@@ -55,6 +63,11 @@ localStorageMiddleware.startListening({
     localStorage.setItem(
       activeColumnKey,
       JSON.stringify(state.taskColumns.activeColumn)
+    );
+    localStorage.setItem(taskKey, JSON.stringify(state.tasksList.task));
+    localStorage.setItem(
+      activeCardKey,
+      JSON.stringify(state.tasksList.activeCard)
     );
   },
 });
