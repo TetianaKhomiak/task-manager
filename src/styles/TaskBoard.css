@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 .board__wrapper {
     display: flex;
     gap: 15px;
@@ -7,4 +9,6 @@
 
 .board__btn_add-column {
     height: 25px;
+    font-family: "Roboto Mono", monospace;
+    font-size: 16px;
 }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 .column__wrapper {
     width: 300px;
     min-height: 100px;
@@ -6,11 +8,14 @@
     padding: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     background-color: rgb(237, 249, 232);
+    font-family: "Roboto Mono", monospace;
 }
 
 .column__title {
     display: flex;
     justify-content: space-between;
+    font-size: 22px;
+    opacity: 0.8;
 }
 
 .column__delete-btn {
@@ -24,4 +29,9 @@
 
 .column__delete-icon:hover {
     opacity: 0.7;
+}
+
+.column__create-btn {
+    font-family: "Roboto Mono", monospace;
+    font-size: 16px;
 }

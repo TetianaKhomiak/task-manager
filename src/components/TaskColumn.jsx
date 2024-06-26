@@ -63,7 +63,9 @@ const TaskColumn = ({ title, columnIndex }) => {
       ) : (
         <>
           <TaskCards columnName={title} />
-          <button onClick={handleCreateTask}>+ Create Task</button>
+          <button className="column__create-btn" onClick={handleCreateTask}>
+            + Create Task
+          </button>
         </>
       )}
     </div>
