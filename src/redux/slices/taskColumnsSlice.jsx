@@ -1,10 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export const columnsKey = "columns";
+export const isAddingColumnKey = "isAddingColumn";
+export const selectValueKey = "selectValue";
+export const activeCardKey = "activeCard";
+
 const initialState = {
-  columns: ["To Do"],
-  isAddingColumn: false,
-  selectValue: "In Progress",
-  activeCard: null,
+  columns: JSON.parse(localStorage.getItem(columnsKey)) ?? ["To Do"],
+  isAddingColumn: JSON.parse(localStorage.getItem(isAddingColumnKey)) ?? false,
+  selectValue:
+    JSON.parse(localStorage.getItem(selectValueKey)) ?? "In Progress",
+  activeCard: JSON.parse(localStorage.getItem(activeCardKey)) ?? null,
+
+  // columns: ["To Do"],
+  // isAddingColumn: false,
+  // selectValue: "In Progress",
+  // activeCard: null,
 };
 
 export const taskColumnsSlice = createSlice({

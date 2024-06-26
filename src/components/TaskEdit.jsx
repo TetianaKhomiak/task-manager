@@ -67,7 +67,7 @@ const TaskEdit = ({
       <>
         {isEditingName ? (
           <>
-            <form onSubmit={handleSaveEditedName}>
+            <form className="edit__form" onSubmit={handleSaveEditedName}>
               <textarea
                 className="edit__textarea"
                 type="text"

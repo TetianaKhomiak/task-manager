@@ -19,11 +19,12 @@
     padding: 10px 0 10px 15px;
     margin: 5px 0;
     border-radius: 5px;
-    box-shadow: 0 -4px 4px rgba(203, 250, 183, 0.8), 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24),
-        0 4px 4px rgba(203, 250, 183, 0.8), 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 -4px 4px rgba(217, 245, 205, 0.8), 0 1px 3px rgba(76, 75, 75, 0.12), 0 1px 2px rgba(58, 57, 57, 0.24),
+        0 4px 4px rgba(223, 251, 210, 0.8), 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(53, 53, 53, 0.24);
     transition: all 0.2s ease-in-out;
 }
 
 .board__btn_add-column:hover {
     background-color: #c4f8ae;
+    box-shadow: none;
 }
