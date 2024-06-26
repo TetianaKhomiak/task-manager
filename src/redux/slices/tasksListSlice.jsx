@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export const taskKey = "task";
+export const activeCardKey = "activeCard";
+
 const initialState = {
-  task: [],
-  activeCard: null,
+  task: JSON.parse(localStorage.getItem(taskKey)) ?? [],
+  activeCard: JSON.parse(localStorage.getItem(activeCardKey)) ?? null,
 };
 
 export const tasksListSlice = createSlice({

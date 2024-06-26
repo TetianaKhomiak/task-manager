@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styles/TaskColumn.css";
 import TaskForm from "./TaskForm";
 import { useSelector, useDispatch } from "react-redux";
-import { setActiveCard, deleteColum } from "../redux/slices/taskColumnsSlice";
+import { setActiveColumn, deleteColum } from "../redux/slices/taskColumnsSlice";
 import TaskCards from "./TaskCards";
 import { updateTasks } from "../redux/slices/tasksListSlice";
 import { TiDeleteOutline } from "react-icons/ti";
@@ -33,11 +33,11 @@ const TaskColumn = ({ title, columnIndex }) => {
   };
 
   const handleDragStart = () => {
-    dispatch(setActiveCard(columnIndex));
+    dispatch(setActiveColumn(columnIndex));
   };
 
   const handleDragEnd = () => {
-    dispatch(setActiveCard(null));
+    dispatch(setActiveColumn(null));
   };
 
   return (

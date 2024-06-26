@@ -9,14 +9,25 @@ import taskColumnsReducer, {
   addColumn,
   cancleAdding,
   dropColumn,
-  setActiveCard,
+  setActiveColumn,
   deleteColum,
   columnsKey,
   isAddingColumnKey,
   selectValueKey,
-  activeCardKey,
+  activeColumnKey,
 } from "./slices/taskColumnsSlice";
-import tasksListReducer from "./slices/tasksListSlice";
+import tasksListReducer, {
+  addTask,
+  updateTasks,
+  setActiveCard,
+  deleteCard,
+  updateTaskName,
+  updateDeadline,
+  updateTaskDescription,
+  setColor,
+  taskKey,
+  activeCardKey,
+} from "./slices/tasksListSlice";
 
 const localStorageMiddleware = createListenerMiddleware();
 
@@ -27,7 +38,7 @@ localStorageMiddleware.startListening({
     addColumn,
     cancleAdding,
     dropColumn,
-    setActiveCard,
+    setActiveColumn,
     deleteColum
   ),
   effect: (action, listenerApi) => {
@@ -42,8 +53,8 @@ localStorageMiddleware.startListening({
       JSON.stringify(state.taskColumns.selectValue)
     );
     localStorage.setItem(
-      activeCardKey,
-      JSON.stringify(state.taskColumns.activeCard)
+      activeColumnKey,
+      JSON.stringify(state.taskColumns.activeColumn)
     );
   },
 });
