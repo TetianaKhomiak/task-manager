@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/SubDropdownMenu.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateTasks } from "../redux/slices/tasksListSlice";
 import { addColumn } from "../redux/slices/taskColumnsSlice";
 
@@ -29,7 +29,6 @@ const SubDropdownMenu = ({
 
   return (
     <div
-      //  className="subdropdown-menu"
       className={
         currentIndexColumn == 3 ? "subdropdown-menu__last" : "subdropdown-menu"
       }>

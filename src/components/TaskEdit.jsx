@@ -63,20 +63,24 @@ const TaskEdit = ({
   };
 
   return (
-    <div>
+    <div className="edit__wrapper">
       <>
         {isEditingName ? (
           <>
-            <form className="edit__form" onSubmit={handleSaveEditedName}>
+            <form className="edit__form_name" onSubmit={handleSaveEditedName}>
               <textarea
                 className="edit__textarea"
                 type="text"
                 maxLength={20}
                 value={editedName}
                 onChange={(e) => setEditedName(e.target.value)}></textarea>
-              <p>{leftCharacterLenght}</p>
-              <button type="submit">save</button>
+              <button className="edit__btn" type="submit">
+                SAVE
+              </button>
             </form>
+            <p className="edit__char-counter">
+              Remaining Characters: {leftCharacterLenght}
+            </p>
           </>
         ) : (
           <>
@@ -94,7 +98,9 @@ const TaskEdit = ({
       <>
         {isEditingDescription ? (
           <>
-            <form onSubmit={handleSaveEditedDescription}>
+            <form
+              className="edit__form_descr"
+              onSubmit={handleSaveEditedDescription}>
               <textarea
                 className="edit__textarea"
                 type="text"
@@ -103,7 +109,7 @@ const TaskEdit = ({
                   setEditedDescription(e.target.value)
                 }></textarea>
               <button className="edit__btn" type="submit">
-                save
+                SAVE
               </button>
             </form>
           </>

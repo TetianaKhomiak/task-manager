@@ -79,7 +79,6 @@ const DropdownMenu = ({
 
   return (
     <div
-      // className="dropdown-menu"
       className={
         currentIndexColumn == 3 ? "dropdown-menu__last" : "dropdown-menu"
       }>
