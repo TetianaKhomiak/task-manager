@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/DropAreaTaskColumn.css";
+import "../styles/DropAreaTask.css";
 
 const DropAreaTask = ({ onDrop }) => {
   const [showDrop, setShowDrop] = useState(false);
