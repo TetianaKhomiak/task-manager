@@ -21,14 +21,20 @@
 .column__delete-btn {
     all: unset;
     cursor: pointer;
+    box-shadow: 0 -4px 4px rgba(217, 245, 205, 0.8), 0 1px 3px rgba(76, 75, 75, 0.12), 0 1px 2px rgba(58, 57, 57, 0.24),
+        0 4px 4px rgba(223, 251, 210, 0.8), 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(53, 53, 53, 0.24);
+    transition: all 0.2s ease-in-out;
+    padding: 5px 5px 0 5px;
+    border-radius: 5px;
+}
+
+.column__delete-btn:hover {
+    background-color: #c4f8ae;
+    box-shadow: none;
 }
 
 .column__delete-icon {
     opacity: 0.3;
-}
-
-.column__delete-icon:hover {
-    opacity: 0.7;
 }
 
 .column__create-btn {
