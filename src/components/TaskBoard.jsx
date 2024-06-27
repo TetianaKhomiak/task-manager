@@ -12,7 +12,7 @@ import {
 } from "../redux/slices/taskColumnsSlice";
 
 const TaskBoard = () => {
-  const { columns, isAddingColumn, selectValue, activeCard } = useSelector(
+  const { columns, isAddingColumn, selectValue, activeColumn } = useSelector(
     (state) => state.taskColumns
   );
   const dispatch = useDispatch();
@@ -37,10 +37,10 @@ const TaskBoard = () => {
   };
 
   const onDrop = (position) => {
-    if (activeCard == null || activeCard === undefined) {
+    if (activeColumn == null || activeColumn === undefined) {
       return;
     }
-    dispatch(dropColumn({ fromIndex: activeCard, toIndex: position }));
+    dispatch(dropColumn({ fromIndex: activeColumn, toIndex: position }));
   };
 
   const isOptionDisabled = (option) => {

@@ -9,12 +9,12 @@
 }
 
 .search__input {
-    width: 140px;
+    width: 150px;
     outline: none;
-    height: 30px;
+    height: 40px;
     font-family: "Manrope", sans-serif;
-    padding: 10px;
-    font-size: 16px;
+    padding: 10px 40px 15px 10px;
+    font-size: 18px;
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
@@ -30,8 +30,9 @@
 }
 
 .search__icon {
+    font-size: 24px;
     position: absolute;
     opacity: 0.5;
     margin-left: 100px;
-    top: 7px;
+    top: 9px;
 }

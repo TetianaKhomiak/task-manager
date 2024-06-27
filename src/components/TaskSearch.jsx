@@ -7,8 +7,6 @@ import { SearchContext } from "../context/SearchProvider";
 const TaskSearch = () => {
   const { searchTask, setSearchTask } = useContext(SearchContext);
 
-  // console.log(searchTask);
-
   const onChangeSearch = (e) => {
     setSearchTask(e.target.value);
   };
