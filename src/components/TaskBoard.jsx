@@ -62,9 +62,10 @@ const TaskBoard = () => {
         ))}
       {isAddingColumn ? (
         <>
-          <form onSubmit={handleAddTaskColumn}>
+          <form className="board__form" onSubmit={handleAddTaskColumn}>
             <select
               name="category"
+              className="board__select"
               onChange={handleSelectChange}
               value={selectValue}>
               <option
@@ -82,10 +83,16 @@ const TaskBoard = () => {
               </option>
             </select>
 
-            <button type="submit" disabled={isOptionDisabled(selectValue)}>
+            <button
+              className="board__btn"
+              type="submit"
+              disabled={isOptionDisabled(selectValue)}>
               Add
             </button>
-            <button type="button" onClick={handleCancelAdding}>
+            <button
+              className="board__btn"
+              type="button"
+              onClick={handleCancelAdding}>
               Cancel
             </button>
           </form>
