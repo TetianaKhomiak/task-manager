@@ -101,20 +101,18 @@ const TaskCard = ({ task, index }) => {
         draggable
         onDragStart={() => dispatch(setActiveCard(index))}
         onDragEnd={() => dispatch(setActiveCard(null))}>
-        <div>
-          {isDropdownMenu && (
-            <div
-              className="overlay"
-              onClick={() => setIsDropdownMenu(false)}></div>
-          )}
-        </div>
+        {isDropdownMenu && (
+          <div
+            className="overlay"
+            onClick={() => setIsDropdownMenu(false)}></div>
+        )}
 
         <div
-          className="topper__wrapper"
+          className="card__deadline_wrapper"
           style={{
             backgroundColor: selectedColor ? selectedColor : "#CDC5C5",
           }}>
-          <div>
+          <div className="card__header_wrapper">
             {isSelectDeadline ? (
               <div className="card__input_wrapper">
                 <input
@@ -136,32 +134,32 @@ const TaskCard = ({ task, index }) => {
                     : "card__deadline-btn_hide"
                 }
                 style={isDropdownMenu && !deadlineValue ? { opacity: 0 } : {}}>
-                {/* to hide hover effect of deadline-btn */}
                 {deadlineValue ? `deadline ${deadlineValue}` : "deadline"}
               </button>
             )}
-          </div>
-          <div ref={dropdownRef} className="dropdown-container">
-            {isDropdownMenu ? (
-              <DropdownMenu
-                setDeadlineValue={setDeadlineValue}
-                task={task}
-                setIsDropdownMenu={setIsDropdownMenu}
-                deadlineValue={deadlineValue}
-                handleDeleteCard={() => dispatch(deleteCard(task.id))}
-                isDeadlineDeleteDisabled={isDeadlineDeleteDisabled}
-                isDeadlineAddDisabled={isDeadlineAddDisabled}
-                handleSelectDeadline={handleSelectDeadline}
-                setIsEditingDescription={setIsEditingDescription}
-              />
-            ) : (
-              <IoEllipsisVerticalOutline
-                className="card__dots"
-                onClick={handleDropdownMenu}
-              />
-            )}
+            <div ref={dropdownRef} className="dropdown-container">
+              {isDropdownMenu ? (
+                <DropdownMenu
+                  setDeadlineValue={setDeadlineValue}
+                  task={task}
+                  setIsDropdownMenu={setIsDropdownMenu}
+                  deadlineValue={deadlineValue}
+                  handleDeleteCard={() => dispatch(deleteCard(task.id))}
+                  isDeadlineDeleteDisabled={isDeadlineDeleteDisabled}
+                  isDeadlineAddDisabled={isDeadlineAddDisabled}
+                  handleSelectDeadline={handleSelectDeadline}
+                  setIsEditingDescription={setIsEditingDescription}
+                />
+              ) : (
+                <IoEllipsisVerticalOutline
+                  className="card__dots"
+                  onClick={handleDropdownMenu}
+                />
+              )}
+            </div>
           </div>
         </div>
+
         <TaskEdit
           task={task}
           isEditingDescription={isEditingDescription}
@@ -169,8 +167,8 @@ const TaskCard = ({ task, index }) => {
           editedDescription={editedDescription}
           setEditedDescription={setEditedDescription}
         />
-        <div className="card__created-date">Created {date}</div>
       </div>
+      <div className="card__created-date">Created {date}</div>
     </div>
   );
 };
