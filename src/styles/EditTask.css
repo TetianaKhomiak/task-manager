@@ -33,6 +33,10 @@
     background-color: #bbb4b4;
 }
 
+.edit__textarea_descr {
+    height: 200px;
+}
+
 .edit__form_descr,
 .edit__form_name {
     display: flex;

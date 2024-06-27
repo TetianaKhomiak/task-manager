@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 .form {
+    width: 98%;
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    margin: 10px auto;
+    padding: 20px 30px;
+    box-shadow: 0 -4px 4px rgba(217, 245, 205, 0.8), 0 1px 3px rgba(76, 75, 75, 0.12), 0 1px 2px rgba(58, 57, 57, 0.24),
+        0 4px 4px rgba(223, 251, 210, 0.8), 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(53, 53, 53, 0.24);
 }
 
 .form__textarea {

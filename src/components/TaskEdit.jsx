@@ -102,7 +102,7 @@ const TaskEdit = ({
               className="edit__form_descr"
               onSubmit={handleSaveEditedDescription}>
               <textarea
-                className="edit__textarea"
+                className="edit__textarea edit__textarea_descr"
                 type="text"
                 value={editedDescription}
                 onChange={(e) =>

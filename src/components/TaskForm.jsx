@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import "../styles/TaskForm.css";
-import { addTask } from "../redux/slices/tasksListSlice";
+import React, { useId, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useId } from "react";
+import { addTask } from "../redux/slices/tasksListSlice";
+import "../styles/TaskForm.css";
 
 const TaskForm = ({ setIsAddingTask, columnName }) => {
   const [taskName, setTaskName] = useState("");
@@ -30,7 +29,6 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
         })
       );
 
-      // Clear form fields and state after adding task
       setTaskName("");
       setTaskDescription("");
       setCharCount(20);
