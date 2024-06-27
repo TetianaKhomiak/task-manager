@@ -116,14 +116,17 @@ const TaskCard = ({ task, index }) => {
           }}>
           <div>
             {isSelectDeadline ? (
-              <input
-                ref={deadlineRef}
-                type="date"
-                min={minDate}
-                value={deadlineValue}
-                onChange={handleDateChange}
-                className="card__deadline_input"
-              />
+              <div className="card__input_wrapper">
+                <input
+                  ref={deadlineRef}
+                  type="date"
+                  min={minDate}
+                  value={deadlineValue}
+                  onChange={handleDateChange}
+                  className="card__deadline_input"
+                  style={{ backgroundColor: task.selectedColor }}
+                />
+              </div>
             ) : (
               <button
                 onClick={handleSelectDeadline}

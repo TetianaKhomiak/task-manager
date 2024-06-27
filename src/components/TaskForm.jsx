@@ -49,19 +49,19 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
   return (
     <div className="form__wrapper">
       <form className="form" onSubmit={handleSubmitForm}>
-        <p>Title</p>
+        <p className="form__text">Title:</p>
         <textarea
           maxLength={20}
           className="form__textarea"
           value={taskName}
           onChange={handleNameChange}></textarea>
         <div className="char-count">Characters left: {charCount}</div>
-        <p>Description</p>
+        <p className="form__text">Description:</p>
         <textarea
-          className="form__textarea"
+          className="form__textarea form__textarea_big"
           value={taskDescription}
           onChange={handleDescriptionChange}></textarea>
-        <div>
+        <div className="form__btn_wrapper">
           <button className="form__btn" type="submit">
             Add
           </button>
