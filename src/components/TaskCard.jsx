@@ -25,8 +25,6 @@ const TaskCard = ({ task, index }) => {
 
   const [isDropdownMenu, setIsDropdownMenu] = useState(false);
 
-  const [minDate, setMinDate] = useState("");
-  const date = formatDate(task.creationDate);
   const selectedColor = useSelector((state) => {
     const currentTask = state.tasksList.task.find(
       (item) => item.id === task.id
@@ -47,13 +45,6 @@ const TaskCard = ({ task, index }) => {
     };
     updateTaskProp();
   }, [task]);
-
-  useEffect(() => {
-    const getDate = () => {
-      setMinDate(getMinDate());
-    };
-    getDate();
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -108,35 +99,11 @@ const TaskCard = ({ task, index }) => {
         )}
 
         <div
-          className="card__deadline_wrapper"
+          className="card__wrapper"
           style={{
             backgroundColor: selectedColor ? selectedColor : "#CDC5C5",
           }}>
           <div className="card__header_wrapper">
-            {isSelectDeadline ? (
-              <div className="card__input_wrapper">
-                <input
-                  ref={deadlineRef}
-                  type="date"
-                  min={minDate}
-                  value={deadlineValue}
-                  onChange={handleDateChange}
-                  className="card__deadline_input"
-                  style={{ backgroundColor: task.selectedColor }}
-                />
-              </div>
-            ) : (
-              <button
-                onClick={handleSelectDeadline}
-                className={
-                  deadlineValue
-                    ? "card__deadline-btn_show"
-                    : "card__deadline-btn_hide"
-                }
-                style={isDropdownMenu && !deadlineValue ? { opacity: 0 } : {}}>
-                {deadlineValue ? `deadline ${deadlineValue}` : "deadline"}
-              </button>
-            )}
             <div ref={dropdownRef} className="dropdown-container">
               {isDropdownMenu ? (
                 <DropdownMenu
@@ -156,19 +123,43 @@ const TaskCard = ({ task, index }) => {
                   onClick={handleDropdownMenu}
                 />
               )}
+              <TaskEdit
+                task={task}
+                isEditingDescription={isEditingDescription}
+                setIsEditingDescription={setIsEditingDescription}
+                editedDescription={editedDescription}
+                setEditedDescription={setEditedDescription}
+              />
             </div>
           </div>
         </div>
-
-        <TaskEdit
-          task={task}
-          isEditingDescription={isEditingDescription}
-          setIsEditingDescription={setIsEditingDescription}
-          editedDescription={editedDescription}
-          setEditedDescription={setEditedDescription}
-        />
       </div>
-      <div className="card__created-date">Created {date}</div>
+      <div className="card__deadline_wrapper">
+        {isSelectDeadline ? (
+          <div className="card__input_wrapper">
+            <input
+              ref={deadlineRef}
+              type="date"
+              min={getMinDate()}
+              value={deadlineValue}
+              onChange={handleDateChange}
+              className="card__deadline_input"
+              style={{ backgroundColor: task.selectedColor }}
+            />
+          </div>
+        ) : (
+          <button
+            onClick={handleSelectDeadline}
+            className={
+              deadlineValue
+                ? "card__deadline-btn_show"
+                : "card__deadline-btn_hide"
+            }
+            style={isDropdownMenu && !deadlineValue ? { opacity: 0 } : {}}>
+            {deadlineValue ? `deadline ${deadlineValue}` : "deadline"}
+          </button>
+        )}
+      </div>
     </div>
   );
 };

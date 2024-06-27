@@ -23,7 +23,7 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
           id,
           description: taskDescription,
           columnName,
-          creationDate: new Date().toISOString(),
+          // creationDate: new Date().toISOString(),
           deadline: null,
           selectedColor: "",
         })

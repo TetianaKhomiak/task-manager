@@ -29,7 +29,7 @@ const DropAreaTask = ({ onDrop }) => {
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
-      className={showDrop ? "drop_area" : "hide_drop"}>
+      className={showDrop ? "card__drop_area" : "card__hide_drop"}>
       Drop Here
     </section>
   );
