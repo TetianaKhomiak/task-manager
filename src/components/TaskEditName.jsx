@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { transformColor } from "../../utils";
 import { updateTaskName } from "../redux/slices/cardSlice";
-import "../styles/EditTask.css";
+import "../styles/TaskEditName.css";
 
-const TaskEdit = ({ task }) => {
+const TaskEditName = ({ task }) => {
   const [isEditingName, setIsEditingName] = useState(false);
   const [editedName, setEditedName] = useState(task.name);
 
@@ -21,7 +21,7 @@ const TaskEdit = ({ task }) => {
     backgroundColor: isHovered
       ? transformedColor
         ? transformedColor
-        : ""
+        : "#F5F6F8"
       : "",
     transition: "background-color 0.3s ease",
   };
@@ -80,12 +80,12 @@ const TaskEdit = ({ task }) => {
         ) : (
           <>
             <div
-              className="card__name"
+              className="edit__name"
               onDoubleClick={handleEditName}
               style={{
                 backgroundColor: selectedColor ? selectedColor : "#CDC5C5",
               }}>
-              <div className="card__name_text">{task.name}</div>
+              <div className="edit__name_text">{task.name}</div>
             </div>
           </>
         )}
@@ -94,4 +94,4 @@ const TaskEdit = ({ task }) => {
   );
 };
 
-export default TaskEdit;
+export default TaskEditName;

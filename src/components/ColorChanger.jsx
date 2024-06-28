@@ -1,10 +1,9 @@
 import React from "react";
-import "../styles/ColorChanger.css";
 import { FaRegCircleDot } from "react-icons/fa6";
-import { setColor } from "../redux/slices/cardSlice";
+import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { RiArrowDropUpLine } from "react-icons/ri";
+import { setColor } from "../redux/slices/cardSlice";
+import "../styles/ColorChanger.css";
 
 const ColorChanger = ({ task }) => {
   const dispatch = useDispatch();
@@ -16,12 +15,12 @@ const ColorChanger = ({ task }) => {
   const handleColorChange = (color) => {
     dispatch(setColor({ id: task.id, selectedColor: color }));
   };
-  console.log(selectedColor);
+  //console.log(selectedColor);
 
   return (
     <div className="color-changer">
-      <div className="dropdown-menu__item">
-        <details className="dropdown-menu__details" type="button">
+      <div className="color-changer__container">
+        <details type="button">
           <summary>
             <span className="summary-title">Change Color </span>
             <div className="summary-chevron-up">

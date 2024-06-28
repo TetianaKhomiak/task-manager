@@ -24,7 +24,7 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
           description: taskDescription,
           columnName,
           deadline: null,
-          selectedColor: "",
+          selectedColor: "#CDC5C5",
         })
       );
 
@@ -58,7 +58,7 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
           value={taskName}
           placeholder={isError ? "Title is required" : "Title"}
           onChange={handleNameChange}></textarea>
-        <div className="char-count">Characters left: {charCount}</div>
+        <div className="form__char-count">Characters left: {charCount}</div>
         <textarea
           className="form__textarea form__textarea_big"
           value={taskDescription}

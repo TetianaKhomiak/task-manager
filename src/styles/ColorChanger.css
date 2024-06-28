@@ -3,6 +3,9 @@
     width: 100%;
 }
 
+.color-changer__container {
+    position: relative;
+}
 
 .color-changer__wrapper {
     display: flex;

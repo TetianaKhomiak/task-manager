@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "../styles/TaskCard.css";
 import TaskCard from "./TaskCard";
 import DropAreaCard from "./DropAreaCard";
 import { updateTasks } from "../redux/slices/cardSlice";

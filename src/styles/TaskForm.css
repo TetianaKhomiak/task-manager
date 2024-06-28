@@ -73,7 +73,7 @@
     box-shadow: none;
 }
 
-.char-count {
+.form__char-count {
     font-family: "Manrope", sans-serif;
     font-size: 16px;
     font-weight: 500;

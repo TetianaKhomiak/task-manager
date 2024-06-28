@@ -120,7 +120,6 @@ const DropdownMenu = ({
       </DropdownMenuItem>
 
       <div
-        className="dropdown-menu__item"
         onMouseEnter={handleMoveTaskEnter}
         onMouseLeave={handleMoveTaskLeave}>
         <div className="dropdown-menu__btn_move">

@@ -8,7 +8,7 @@ const DropdownMenuItem = ({
   children,
 }) => {
   return (
-    <div className="dropdown-menu__item">
+    <div>
       <button
         type="button"
         className={className}

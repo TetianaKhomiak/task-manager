@@ -7,8 +7,9 @@ import {
   setActiveCard,
   updateDeadline,
 } from "../redux/slices/cardSlice";
+import "../styles/TaskCard.css";
 import DropdownMenu from "./DropdownMenu";
-import TaskEdit from "./TaskEdit";
+import TaskEditName from "./TaskEditName";
 import TaskEditDescription from "./TaskEditDescription";
 
 const TaskCard = ({ task, index }) => {
@@ -83,7 +84,7 @@ const TaskCard = ({ task, index }) => {
 
   return (
     <div
-      className="task__wrapper"
+      className="card__container"
       style={{
         backgroundColor: transformedColor ? transformedColor : "#F5F6F8",
       }}>
@@ -93,7 +94,7 @@ const TaskCard = ({ task, index }) => {
         onDragEnd={() => dispatch(setActiveCard(null))}>
         {isDropdownMenu && (
           <div
-            className="overlay"
+            className="card__overlay"
             onClick={() => setIsDropdownMenu(false)}></div>
         )}
 
@@ -102,9 +103,9 @@ const TaskCard = ({ task, index }) => {
           style={{
             backgroundColor: selectedColor ? selectedColor : "#CDC5C5",
           }}>
-          <TaskEdit task={task} />
+          <TaskEditName task={task} />
           <div className="card__header_wrapper">
-            <div ref={dropdownRef} className="dropdown-container">
+            <div ref={dropdownRef} className="card__dropdown-container">
               {isDropdownMenu ? (
                 <DropdownMenu
                   setDeadlineValue={setDeadlineValue}

@@ -36,10 +36,6 @@
     font-size: 18px;
 }
 
-.dropdown-menu__item {
-    position: relative;
-}
-
 .dropdown-menu__btn:hover {
     background-color: #eef1f4;
     width: 94%;

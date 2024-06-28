@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../styles/EditTask.css";
+import "../styles/TaskEditDescription.css";
+import "../styles/TaskEditName.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTaskDescription } from "../redux/slices/cardSlice";
 
