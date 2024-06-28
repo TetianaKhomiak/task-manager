@@ -3,7 +3,7 @@ import {
   createListenerMiddleware,
   isAnyOf,
 } from "@reduxjs/toolkit";
-import taskColumnsReducer, {
+import columnReducer, {
   setIsAddingColumn,
   setSelectValue,
   addColumn,
@@ -15,8 +15,8 @@ import taskColumnsReducer, {
   isAddingColumnKey,
   selectValueKey,
   activeColumnKey,
-} from "./slices/taskColumnsSlice";
-import tasksListReducer, {
+} from "./slices/columnSlice";
+import cardReducer, {
   addTask,
   updateTasks,
   setActiveCard,
@@ -27,7 +27,7 @@ import tasksListReducer, {
   setColor,
   taskKey,
   activeCardKey,
-} from "./slices/tasksListSlice";
+} from "./slices/cardSlice";
 
 const localStorageMiddleware = createListenerMiddleware();
 
@@ -51,31 +51,28 @@ localStorageMiddleware.startListening({
   ),
   effect: (action, listenerApi) => {
     const state = listenerApi.getState();
-    localStorage.setItem(columnsKey, JSON.stringify(state.taskColumns.columns));
+    localStorage.setItem(columnsKey, JSON.stringify(state.column.columns));
     localStorage.setItem(
       isAddingColumnKey,
-      JSON.stringify(state.taskColumns.isAddingColumn)
+      JSON.stringify(state.column.isAddingColumn)
     );
     localStorage.setItem(
       selectValueKey,
-      JSON.stringify(state.taskColumns.selectValue)
+      JSON.stringify(state.column.selectValue)
     );
     localStorage.setItem(
       activeColumnKey,
-      JSON.stringify(state.taskColumns.activeColumn)
+      JSON.stringify(state.column.activeColumn)
     );
-    localStorage.setItem(taskKey, JSON.stringify(state.tasksList.task));
-    localStorage.setItem(
-      activeCardKey,
-      JSON.stringify(state.tasksList.activeCard)
-    );
+    localStorage.setItem(taskKey, JSON.stringify(state.card.task));
+    localStorage.setItem(activeCardKey, JSON.stringify(state.card.activeCard));
   },
 });
 
 export const store = configureStore({
   reducer: {
-    taskColumns: taskColumnsReducer,
-    tasksList: tasksListReducer,
+    column: columnReducer,
+    card: cardReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(localStorageMiddleware.middleware),

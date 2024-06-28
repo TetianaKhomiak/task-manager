@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "../styles/DropAreaTaskColumn.css";
+import "../styles/DropAreaColumn.css";
 
-const DropAreaTaskColumn = ({ onDrop }) => {
+const DropAreaColumn = ({ onDrop }) => {
   const [showDrop, setShowDrop] = useState(false);
 
   return (
@@ -20,4 +20,4 @@ const DropAreaTaskColumn = ({ onDrop }) => {
   );
 };
 
-export default DropAreaTaskColumn;
+export default DropAreaColumn;

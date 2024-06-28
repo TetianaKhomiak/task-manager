@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/ColorChanger.css";
 import { FaRegCircleDot } from "react-icons/fa6";
-import { setColor } from "../redux/slices/tasksListSlice";
+import { setColor } from "../redux/slices/cardSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { RiArrowDropUpLine } from "react-icons/ri";
@@ -9,7 +9,7 @@ import { RiArrowDropUpLine } from "react-icons/ri";
 const ColorChanger = ({ task }) => {
   const dispatch = useDispatch();
   const selectedColor = useSelector((state) => {
-    const task2 = state.tasksList.task.find((item) => item.id === task.id);
+    const task2 = state.card.task.find((item) => item.id === task.id);
     return task2 ? task2.selectedColor : null;
   });
 

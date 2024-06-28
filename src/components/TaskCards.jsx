@@ -2,14 +2,14 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "../styles/TaskCard.css";
 import TaskCard from "./TaskCard";
-import DropAreaTask from "./DropAreaTask";
-import { updateTasks } from "../redux/slices/tasksListSlice";
+import DropAreaCard from "./DropAreaCard";
+import { updateTasks } from "../redux/slices/cardSlice";
 import { useContext } from "react";
 import { SearchContext } from "../context/SearchProvider";
 
 const TaskCards = ({ columnName }) => {
-  const tasks = useSelector((state) => state.tasksList.task);
-  const activeCard = useSelector((state) => state.tasksList.activeCard);
+  const tasks = useSelector((state) => state.card.task);
+  const activeCard = useSelector((state) => state.card.activeCard);
   const dispatch = useDispatch();
   const { searchTask } = useContext(SearchContext);
 
@@ -36,13 +36,13 @@ const TaskCards = ({ columnName }) => {
 
   return (
     <div>
-      <DropAreaTask onDrop={() => onDrop(columnName, 0)} />
+      <DropAreaCard onDrop={() => onDrop(columnName, 0)} />
       {filteredTasks
         .filter((task) => task.columnName === columnName)
         .map((task, index) => (
           <div key={task.originalIndex}>
             <TaskCard task={task} index={task.originalIndex} />
-            <DropAreaTask onDrop={() => onDrop(columnName, index + 1)} />
+            <DropAreaCard onDrop={() => onDrop(columnName, index + 1)} />
           </div>
         ))}
     </div>

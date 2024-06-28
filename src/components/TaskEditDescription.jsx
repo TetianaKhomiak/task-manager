@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/EditTask.css";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTaskDescription } from "../redux/slices/tasksListSlice";
+import { updateTaskDescription } from "../redux/slices/cardSlice";
 
 const TaskEditDescription = ({
   task,
@@ -11,9 +11,7 @@ const TaskEditDescription = ({
   setEditedDescription,
 }) => {
   const selectedColor = useSelector((state) => {
-    const currentTask = state.tasksList.task.find(
-      (item) => item.id === task.id
-    );
+    const currentTask = state.card.task.find((item) => item.id === task.id);
     return currentTask ? currentTask.selectedColor : null;
   });
   const dispatch = useDispatch();

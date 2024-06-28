@@ -1,8 +1,8 @@
 import React from "react";
 import "../styles/SubDropdownMenu.css";
 import { useDispatch } from "react-redux";
-import { updateTasks } from "../redux/slices/tasksListSlice";
-import { addColumn } from "../redux/slices/taskColumnsSlice";
+import { updateTasks } from "../redux/slices/cardSlice";
+import { addColumn } from "../redux/slices/columnSlice";
 
 const SubDropdownMenu = ({
   tasks,

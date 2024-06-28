@@ -1,6 +1,6 @@
 import React, { useId, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTask } from "../redux/slices/tasksListSlice";
+import { addTask } from "../redux/slices/cardSlice";
 import "../styles/TaskForm.css";
 
 const TaskForm = ({ setIsAddingTask, columnName }) => {
@@ -23,7 +23,6 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
           id,
           description: taskDescription,
           columnName,
-          // creationDate: new Date().toISOString(),
           deadline: null,
           selectedColor: "",
         })

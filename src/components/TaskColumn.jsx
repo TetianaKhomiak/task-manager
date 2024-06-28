@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import "../styles/TaskColumn.css";
 import TaskForm from "./TaskForm";
 import { useSelector, useDispatch } from "react-redux";
-import { setActiveColumn, deleteColum } from "../redux/slices/taskColumnsSlice";
+import { setActiveColumn, deleteColum } from "../redux/slices/columnSlice";
 import TaskCards from "./TaskCards";
-import { updateTasks } from "../redux/slices/tasksListSlice";
+import { updateTasks } from "../redux/slices/cardSlice";
 import { RxCross2 } from "react-icons/rx";
 
 const TaskColumn = ({ title, columnIndex }) => {
   const [isAddingTask, setIsAddingTask] = useState(false);
-  const { columns } = useSelector((state) => state.taskColumns);
-  const tasks = useSelector((state) => state.tasksList.task);
+  const { columns } = useSelector((state) => state.column);
+  const tasks = useSelector((state) => state.card.task);
   const dispatch = useDispatch();
   console.log(columns);
   const handleCreateTask = () => {

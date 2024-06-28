@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   updateDeadline,
   updateTaskDescription,
-} from "../redux/slices/tasksListSlice";
+} from "../redux/slices/cardSlice";
 import "../styles/DropdownMenu.css";
 import ColorChanger from "./ColorChanger";
 import DropdownMenuItem from "./DropdownMenuItem";
@@ -30,10 +30,10 @@ const DropdownMenu = ({
     task.description
   );
 
-  const tasks = useSelector((state) => state.tasksList.task);
+  const tasks = useSelector((state) => state.card.task);
   const currentTask = tasks.find((item) => item.id === task.id);
   const currentColumn = currentTask ? currentTask.columnName : "";
-  const columns = useSelector((state) => state.taskColumns.columns);
+  const columns = useSelector((state) => state.column.columns);
   const currentIndexColumn = columns.indexOf(currentColumn);
 
   const dispatch = useDispatch();

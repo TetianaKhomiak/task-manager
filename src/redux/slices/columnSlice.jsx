@@ -13,8 +13,8 @@ const initialState = {
   activeColumn: JSON.parse(localStorage.getItem(activeColumnKey)) ?? null,
 };
 
-export const taskColumnsSlice = createSlice({
-  name: "taskColumns",
+export const columnSlice = createSlice({
+  name: "column",
   initialState,
   reducers: {
     addColumn: (state, action) => {
@@ -48,7 +48,7 @@ export const taskColumnsSlice = createSlice({
   },
 });
 
-export default taskColumnsSlice.reducer;
+export default columnSlice.reducer;
 export const {
   setIsAddingColumn,
   setSelectValue,
@@ -57,4 +57,4 @@ export const {
   dropColumn,
   setActiveColumn,
   deleteColum,
-} = taskColumnsSlice.actions;
+} = columnSlice.actions;

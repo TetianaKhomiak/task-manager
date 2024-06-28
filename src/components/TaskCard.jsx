@@ -6,7 +6,7 @@ import {
   deleteCard,
   setActiveCard,
   updateDeadline,
-} from "../redux/slices/tasksListSlice";
+} from "../redux/slices/cardSlice";
 import DropdownMenu from "./DropdownMenu";
 import TaskEdit from "./TaskEdit";
 import TaskEditDescription from "./TaskEditDescription";
@@ -27,9 +27,7 @@ const TaskCard = ({ task, index }) => {
   const [isDropdownMenu, setIsDropdownMenu] = useState(false);
 
   const selectedColor = useSelector((state) => {
-    const currentTask = state.tasksList.task.find(
-      (item) => item.id === task.id
-    );
+    const currentTask = state.card.task.find((item) => item.id === task.id);
     return currentTask ? currentTask.selectedColor : null;
   });
   const transformedColor = transformColor(selectedColor);

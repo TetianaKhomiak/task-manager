@@ -8,8 +8,8 @@ const initialState = {
   activeCard: JSON.parse(localStorage.getItem(activeCardKey)) ?? null,
 };
 
-export const tasksListSlice = createSlice({
-  name: "tasksList",
+export const cardSlice = createSlice({
+  name: "card",
   initialState,
   reducers: {
     addTask: (state, action) => {
@@ -72,7 +72,7 @@ export const tasksListSlice = createSlice({
   },
 });
 
-export default tasksListSlice.reducer;
+export default cardSlice.reducer;
 export const {
   addTask,
   updateTasks,
@@ -82,4 +82,4 @@ export const {
   updateDeadline,
   updateTaskDescription,
   setColor,
-} = tasksListSlice.actions;
+} = cardSlice.actions;

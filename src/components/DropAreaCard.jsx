@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "../styles/DropAreaTask.css";
+import "../styles/DropAreaCard.css";
 
-const DropAreaTask = ({ onDrop }) => {
+const DropAreaCard = ({ onDrop }) => {
   const [showDrop, setShowDrop] = useState(false);
 
   const handleDragEnter = (e) => {
@@ -35,4 +35,4 @@ const DropAreaTask = ({ onDrop }) => {
   );
 };
 
-export default DropAreaTask;
+export default DropAreaCard;

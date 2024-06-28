@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { transformColor } from "../../utils";
-import { updateTaskName } from "../redux/slices/tasksListSlice";
+import { updateTaskName } from "../redux/slices/cardSlice";
 import "../styles/EditTask.css";
 
 const TaskEdit = ({ task }) => {
@@ -10,9 +10,7 @@ const TaskEdit = ({ task }) => {
 
   const [leftCharacterLenght, setLeftCharacterLenght] = useState(30);
   const selectedColor = useSelector((state) => {
-    const currentTask = state.tasksList.task.find(
-      (item) => item.id === task.id
-    );
+    const currentTask = state.card.task.find((item) => item.id === task.id);
     return currentTask ? currentTask.selectedColor : null;
   });
   const transformedColor = transformColor(selectedColor);

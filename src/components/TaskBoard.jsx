@@ -1,7 +1,7 @@
 import React from "react";
 import TaskColumn from "./TaskColumn";
 import "../styles/TaskBoard.css";
-import DropAreaTaskColumn from "./DropAreaTaskColumn";
+import DropAreaColumn from "./DropAreaColumn";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setIsAddingColumn,
@@ -9,11 +9,11 @@ import {
   addColumn,
   cancleAdding,
   dropColumn,
-} from "../redux/slices/taskColumnsSlice";
+} from "../redux/slices/columnSlice";
 
 const TaskBoard = () => {
   const { columns, isAddingColumn, selectValue, activeColumn } = useSelector(
-    (state) => state.taskColumns
+    (state) => state.column
   );
   const dispatch = useDispatch();
 
@@ -49,7 +49,7 @@ const TaskBoard = () => {
 
   return (
     <div className="board__wrapper">
-      <DropAreaTaskColumn onDrop={() => onDrop(0)} />
+      <DropAreaColumn onDrop={() => onDrop(0)} />
       {columns &&
         columns.length > 0 &&
         columns.map((item, index) => (
@@ -57,7 +57,7 @@ const TaskBoard = () => {
             <div>
               <TaskColumn title={item} columnIndex={index} />
             </div>
-            <DropAreaTaskColumn onDrop={() => onDrop(index + 1)} />
+            <DropAreaColumn onDrop={() => onDrop(index + 1)} />
           </React.Fragment>
         ))}
       {isAddingColumn ? (
