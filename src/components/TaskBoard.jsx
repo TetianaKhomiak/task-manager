@@ -1,20 +1,21 @@
 import React from "react";
-import TaskColumn from "./TaskColumn";
-import "../styles/TaskBoard.css";
-import DropAreaColumn from "./DropAreaColumn";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  setIsAddingColumn,
-  setSelectValue,
   addColumn,
   cancleAdding,
   dropColumn,
+  setIsAddingColumn,
+  setSelectValue,
 } from "../redux/slices/columnSlice";
+import "../styles/TaskBoard.css";
+import DropAreaColumn from "./DropAreaColumn";
+import TaskColumn from "./TaskColumn";
 
 const TaskBoard = () => {
   const { columns, isAddingColumn, selectValue, activeColumn } = useSelector(
     (state) => state.column
   );
+  console.log(columns);
   const dispatch = useDispatch();
 
   const handleAddTaskColumn = (e) => {
@@ -40,7 +41,15 @@ const TaskBoard = () => {
     if (activeColumn == null || activeColumn === undefined) {
       return;
     }
-    dispatch(dropColumn({ fromIndex: activeColumn, toIndex: position }));
+    // console.log(
+    //   `${activeColumn} is going to place at the position ${position}`
+    // );
+    const adjustedDropIndex = position > activeColumn ? position - 1 : position;
+
+    const columnToMove = columns[activeColumn];
+    const updatedColumns = columns.filter((_, index) => index !== activeColumn);
+    updatedColumns.splice(adjustedDropIndex, 0, columnToMove);
+    dispatch(dropColumn(updatedColumns));
   };
 
   const isOptionDisabled = (option) => {
@@ -54,12 +63,11 @@ const TaskBoard = () => {
         columns.length > 0 &&
         columns.map((item, index) => (
           <React.Fragment key={index}>
-            <div>
-              <TaskColumn title={item} columnIndex={index} />
-            </div>
+            <TaskColumn title={item} columnIndex={index} />
             <DropAreaColumn onDrop={() => onDrop(index + 1)} />
           </React.Fragment>
         ))}
+
       {isAddingColumn ? (
         <>
           <form className="board__form" onSubmit={handleAddTaskColumn}>

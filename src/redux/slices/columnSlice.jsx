@@ -35,9 +35,7 @@ export const columnSlice = createSlice({
       state.selectValue = "In Progress";
     },
     dropColumn: (state, action) => {
-      const { fromIndex, toIndex } = action.payload;
-      const [movedColumn] = state.columns.splice(fromIndex, 1);
-      state.columns.splice(toIndex, 0, movedColumn);
+      state.columns = action.payload;
     },
     setActiveColumn: (state, action) => {
       state.activeColumn = action.payload;

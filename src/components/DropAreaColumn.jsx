@@ -8,8 +8,8 @@ const DropAreaColumn = ({ onDrop }) => {
     <section
       onDragEnter={() => setShowDrop(true)}
       onDragLeave={() => setShowDrop(false)}
-      onDrop={(e) => {
-        e.preventDefault();
+      onDrop={() => {
+        //e.preventDefault();
         onDrop();
         setShowDrop(false);
       }}

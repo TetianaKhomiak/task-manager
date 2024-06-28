@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 .column__wrapper {
-    width: 300px;
     min-height: 370px;
     border-radius: 5px;
     cursor: grab;

@@ -32,42 +32,35 @@ const TaskColumn = ({ title, columnIndex }) => {
     dispatch(updateTasks(filteredTaskCards));
   };
 
-  const handleDragStart = () => {
-    dispatch(setActiveColumn(columnIndex));
-  };
-
-  const handleDragEnd = () => {
-    dispatch(setActiveColumn(null));
-  };
-
   return (
-    <div
-      className="column__wrapper"
-      draggable
-      onDragStart={handleDragStart}
-      onDragEnd={handleDragEnd}>
-      <div className="column__title">
-        <h3>{title}</h3>
-        {title !== "To Do" && (
-          <button onClick={handleDeleteColumn} className="column__delete-btn">
-            <RxCross2 className="column__delete-icon" />
-          </button>
+    <div className="column__wrapper">
+      <div
+        draggable
+        onDragStart={() => dispatch(setActiveColumn(columnIndex))}
+        onDragEnd={() => dispatch(setActiveColumn(null))}>
+        <div className="column__title">
+          <h3>{title}</h3>
+          {title !== "To Do" && (
+            <button onClick={handleDeleteColumn} className="column__delete-btn">
+              <RxCross2 className="column__delete-icon" />
+            </button>
+          )}
+        </div>
+
+        {isAddingTask ? (
+          <>
+            <TaskCards columnName={title} />
+            <TaskForm setIsAddingTask={setIsAddingTask} columnName={title} />
+          </>
+        ) : (
+          <>
+            <TaskCards columnName={title} />
+            <button className="column__create-btn" onClick={handleCreateTask}>
+              + Create Task
+            </button>
+          </>
         )}
       </div>
-
-      {isAddingTask ? (
-        <>
-          <TaskCards columnName={title} />
-          <TaskForm setIsAddingTask={setIsAddingTask} columnName={title} />
-        </>
-      ) : (
-        <>
-          <TaskCards columnName={title} />
-          <button className="column__create-btn" onClick={handleCreateTask}>
-            + Create Task
-          </button>
-        </>
-      )}
     </div>
   );
 };
