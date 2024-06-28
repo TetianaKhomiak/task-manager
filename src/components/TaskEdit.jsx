@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { updateTaskName } from "../redux/slices/tasksListSlice";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { transformColor } from "../../utils";
+import { updateTaskName } from "../redux/slices/tasksListSlice";
 import "../styles/EditTask.css";
-import { formatDate, getMinDate, transformColor } from "../../utils";
 
 const TaskEdit = ({ task }) => {
   const [isEditingName, setIsEditingName] = useState(false);
   const [editedName, setEditedName] = useState(task.name);
 
-  const [leftCharacterLenght, setLeftCharacterLenght] = useState(20);
+  const [leftCharacterLenght, setLeftCharacterLenght] = useState(30);
   const selectedColor = useSelector((state) => {
     const currentTask = state.tasksList.task.find(
       (item) => item.id === task.id
@@ -63,7 +63,7 @@ const TaskEdit = ({ task }) => {
               <textarea
                 className="edit__textarea"
                 type="text"
-                maxLength={20}
+                maxLength={30}
                 value={editedName}
                 onChange={(e) => setEditedName(e.target.value)}></textarea>
               <button
