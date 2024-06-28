@@ -9,6 +9,7 @@ import {
 } from "../redux/slices/tasksListSlice";
 import DropdownMenu from "./DropdownMenu";
 import TaskEdit from "./TaskEdit";
+import TaskEditDescription from "./TaskEditDescription";
 
 const TaskCard = ({ task, index }) => {
   const [isSelectDeadline, setIsDeadline] = useState(false);
@@ -103,6 +104,7 @@ const TaskCard = ({ task, index }) => {
           style={{
             backgroundColor: selectedColor ? selectedColor : "#CDC5C5",
           }}>
+          <TaskEdit task={task} />
           <div className="card__header_wrapper">
             <div ref={dropdownRef} className="dropdown-container">
               {isDropdownMenu ? (
@@ -123,17 +125,17 @@ const TaskCard = ({ task, index }) => {
                   onClick={handleDropdownMenu}
                 />
               )}
-              <TaskEdit
-                task={task}
-                isEditingDescription={isEditingDescription}
-                setIsEditingDescription={setIsEditingDescription}
-                editedDescription={editedDescription}
-                setEditedDescription={setEditedDescription}
-              />
             </div>
           </div>
         </div>
       </div>
+      <TaskEditDescription
+        task={task}
+        isEditingDescription={isEditingDescription}
+        setIsEditingDescription={setIsEditingDescription}
+        editedDescription={editedDescription}
+        setEditedDescription={setEditedDescription}
+      />
       <div className="card__deadline_wrapper">
         {isSelectDeadline ? (
           <div className="card__input_wrapper">
@@ -155,7 +157,10 @@ const TaskCard = ({ task, index }) => {
                 ? "card__deadline-btn_show"
                 : "card__deadline-btn_hide"
             }
-            style={isDropdownMenu && !deadlineValue ? { opacity: 0 } : {}}>
+            style={{
+              ...(isDropdownMenu && !deadlineValue ? { opacity: 0 } : {}),
+              backgroundColor: task.selectedColor,
+            }}>
             {deadlineValue ? `deadline ${deadlineValue}` : "deadline"}
           </button>
         )}

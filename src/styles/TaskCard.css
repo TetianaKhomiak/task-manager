@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Aboreto&display=swap');
 
 .task__wrapper {
     box-shadow: 0 -4px 4px rgba(217, 245, 205, 0.8), 0 1px 3px rgba(76, 75, 75, 0.12), 0 1px 2px rgba(58, 57, 57, 0.24),
@@ -11,14 +10,6 @@
     display: flex;
     flex-direction: column;
 }
-
-/* .card__wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 150px;
-} */
-
 
 .card__dots {
     font-size: 20px;
@@ -35,18 +26,14 @@
 .card__deadline-btn_show,
 .card__deadline-btn_hide:hover {
     all: unset;
+    width: 100%;
     opacity: 1;
     cursor: pointer;
-    font-family: "Aboreto", system-ui;
+    font-family: "Manrope", sans-serif;
+    text-transform: uppercase;
     font-size: 15px;
-    text-shadow:
-        1px 0 0 black,
-        0 1px 0 black,
-        -1px 0 0 black,
-        0 -1px 0 black;
     padding: 2px;
     letter-spacing: 0.5px;
-    margin: 5px 0 0 15px;
     border-radius: 2px;
     box-shadow: 0 1px 1px rgba(68, 66, 66, 0.25), 0 2px 8px rgba(68, 66, 66, 0.25), inset 0px 0px 0px 1px rgba(255, 255, 255, 0.1);
 }
@@ -55,13 +42,9 @@
     all: unset;
     opacity: 0;
     transition: all 0.2s ease-in-out;
-    font-family: "Aboreto", system-ui;
+    font-family: "Manrope", sans-serif;
+    text-transform: uppercase;
     font-size: 15px;
-    text-shadow:
-        1px 0 0 black,
-        0 1px 0 black,
-        -1px 0 0 black,
-        0 -1px 0 black;
     letter-spacing: 0.5px;
 }
 
@@ -72,13 +55,9 @@
 .card__deadline_input {
     all: unset;
     border-radius: 5px;
-    font-family: "Aboreto", system-ui;
+    font-family: "Manrope", sans-serif;
+    text-transform: uppercase;
     font-size: 15px;
-    text-shadow:
-        1px 0 0 black,
-        0 1px 0 black,
-        -1px 0 0 black,
-        0 -1px 0 black;
     letter-spacing: 0.5px;
     font-size: 16px;
     box-shadow: 0 1px 1px rgba(68, 66, 66, 0.25), 0 2px 8px rgba(68, 66, 66, 0.25), inset 0px 0px 0px 1px rgba(255, 255, 255, 0.1);
@@ -121,5 +100,5 @@
     font-size: 15px;
     font-weight: 700;
     padding-top: 10px;
-    margin: auto 0 8px 15px;
+    margin: auto 5px 8px 15px;
 }

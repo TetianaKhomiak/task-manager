@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  updateTaskName,
-  updateTaskDescription,
-} from "../redux/slices/tasksListSlice";
+import { updateTaskName } from "../redux/slices/tasksListSlice";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/EditTask.css";
 
-const TaskEdit = ({
-  task,
-  isEditingDescription,
-  setIsEditingDescription,
-  editedDescription,
-  setEditedDescription,
-}) => {
+const TaskEdit = ({ task }) => {
   const [isEditingName, setIsEditingName] = useState(false);
   const [editedName, setEditedName] = useState(task.name);
 
@@ -28,7 +19,6 @@ const TaskEdit = ({
   useEffect(() => {
     const updateTaskProp = () => {
       setEditedName(task.name);
-      setEditedDescription(task.description);
     };
     updateTaskProp();
   }, [task]);
@@ -50,18 +40,6 @@ const TaskEdit = ({
     dispatch(updateTaskName({ id: task.id, editedTask: editedName }));
   };
 
-  const handleEditDescription = () => {
-    setIsEditingDescription(true);
-  };
-
-  const handleSaveEditedDescription = (e) => {
-    e.preventDefault();
-    setIsEditingDescription(false);
-    dispatch(
-      updateTaskDescription({ id: task.id, description: editedDescription })
-    );
-  };
-
   return (
     <div className="edit__wrapper">
       <>
@@ -74,7 +52,7 @@ const TaskEdit = ({
                 maxLength={20}
                 value={editedName}
                 onChange={(e) => setEditedName(e.target.value)}></textarea>
-              <button className="edit__btn" type="submit">
+              <button className="edit__btn_name" type="submit">
                 SAVE
               </button>
             </form>
@@ -91,32 +69,6 @@ const TaskEdit = ({
                 backgroundColor: selectedColor ? selectedColor : "#CDC5C5",
               }}>
               <div className="card__name_text">{task.name}</div>
-            </div>
-          </>
-        )}
-      </>
-      <>
-        {isEditingDescription ? (
-          <>
-            <form
-              className="edit__form_descr"
-              onSubmit={handleSaveEditedDescription}>
-              <textarea
-                className="edit__textarea edit__textarea_descr"
-                type="text"
-                value={editedDescription}
-                onChange={(e) =>
-                  setEditedDescription(e.target.value)
-                }></textarea>
-              <button className="edit__btn" type="submit">
-                SAVE
-              </button>
-            </form>
-          </>
-        ) : (
-          <>
-            <div className="card__descr" onDoubleClick={handleEditDescription}>
-              <div className="card__descr_text">{task.description}</div>
             </div>
           </>
         )}
