@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { updateTaskName } from "../redux/slices/tasksListSlice";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/EditTask.css";
+import { formatDate, getMinDate, transformColor } from "../../utils";
 
 const TaskEdit = ({ task }) => {
   const [isEditingName, setIsEditingName] = useState(false);
@@ -14,7 +15,20 @@ const TaskEdit = ({ task }) => {
     );
     return currentTask ? currentTask.selectedColor : null;
   });
+  const transformedColor = transformColor(selectedColor);
   const dispatch = useDispatch();
+
+  const [isHovered, setIsHovered] = useState(false);
+  const buttonStyle = {
+    backgroundColor: isHovered
+      ? transformedColor
+        ? transformedColor
+        : ""
+      : "",
+    transition: "background-color 0.3s ease",
+  };
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
 
   useEffect(() => {
     const updateTaskProp = () => {
@@ -52,7 +66,12 @@ const TaskEdit = ({ task }) => {
                 maxLength={20}
                 value={editedName}
                 onChange={(e) => setEditedName(e.target.value)}></textarea>
-              <button className="edit__btn_name" type="submit">
+              <button
+                className="edit__btn_name"
+                type="submit"
+                style={buttonStyle}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}>
                 SAVE
               </button>
             </form>

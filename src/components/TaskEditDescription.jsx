@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/EditTask.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateTaskDescription } from "../redux/slices/tasksListSlice";
 
 const TaskEditDescription = ({
@@ -10,7 +10,20 @@ const TaskEditDescription = ({
   editedDescription,
   setEditedDescription,
 }) => {
+  const selectedColor = useSelector((state) => {
+    const currentTask = state.tasksList.task.find(
+      (item) => item.id === task.id
+    );
+    return currentTask ? currentTask.selectedColor : null;
+  });
   const dispatch = useDispatch();
+  const [isHovered, setIsHovered] = useState(false);
+  const buttonStyle = {
+    backgroundColor: isHovered ? (selectedColor ? selectedColor : "") : "",
+    transition: "background-color 0.3s ease",
+  };
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
 
   const handleEditDescription = () => {
     setIsEditingDescription(true);
@@ -43,7 +56,12 @@ const TaskEditDescription = ({
               type="text"
               value={editedDescription}
               onChange={(e) => setEditedDescription(e.target.value)}></textarea>
-            <button className="edit__btn" type="submit">
+            <button
+              className="edit__btn"
+              type="submit"
+              style={buttonStyle}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}>
               SAVE
             </button>
           </form>
