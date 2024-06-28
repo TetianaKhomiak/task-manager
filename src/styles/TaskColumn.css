@@ -17,6 +17,7 @@
     justify-content: space-between;
     font-size: 22px;
     opacity: 0.8;
+    margin-left: 20px;
 }
 
 .column__delete-btn {
