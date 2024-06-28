@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     left: 180px;
-    top: 5px;
+    top: 155px;
 }
 
 .subdropdown-menu__last {
@@ -21,7 +21,7 @@
     display: flex;
     flex-direction: column;
     right: 180px;
-    top: 5px;
+    top: 155px;
 }
 
 .subdropdown-menu__btn {

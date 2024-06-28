@@ -37,7 +37,7 @@ const TaskEditName = ({ task }) => {
 
   useEffect(() => {
     const setCharactersLengh = () => {
-      setLeftCharacterLenght(20 - editedName.length);
+      setLeftCharacterLenght(30 - editedName.length);
     };
     setCharactersLengh();
   }, [editedName]);
