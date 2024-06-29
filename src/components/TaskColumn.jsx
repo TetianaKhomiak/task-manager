@@ -10,9 +10,10 @@ import { RxCross2 } from "react-icons/rx";
 const TaskColumn = ({ title, columnIndex }) => {
   const [isAddingTask, setIsAddingTask] = useState(false);
   const { columns } = useSelector((state) => state.column);
+  console.log(columns);
   const tasks = useSelector((state) => state.card.task);
   const dispatch = useDispatch();
-  console.log(columns);
+
   const handleCreateTask = () => {
     setIsAddingTask(true);
   };
@@ -24,7 +25,7 @@ const TaskColumn = ({ title, columnIndex }) => {
     }
 
     const filteredTaskColumnList = columns.filter(
-      (_, index) => columnIndex !== index
+      (column, index) => columnIndex !== index
     );
     const filteredTaskCards = tasks.filter((task) => task.columnName !== title);
 
@@ -33,32 +34,27 @@ const TaskColumn = ({ title, columnIndex }) => {
   };
 
   return (
-    <div className="column__wrapper">
-      <div
-        draggable
-        onDragStart={() => dispatch(setActiveColumn(columnIndex))}
-        onDragEnd={() => dispatch(setActiveColumn(null))}>
-        <div className="column__title">
-          <h3>{title}</h3>
-          {title !== "To Do" && (
-            <button onClick={handleDeleteColumn} className="column__delete-btn">
-              <RxCross2 className="column__delete-icon" />
-            </button>
-          )}
-        </div>
-
+    <div
+      className="column__wrapper"
+      draggable
+      onDragStart={() => dispatch(setActiveColumn(columnIndex))}
+      onDragEnd={() => dispatch(setActiveColumn(null))}>
+      <div className="column__title">
+        <h3>{title}</h3>
+        {title !== "To Do" && (
+          <button onClick={handleDeleteColumn} className="column__delete-btn">
+            <RxCross2 className="column__delete-icon" />
+          </button>
+        )}
+      </div>
+      <div>
+        <TaskCards columnName={title} />
         {isAddingTask ? (
-          <>
-            <TaskCards columnName={title} />
-            <TaskForm setIsAddingTask={setIsAddingTask} columnName={title} />
-          </>
+          <TaskForm setIsAddingTask={setIsAddingTask} columnName={title} />
         ) : (
-          <>
-            <TaskCards columnName={title} />
-            <button className="column__create-btn" onClick={handleCreateTask}>
-              + Create Task
-            </button>
-          </>
+          <button className="column__create-btn" onClick={handleCreateTask}>
+            + Create Task
+          </button>
         )}
       </div>
     </div>

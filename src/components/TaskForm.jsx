@@ -6,7 +6,7 @@ import "../styles/TaskForm.css";
 const TaskForm = ({ setIsAddingTask, columnName }) => {
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
-  const [charCount, setCharCount] = useState(20);
+  const [charCount, setCharCount] = useState(30);
   const [isError, setIsError] = useState(false);
   const id = useId();
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
 
       setTaskName("");
       setTaskDescription("");
-      setCharCount(20);
+      setCharCount(30);
       setIsAddingTask(false);
     }
   };
@@ -41,7 +41,7 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
 
   const handleNameChange = (e) => {
     setTaskName(e.target.value);
-    setCharCount(20 - e.target.value.length);
+    setCharCount(30 - e.target.value.length);
     setIsError(e.target.value === "");
   };
 
@@ -53,7 +53,7 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
     <div className="form__wrapper">
       <form className="form" onSubmit={handleSubmitForm}>
         <textarea
-          maxLength={20}
+          maxLength={30}
           className="form__textarea"
           value={taskName}
           placeholder={isError ? "Title is required" : "Title"}

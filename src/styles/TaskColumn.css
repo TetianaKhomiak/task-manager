@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 .column__wrapper {
-    min-height: 370px;
+    width: 300px;
     border-radius: 5px;
     cursor: grab;
     padding: 10px;
@@ -9,6 +9,9 @@
     background-color: rgb(237, 249, 232);
     font-family: "Manrope", sans-serif;
     margin-bottom: 150px;
+    min-height: 370px;
+    display: flex;
+    flex-direction: column;
 }
 
 .column__title {

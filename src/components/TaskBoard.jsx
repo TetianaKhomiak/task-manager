@@ -15,7 +15,7 @@ const TaskBoard = () => {
   const { columns, isAddingColumn, selectValue, activeColumn } = useSelector(
     (state) => state.column
   );
-  console.log(columns);
+  // console.log(columns);
   const dispatch = useDispatch();
 
   const handleAddTaskColumn = (e) => {
