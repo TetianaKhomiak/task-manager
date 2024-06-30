@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const taskKey = "task";
+export const tasksKey = "tasks";
 export const activeCardKey = "activeCard";
 
 const initialState = {
-  task: JSON.parse(localStorage.getItem(taskKey)) ?? [],
+  tasks: JSON.parse(localStorage.getItem(tasksKey)) ?? [],
   activeCard: JSON.parse(localStorage.getItem(activeCardKey)) ?? null,
 };
 
@@ -13,61 +13,77 @@ export const cardSlice = createSlice({
   initialState,
   reducers: {
     addTask: (state, action) => {
-      state.task = [...state.task, action.payload];
+      state.tasks = [...state.tasks, action.payload];
     },
     updateTaskName: (state, action) => {
       const { id, editedTask } = action.payload;
-      const updatedTasks = state.task.map((item) => {
+      const updatedTasks = state.tasks.map((item) => {
         if (item.id === id) {
           item.name = editedTask;
         }
         return item;
       });
-      state.task = updatedTasks;
+      state.tasks = updatedTasks;
     },
 
     updateTaskDescription: (state, action) => {
       const { id, description } = action.payload;
-      const updatedTasks = state.task.map((item) => {
+      const updatedTasks = state.tasks.map((item) => {
         if (item.id === id) {
           item.description = description;
         }
         return item;
       });
-      state.task = updatedTasks;
+      state.tasks = updatedTasks;
     },
     updateDeadline: (state, action) => {
       const { id, deadline } = action.payload;
-      const updatedTasks = state.task.map((item) => {
+      const updatedTasks = state.tasks.map((item) => {
         if (item.id === id) {
           item.deadline = deadline;
         }
         return item;
       });
-      state.task = updatedTasks;
+      state.tasks = updatedTasks;
     },
 
     updateTasks: (state, action) => {
-      state.task = action.payload;
+      state.tasks = action.payload;
     },
     setActiveCard: (state, action) => {
       state.activeCard = action.payload;
     },
     deleteCard: (state, action) => {
-      const updatedTasks = state.task.filter(
+      const updatedTasks = state.tasks.filter(
         (item) => item.id !== action.payload
       );
-      state.task = updatedTasks;
+      state.tasks = updatedTasks;
     },
     setColor: (state, action) => {
       const { id, selectedColor } = action.payload;
-      const updatedSelectedColor = state.task.map((item) => {
+      const updatedSelectedColor = state.tasks.map((item) => {
         if (item.id === id) {
           item.selectedColor = selectedColor;
         }
         return item;
       });
-      state.task = updatedSelectedColor;
+      state.tasks = updatedSelectedColor;
+    },
+    dropCard: (state, action) => {
+      const { category, position } = action.payload;
+      const activeCard = state.activeCard;
+      if (activeCard == null || activeCard === undefined) {
+        return;
+      }
+      const taskToMove = state.tasks[activeCard];
+      const updatedTasks = state.tasks.filter(
+        (task, index) => index !== activeCard
+      );
+      updatedTasks.splice(position, 0, {
+        ...taskToMove,
+        columnName: category,
+      });
+      state.tasks = updatedTasks;
     },
   },
 });
@@ -82,4 +98,5 @@ export const {
   updateDeadline,
   updateTaskDescription,
   setColor,
+  dropCard,
 } = cardSlice.actions;

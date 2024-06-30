@@ -35,7 +35,22 @@ export const columnSlice = createSlice({
       state.selectValue = "In Progress";
     },
     dropColumn: (state, action) => {
-      state.columns = action.payload;
+      const activeColumn = state.activeColumn;
+      const position = action.payload;
+
+      if (activeColumn == null || activeColumn === undefined) {
+        return;
+      }
+
+      const adjustedDropIndex =
+        position > activeColumn ? position - 1 : position;
+
+      const columnToMove = state.columns[activeColumn];
+      const updatedColumns = state.columns.filter(
+        (_, index) => index !== activeColumn
+      );
+      updatedColumns.splice(adjustedDropIndex, 0, columnToMove);
+      state.columns = updatedColumns;
     },
     setActiveColumn: (state, action) => {
       state.activeColumn = action.payload;

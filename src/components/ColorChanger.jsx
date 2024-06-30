@@ -8,8 +8,8 @@ import "../styles/ColorChanger.css";
 const ColorChanger = ({ task }) => {
   const dispatch = useDispatch();
   const selectedColor = useSelector((state) => {
-    const task2 = state.card.task.find((item) => item.id === task.id);
-    return task2 ? task2.selectedColor : null;
+    const currentTask = state.card.tasks.find((item) => item.id === task.id);
+    return currentTask ? currentTask.selectedColor : null;
   });
 
   const handleColorChange = (color) => {

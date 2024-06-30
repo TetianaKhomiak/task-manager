@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 .column__drop_area {
-    font-size: 36px;
+    font-size: 26px;
     white-space: nowrap;
     padding: 0 50px;
     color: #747070;
@@ -13,10 +13,11 @@
     transition: all 0.2s ease-in-out;
     font-family: "Manrope", sans-serif;
     font-weight: 600;
-    margin: 5px;
+    margin: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 370px;
 }
 
 .column__hide_drop {

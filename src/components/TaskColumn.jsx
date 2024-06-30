@@ -7,11 +7,11 @@ import TaskCards from "./TaskCards";
 import { updateTasks } from "../redux/slices/cardSlice";
 import { RxCross2 } from "react-icons/rx";
 
-const TaskColumn = ({ title, columnIndex, setIsDragging }) => {
+const TaskColumn = ({ title, columnIndex }) => {
   const [isAddingTask, setIsAddingTask] = useState(false);
   const { columns } = useSelector((state) => state.column);
   console.log(columns);
-  const tasks = useSelector((state) => state.card.task);
+  const tasks = useSelector((state) => state.card.tasks);
   const dispatch = useDispatch();
 
   const handleCreateTask = () => {
@@ -35,12 +35,10 @@ const TaskColumn = ({ title, columnIndex, setIsDragging }) => {
 
   const handleOnDragStart = () => {
     dispatch(setActiveColumn(columnIndex));
-    setIsDragging(true);
   };
 
   const handleOnDragEnd = () => {
     dispatch(setActiveColumn(null));
-    setIsDragging(false);
   };
 
   return (

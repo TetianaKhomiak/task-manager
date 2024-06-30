@@ -12,11 +12,11 @@ import DropAreaColumn from "./DropAreaColumn";
 import TaskColumn from "./TaskColumn";
 
 const TaskBoard = () => {
-  const { columns, isAddingColumn, selectValue, activeColumn } = useSelector(
+  const { columns, isAddingColumn, selectValue } = useSelector(
     (state) => state.column
   );
+
   // console.log(columns);
-  const [isDragging, setIsDragging] = useState(false);
   const dispatch = useDispatch();
 
   const handleAddTaskColumn = (e) => {
@@ -39,19 +39,7 @@ const TaskBoard = () => {
   };
 
   const onDrop = (position) => {
-    if (activeColumn == null || activeColumn === undefined) {
-      return;
-    }
-    setIsDragging(false);
-    // console.log(
-    //   `${activeColumn} is going to place at the position ${position}`
-    // );
-    const adjustedDropIndex = position > activeColumn ? position - 1 : position;
-
-    const columnToMove = columns[activeColumn];
-    const updatedColumns = columns.filter((_, index) => index !== activeColumn);
-    updatedColumns.splice(adjustedDropIndex, 0, columnToMove);
-    dispatch(dropColumn(updatedColumns));
+    dispatch(dropColumn(position));
   };
 
   const isOptionDisabled = (option) => {
@@ -65,63 +53,58 @@ const TaskBoard = () => {
         columns.length > 0 &&
         columns.map((item, index) => (
           <React.Fragment key={index}>
-            <TaskColumn
-              title={item}
-              columnIndex={index}
-              setIsDragging={setIsDragging}
-            />
+            <TaskColumn title={item} columnIndex={index} />
             <DropAreaColumn onDrop={() => onDrop(index + 1)} />
           </React.Fragment>
         ))}
+      <div>
+        {isAddingColumn ? (
+          <>
+            <form className="board__form" onSubmit={handleAddTaskColumn}>
+              <select
+                name="category"
+                className="board__select"
+                onChange={handleSelectChange}
+                value={selectValue}>
+                <option
+                  value="In Progress"
+                  disabled={isOptionDisabled("In Progress")}>
+                  In Progress
+                </option>
+                <option value="On Hold" disabled={isOptionDisabled("On Hold")}>
+                  On Hold
+                </option>
+                <option
+                  value="Completed"
+                  disabled={isOptionDisabled("Completed")}>
+                  Completed
+                </option>
+              </select>
 
-      {isAddingColumn ? (
-        <>
-          <form className="board__form" onSubmit={handleAddTaskColumn}>
-            <select
-              name="category"
-              className="board__select"
-              onChange={handleSelectChange}
-              value={selectValue}>
-              <option
-                value="In Progress"
-                disabled={isOptionDisabled("In Progress")}>
-                In Progress
-              </option>
-              <option value="On Hold" disabled={isOptionDisabled("On Hold")}>
-                On Hold
-              </option>
-              <option
-                value="Completed"
-                disabled={isOptionDisabled("Completed")}>
-                Completed
-              </option>
-            </select>
-
+              <button
+                className="board__btn"
+                type="submit"
+                disabled={isOptionDisabled(selectValue)}>
+                Add
+              </button>
+              <button
+                className="board__btn"
+                type="button"
+                onClick={handleCancelAdding}>
+                Cancel
+              </button>
+            </form>
+          </>
+        ) : (
+          columns.length < 4 && (
             <button
-              className="board__btn"
-              type="submit"
-              disabled={isOptionDisabled(selectValue)}>
-              Add
+              onClick={handleAddColumnButtonClick}
+              className="board__btn-add_show">
+              + New Column
             </button>
-            <button
-              className="board__btn"
-              type="button"
-              onClick={handleCancelAdding}>
-              Cancel
-            </button>
-          </form>
-        </>
-      ) : (
-        columns.length < 4 && (
-          <button
-            onClick={handleAddColumnButtonClick}
-            className={
-              isDragging ? "board__btn-add_hide" : "board__btn-add_show"
-            }>
-            + Add New Category
-          </button>
-        )
-      )}
+          )
+        )}
+      </div>
     </div>
   );
 };

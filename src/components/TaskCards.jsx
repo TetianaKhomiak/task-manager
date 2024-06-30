@@ -2,31 +2,17 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TaskCard from "./TaskCard";
 import DropAreaCard from "./DropAreaCard";
-import { updateTasks } from "../redux/slices/cardSlice";
+import { updateTasks, dropCard } from "../redux/slices/cardSlice";
 import { useContext } from "react";
 import { SearchContext } from "../context/SearchProvider";
 
 const TaskCards = ({ columnName }) => {
-  const tasks = useSelector((state) => state.card.task);
-  const activeCard = useSelector((state) => state.card.activeCard);
+  const tasks = useSelector((state) => state.card.tasks);
   const dispatch = useDispatch();
   const { searchTask } = useContext(SearchContext);
 
-  console.log(tasks);
   const onDrop = (category, position) => {
-    // console.log(
-    //   `${activeCard} is going to place inot ${category} at the position ${position}`
-    // );
-    if (activeCard == null || activeCard === undefined) {
-      return;
-    }
-    const taskToMove = tasks[activeCard];
-    const updatedTasks = tasks.filter((task, index) => index !== activeCard);
-    updatedTasks.splice(position, 0, {
-      ...taskToMove,
-      columnName: category,
-    });
-    dispatch(updateTasks(updatedTasks));
+    dispatch(dropCard({ category, position }));
   };
 
   const filteredTasks = tasks

@@ -25,7 +25,8 @@ import cardReducer, {
   updateDeadline,
   updateTaskDescription,
   setColor,
-  taskKey,
+  dropCard,
+  tasksKey,
   activeCardKey,
 } from "./slices/cardSlice";
 
@@ -47,7 +48,8 @@ localStorageMiddleware.startListening({
     updateTaskName,
     updateDeadline,
     updateTaskDescription,
-    setColor
+    setColor,
+    dropCard
   ),
   effect: (action, listenerApi) => {
     const state = listenerApi.getState();
@@ -64,7 +66,7 @@ localStorageMiddleware.startListening({
       activeColumnKey,
       JSON.stringify(state.column.activeColumn)
     );
-    localStorage.setItem(taskKey, JSON.stringify(state.card.task));
+    localStorage.setItem(tasksKey, JSON.stringify(state.card.tasks));
     localStorage.setItem(activeCardKey, JSON.stringify(state.card.activeCard));
   },
 });

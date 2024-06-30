@@ -12,7 +12,7 @@ const TaskEditDescription = ({
   setEditedDescription,
 }) => {
   const selectedColor = useSelector((state) => {
-    const currentTask = state.card.task.find((item) => item.id === task.id);
+    const currentTask = state.card.tasks.find((item) => item.id === task.id);
     return currentTask ? currentTask.selectedColor : null;
   });
   const dispatch = useDispatch();

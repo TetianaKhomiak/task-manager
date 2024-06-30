@@ -30,7 +30,7 @@ const DropdownMenu = ({
     task.description
   );
 
-  const tasks = useSelector((state) => state.card.task);
+  const tasks = useSelector((state) => state.card.tasks);
   const currentTask = tasks.find((item) => item.id === task.id);
   const currentColumn = currentTask ? currentTask.columnName : "";
   const columns = useSelector((state) => state.column.columns);

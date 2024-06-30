@@ -9,7 +9,6 @@ const DropAreaColumn = ({ onDrop }) => {
       onDragEnter={() => setShowDrop(true)}
       onDragLeave={() => setShowDrop(false)}
       onDrop={() => {
-        //e.preventDefault();
         onDrop();
         setShowDrop(false);
       }}

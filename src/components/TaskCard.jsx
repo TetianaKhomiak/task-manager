@@ -28,7 +28,7 @@ const TaskCard = ({ task, index }) => {
   const [isDropdownMenu, setIsDropdownMenu] = useState(false);
 
   const selectedColor = useSelector((state) => {
-    const currentTask = state.card.task.find((item) => item.id === task.id);
+    const currentTask = state.card.tasks.find((item) => item.id === task.id);
     return currentTask ? currentTask.selectedColor : null;
   });
   const transformedColor = transformColor(selectedColor);
@@ -82,6 +82,14 @@ const TaskCard = ({ task, index }) => {
     setIsDropdownMenu(!isDropdownMenu);
   };
 
+  const handleOnDragStart = () => {
+    dispatch(setActiveCard(index));
+  };
+
+  const handleOnDragEnd = () => {
+    dispatch(setActiveCard(null));
+  };
+
   return (
     <div
       className="card__container"
@@ -90,8 +98,8 @@ const TaskCard = ({ task, index }) => {
       }}>
       <div
         draggable
-        onDragStart={() => dispatch(setActiveCard(index))}
-        onDragEnd={() => dispatch(setActiveCard(null))}>
+        onDragStart={handleOnDragStart}
+        onDragEnd={handleOnDragEnd}>
         {isDropdownMenu && (
           <div
             className="card__overlay"
