@@ -82,6 +82,7 @@ const TaskBoard = () => {
               <button
                 className="board__btn"
                 type="submit"
+                style={{ opacity: isOptionDisabled(selectValue) ? 0.5 : 1 }}
                 disabled={isOptionDisabled(selectValue)}>
                 Add
               </button>
