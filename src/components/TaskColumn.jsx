@@ -7,7 +7,7 @@ import TaskCards from "./TaskCards";
 import { updateTasks } from "../redux/slices/cardSlice";
 import { RxCross2 } from "react-icons/rx";
 
-const TaskColumn = ({ title, columnIndex }) => {
+const TaskColumn = ({ title, columnIndex, setIsDragging }) => {
   const [isAddingTask, setIsAddingTask] = useState(false);
   const { columns } = useSelector((state) => state.column);
   console.log(columns);
@@ -33,12 +33,22 @@ const TaskColumn = ({ title, columnIndex }) => {
     dispatch(updateTasks(filteredTaskCards));
   };
 
+  const handleOnDragStart = () => {
+    dispatch(setActiveColumn(columnIndex));
+    setIsDragging(true);
+  };
+
+  const handleOnDragEnd = () => {
+    dispatch(setActiveColumn(null));
+    setIsDragging(false);
+  };
+
   return (
     <div
       className="column__wrapper"
       draggable
-      onDragStart={() => dispatch(setActiveColumn(columnIndex))}
-      onDragEnd={() => dispatch(setActiveColumn(null))}>
+      onDragStart={handleOnDragStart}
+      onDragEnd={handleOnDragEnd}>
       <div className="column__title">
         <h3>{title}</h3>
         {title !== "To Do" && (

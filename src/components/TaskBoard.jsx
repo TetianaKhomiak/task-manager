@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addColumn,
@@ -16,6 +16,7 @@ const TaskBoard = () => {
     (state) => state.column
   );
   // console.log(columns);
+  const [isDragging, setIsDragging] = useState(false);
   const dispatch = useDispatch();
 
   const handleAddTaskColumn = (e) => {
@@ -41,6 +42,7 @@ const TaskBoard = () => {
     if (activeColumn == null || activeColumn === undefined) {
       return;
     }
+    setIsDragging(false);
     // console.log(
     //   `${activeColumn} is going to place at the position ${position}`
     // );
@@ -63,7 +65,11 @@ const TaskBoard = () => {
         columns.length > 0 &&
         columns.map((item, index) => (
           <React.Fragment key={index}>
-            <TaskColumn title={item} columnIndex={index} />
+            <TaskColumn
+              title={item}
+              columnIndex={index}
+              setIsDragging={setIsDragging}
+            />
             <DropAreaColumn onDrop={() => onDrop(index + 1)} />
           </React.Fragment>
         ))}
@@ -109,7 +115,9 @@ const TaskBoard = () => {
         columns.length < 4 && (
           <button
             onClick={handleAddColumnButtonClick}
-            className="board__btn_add-column">
+            className={
+              isDragging ? "board__btn-add_hide" : "board__btn-add_show"
+            }>
             + Add New Category
           </button>
         )
