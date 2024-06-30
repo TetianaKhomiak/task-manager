@@ -4,12 +4,12 @@ import { addTask } from "../redux/slices/cardSlice";
 import "../styles/TaskForm.css";
 
 const TaskForm = ({ setIsAddingTask, columnName }) => {
+  const dispatch = useDispatch();
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [charCount, setCharCount] = useState(30);
   const [isError, setIsError] = useState(false);
   const id = useId();
-  const dispatch = useDispatch();
 
   const handleSubmitForm = (e) => {
     e.preventDefault();

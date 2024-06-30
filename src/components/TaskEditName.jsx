@@ -5,6 +5,7 @@ import { updateTaskName } from "../redux/slices/cardSlice";
 import "../styles/TaskEditName.css";
 
 const TaskEditName = ({ task }) => {
+  const dispatch = useDispatch();
   const [isEditingName, setIsEditingName] = useState(false);
   const [editedName, setEditedName] = useState(task.name);
 
@@ -14,9 +15,10 @@ const TaskEditName = ({ task }) => {
     return currentTask ? currentTask.selectedColor : null;
   });
   const transformedColor = transformColor(selectedColor);
-  const dispatch = useDispatch();
 
+  const [isError, setIsError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
   const buttonStyle = {
     backgroundColor: isHovered
       ? transformedColor
@@ -48,8 +50,13 @@ const TaskEditName = ({ task }) => {
 
   const handleSaveEditedName = (e) => {
     e.preventDefault();
-    setIsEditingName(false);
-    dispatch(updateTaskName({ id: task.id, editedTask: editedName }));
+
+    if (editedName === "") {
+      setIsError(true);
+    } else {
+      setIsEditingName(false);
+      dispatch(updateTaskName({ id: task.id, editedTask: editedName }));
+    }
   };
 
   return (
@@ -63,6 +70,7 @@ const TaskEditName = ({ task }) => {
                 type="text"
                 maxLength={30}
                 value={editedName}
+                placeholder={isError ? "Title is required" : ""}
                 onChange={(e) => setEditedName(e.target.value)}></textarea>
               <button
                 className="edit__btn_name"

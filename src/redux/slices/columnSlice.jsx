@@ -30,7 +30,7 @@ export const columnSlice = createSlice({
     setSelectValue: (state, action) => {
       state.selectValue = action.payload;
     },
-    cancleAdding: (state) => {
+    cancelAdding: (state) => {
       state.isAddingColumn = false;
       state.selectValue = "In Progress";
     },
@@ -55,7 +55,7 @@ export const columnSlice = createSlice({
     setActiveColumn: (state, action) => {
       state.activeColumn = action.payload;
     },
-    deleteColum: (state, action) => {
+    deleteColumn: (state, action) => {
       state.columns = action.payload;
     },
   },
@@ -66,8 +66,8 @@ export const {
   setIsAddingColumn,
   setSelectValue,
   addColumn,
-  cancleAdding,
+  cancelAdding,
   dropColumn,
   setActiveColumn,
-  deleteColum,
+  deleteColumn,
 } = columnSlice.actions;

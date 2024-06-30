@@ -14,7 +14,7 @@ const DropAreaColumn = ({ onDrop }) => {
       }}
       onDragOver={(e) => e.preventDefault()}
       className={showDrop ? "column__drop_area" : "column__hide_drop"}>
-      "Drop Here"
+      Drop Here
     </section>
   );
 };

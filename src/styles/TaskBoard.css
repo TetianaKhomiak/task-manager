@@ -3,6 +3,7 @@
 .board__wrapper {
     display: flex;
     min-width: 96%;
+    margin-right: 40px;
 }
 
 .board__btn-add_show {

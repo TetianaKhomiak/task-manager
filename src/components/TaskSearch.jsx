@@ -1,8 +1,7 @@
-import React from "react";
-import "../styles/TaskSearch.css";
+import React, { useContext } from "react";
 import { IoIosSearch } from "react-icons/io";
-import { useContext } from "react";
 import { SearchContext } from "../context/SearchProvider";
+import "../styles/TaskSearch.css";
 
 const TaskSearch = () => {
   const { searchTask, setSearchTask } = useContext(SearchContext);

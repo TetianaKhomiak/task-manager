@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "../styles/TaskEditDescription.css";
-import "../styles/TaskEditName.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTaskDescription } from "../redux/slices/cardSlice";
+import "../styles/TaskEditDescription.css";
+import "../styles/TaskEditName.css"; //for style of .edit__textarea
 
 const TaskEditDescription = ({
   task,
@@ -67,8 +67,8 @@ const TaskEditDescription = ({
         </>
       ) : (
         <>
-          <div className="card__descr" onDoubleClick={handleEditDescription}>
-            <div className="card__descr_text">{task.description}</div>
+          <div className="edit__descr" onDoubleClick={handleEditDescription}>
+            <div className="edit__descr_text">{task.description}</div>
           </div>
         </>
       )}

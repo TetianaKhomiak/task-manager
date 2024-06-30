@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addColumn,
-  cancleAdding,
+  cancelAdding,
   dropColumn,
   setIsAddingColumn,
   setSelectValue,
@@ -12,12 +12,10 @@ import DropAreaColumn from "./DropAreaColumn";
 import TaskColumn from "./TaskColumn";
 
 const TaskBoard = () => {
+  const dispatch = useDispatch();
   const { columns, isAddingColumn, selectValue } = useSelector(
     (state) => state.column
   );
-
-  // console.log(columns);
-  const dispatch = useDispatch();
 
   const handleAddTaskColumn = (e) => {
     e.preventDefault();
@@ -31,7 +29,7 @@ const TaskBoard = () => {
   };
 
   const handleCancelAdding = () => {
-    dispatch(cancleAdding());
+    dispatch(cancelAdding());
   };
 
   const handleAddColumnButtonClick = () => {

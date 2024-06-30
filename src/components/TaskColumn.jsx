@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import "../styles/TaskColumn.css";
-import TaskForm from "./TaskForm";
-import { useSelector, useDispatch } from "react-redux";
-import { setActiveColumn, deleteColum } from "../redux/slices/columnSlice";
-import TaskCards from "./TaskCards";
-import { updateTasks } from "../redux/slices/cardSlice";
 import { RxCross2 } from "react-icons/rx";
+import { useDispatch, useSelector } from "react-redux";
+import { updateTasks } from "../redux/slices/cardSlice";
+import { deleteColumn, setActiveColumn } from "../redux/slices/columnSlice";
+import "../styles/TaskColumn.css";
+import TaskCards from "./TaskCards";
+import TaskForm from "./TaskForm";
 
 const TaskColumn = ({ title, columnIndex }) => {
+  const dispatch = useDispatch();
   const [isAddingTask, setIsAddingTask] = useState(false);
   const { columns } = useSelector((state) => state.column);
-  console.log(columns);
   const tasks = useSelector((state) => state.card.tasks);
-  const dispatch = useDispatch();
 
   const handleCreateTask = () => {
     setIsAddingTask(true);
@@ -29,7 +28,7 @@ const TaskColumn = ({ title, columnIndex }) => {
     );
     const filteredTaskCards = tasks.filter((task) => task.columnName !== title);
 
-    dispatch(deleteColum(filteredTaskColumnList));
+    dispatch(deleteColumn(filteredTaskColumnList));
     dispatch(updateTasks(filteredTaskCards));
   };
 

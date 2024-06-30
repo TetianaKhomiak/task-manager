@@ -9,8 +9,8 @@ import {
 } from "../redux/slices/cardSlice";
 import "../styles/TaskCard.css";
 import DropdownMenu from "./DropdownMenu";
-import TaskEditName from "./TaskEditName";
 import TaskEditDescription from "./TaskEditDescription";
+import TaskEditName from "./TaskEditName";
 
 const TaskCard = ({ task, index }) => {
   const [isSelectDeadline, setIsDeadline] = useState(false);

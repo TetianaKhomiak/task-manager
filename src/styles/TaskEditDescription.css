@@ -10,13 +10,7 @@
     height: 250px;
 }
 
-.card__descr_text {
-    font-size: 18px;
-    font-weight: 500;
-    margin: 0 5px 0 10px;
-}
-
-.card__descr {
+.edit__descr {
     cursor: pointer;
     max-height: 145px;
     word-break: break-word;
@@ -25,18 +19,24 @@
     margin: 13px;
 }
 
-.card__descr::-webkit-scrollbar-track {
+.edit__descr_text {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 5px 0 10px;
+}
+
+.edit__descr::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(86, 83, 83, 0.3);
     border-radius: 10px;
     background-color: #F5F5F5;
 }
 
-.card__descr::-webkit-scrollbar {
+.edit__descr::-webkit-scrollbar {
     width: 2px;
     background-color: #F5F5F5;
 }
 
-.card__descr::-webkit-scrollbar-thumb {
+.edit__descr::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(86, 83, 83, 0.3);
     background-color: #bbb4b4;

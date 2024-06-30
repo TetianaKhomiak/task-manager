@@ -1,8 +1,8 @@
 import React from "react";
-import "../styles/SubDropdownMenu.css";
 import { useDispatch } from "react-redux";
 import { updateTasks } from "../redux/slices/cardSlice";
 import { addColumn } from "../redux/slices/columnSlice";
+import "../styles/SubDropdownMenu.css";
 
 const SubDropdownMenu = ({
   tasks,
@@ -30,7 +30,7 @@ const SubDropdownMenu = ({
   return (
     <div
       className={
-        currentIndexColumn == 3 ? "subdropdown-menu__last" : "subdropdown-menu"
+        currentIndexColumn === 3 ? "subdropdown-menu__last" : "subdropdown-menu"
       }>
       {buttonsText.map((buttonText) => (
         <button

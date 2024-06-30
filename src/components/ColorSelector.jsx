@@ -3,9 +3,9 @@ import { FaRegCircleDot } from "react-icons/fa6";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { setColor } from "../redux/slices/cardSlice";
-import "../styles/ColorChanger.css";
+import "../styles/ColorSelector.css";
 
-const ColorChanger = ({ task }) => {
+const ColorSelector = ({ task }) => {
   const dispatch = useDispatch();
   const selectedColor = useSelector((state) => {
     const currentTask = state.card.tasks.find((item) => item.id === task.id);
@@ -15,12 +15,11 @@ const ColorChanger = ({ task }) => {
   const handleColorChange = (color) => {
     dispatch(setColor({ id: task.id, selectedColor: color }));
   };
-  //console.log(selectedColor);
 
   return (
     <div className="color-changer">
       <div className="color-changer__container">
-        <details type="button">
+        <details>
           <summary>
             <span className="summary-title">Change Color </span>
             <div className="summary-chevron-up">
@@ -96,4 +95,4 @@ const ColorChanger = ({ task }) => {
   );
 };
 
-export default ColorChanger;
+export default ColorSelector;

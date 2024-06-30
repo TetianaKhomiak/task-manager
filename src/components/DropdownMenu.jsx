@@ -8,7 +8,7 @@ import {
   updateTaskDescription,
 } from "../redux/slices/cardSlice";
 import "../styles/DropdownMenu.css";
-import ColorChanger from "./ColorChanger";
+import ColorSelector from "./ColorSelector";
 import DropdownMenuItem from "./DropdownMenuItem";
 import SubDropdownMenu from "./SubDropdownMenu";
 
@@ -23,6 +23,7 @@ const DropdownMenu = ({
   handleSelectDeadline,
   setIsEditingDescription,
 }) => {
+  const dispatch = useDispatch();
   const [isMovingTask, setIsMovingTask] = useState(false);
   const [isDescriptionDeleteDisabled, setIsDescriptionDeleteDisabled] =
     useState(!task.description);
@@ -35,8 +36,6 @@ const DropdownMenu = ({
   const currentColumn = currentTask ? currentTask.columnName : "";
   const columns = useSelector((state) => state.column.columns);
   const currentIndexColumn = columns.indexOf(currentColumn);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const updateTaskProp = () => {
@@ -82,7 +81,7 @@ const DropdownMenu = ({
       className={
         currentIndexColumn == 3 ? "dropdown-menu__last" : "dropdown-menu"
       }>
-      <ColorChanger task={task} />
+      <ColorSelector task={task} />
       <DropdownMenuItem
         className="dropdown-menu__btn"
         disabled={isDeadlineAddDisabled}
