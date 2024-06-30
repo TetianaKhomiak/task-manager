@@ -6,8 +6,9 @@
     font-weight: 700;
     min-height: 230px;
     padding: 0 50px;
-    color: #dcdcdc;
+    color: #747070;
     border: 1px dashed #b8b6b6;
+    background-color: #f5fbf5;
     border-radius: 5px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     opacity: 1;
@@ -17,11 +18,10 @@
     justify-content: center;
     align-items: center;
     font-family: "Manrope", sans-serif;
-    font-weight: 600;
+    font-weight: 900;
 }
 
 .card__hide_drop {
     opacity: 0;
     font-size: 5px;
-
 }

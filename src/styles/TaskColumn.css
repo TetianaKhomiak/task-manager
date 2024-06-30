@@ -2,39 +2,38 @@
 
 .column__wrapper {
     width: 300px;
-    border-radius: 5px;
     cursor: grab;
-    padding: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    background-color: rgb(237, 249, 232);
-    font-family: "Manrope", sans-serif;
-    margin-bottom: 150px;
-    min-height: 370px;
     display: flex;
     flex-direction: column;
+    margin-bottom: 150px;
 }
 
 .column__title {
+    border-radius: 5px;
+    width: 300px;
     display: flex;
     justify-content: space-between;
     font-size: 22px;
-    opacity: 0.8;
-    margin-left: 20px;
+    opacity: 1;
+    margin: 10px 0;
+    padding: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    background-color: #d5f4c7;
+    font-family: "Manrope", sans-serif;
 }
 
 .column__delete-btn {
     all: unset;
     cursor: pointer;
-    box-shadow: 0 -4px 4px rgba(217, 245, 205, 0.8), 0 1px 3px rgba(76, 75, 75, 0.12), 0 1px 2px rgba(58, 57, 57, 0.24),
-        0 4px 4px rgba(223, 251, 210, 0.8), 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(53, 53, 53, 0.24);
     transition: all 0.2s ease-in-out;
     padding: 5px 5px 0 5px;
     border-radius: 5px;
+    background-color: #d8faca;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .column__delete-btn:hover {
-    background-color: #c4f8ae;
-    box-shadow: none;
+    background-color: #bafb9e;
 }
 
 .column__delete-icon {
@@ -51,6 +50,7 @@
     padding: 10px 0 10px 15px;
     margin: 5px 0;
     border-radius: 5px;
+    background-color: #EDF9E8;
     box-shadow: 0 -4px 4px rgba(217, 245, 205, 0.8), 0 1px 3px rgba(76, 75, 75, 0.12), 0 1px 2px rgba(58, 57, 57, 0.24),
         0 4px 4px rgba(223, 251, 210, 0.8), 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(53, 53, 53, 0.24);
     transition: all 0.2s ease-in-out;

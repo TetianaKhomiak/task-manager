@@ -68,11 +68,11 @@
 }
 
 .edit__char-counter {
-    font-style: italic;
-    font-size: 14px;
+    font-family: "Manrope", sans-serif;
+    font-size: 16px;
     margin-left: 10px;
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-weight: 500;
+
 }
 
 .edit__name {
@@ -81,10 +81,11 @@
     width: 100%;
     font-size: 20px;
     font-weight: 700;
+    padding: 10px 0;
 }
 
 .edit__name_text {
-    margin: 0 5px 0 20px;
+    margin: 0 5px 0 15px;
     padding-bottom: 3px;
     opacity: 0.8;
 }

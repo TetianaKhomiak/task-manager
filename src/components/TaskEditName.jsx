@@ -74,7 +74,7 @@ const TaskEditName = ({ task }) => {
               </button>
             </form>
             <p className="edit__char-counter">
-              Remaining Characters: {leftCharacterLenght}
+              Remaining Characters: <bold> {leftCharacterLenght}</bold>
             </p>
           </>
         ) : (
