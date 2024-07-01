@@ -2,7 +2,7 @@
 
 .board__wrapper {
     display: flex;
-    gap: 60px;
+    gap: 55px;
     min-width: 96%;
     margin-left: 40px;
 }
