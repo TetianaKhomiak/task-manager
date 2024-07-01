@@ -1,27 +1,31 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { updateTasks } from "../redux/slices/cardSlice";
-import { addColumn } from "../redux/slices/columnSlice";
+import { moveColumn } from "../redux/slices/columnSlice";
 import "../styles/SubDropdownMenu.css";
 
 const SubDropdownMenu = ({
   tasks,
   currentIndexColumn,
-  currentColumn,
+  currentColumnName,
   currentTask,
   columns,
+  idColumn,
 }) => {
   const dispatch = useDispatch();
   const buttonsText = ["To Do", "In Progress", "On Hold", "Completed"];
 
-  const handleMoveTask = (currentTask, newColumn) => {
-    const columnExists = columns.includes(newColumn);
+  const handleMoveTask = (currentTask, newColumnName) => {
+    const columnExists = columns.some(
+      (column) => column.name === newColumnName
+    );
+    console.log(columnExists);
     if (!columnExists) {
-      dispatch(addColumn(newColumn));
+      dispatch(moveColumn({ id: idColumn, name: newColumnName }));
     }
 
     const updatedTasks = tasks.map((task) =>
-      task.id === currentTask.id ? { ...task, columnName: newColumn } : task
+      task.id === currentTask.id ? { ...task, columnName: newColumnName } : task
     );
 
     dispatch(updateTasks(updatedTasks));
@@ -30,15 +34,15 @@ const SubDropdownMenu = ({
   return (
     <div
       className={
-        currentIndexColumn === 3 ? "subdropdown-menu__last" : "subdropdown-menu"
+        currentIndexColumn > 3 ? "subdropdown-menu__last" : "subdropdown-menu"
       }>
       {buttonsText.map((buttonText) => (
         <button
           key={buttonText}
           onClick={() => handleMoveTask(currentTask, buttonText)}
-          disabled={buttonText === currentColumn}
+          disabled={buttonText === currentColumnName}
           className="subdropdown-menu__btn"
-          style={buttonText === currentColumn ? { opacity: 0.4 } : {}}>
+          style={buttonText === currentColumnName ? { opacity: 0.4 } : {}}>
           {buttonText}
         </button>
       ))}

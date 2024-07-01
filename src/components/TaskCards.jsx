@@ -5,7 +5,7 @@ import { dropCard } from "../redux/slices/cardSlice";
 import DropAreaCard from "./DropAreaCard";
 import TaskCard from "./TaskCard";
 
-const TaskCards = ({ columnName }) => {
+const TaskCards = ({ columnName, idColumn }) => {
   const dispatch = useDispatch();
   const tasks = useSelector((state) => state.card.tasks);
   const { searchTask } = useContext(SearchContext);
@@ -16,7 +16,8 @@ const TaskCards = ({ columnName }) => {
 
   const filteredTasks = tasks
     .map((task, index) => ({ ...task, originalIndex: index }))
-    .filter((task) => task.name.includes(searchTask));
+    .filter((task) => task.name?.includes(searchTask ?? ""));
+  console.log(filteredTasks);
 
   return (
     <div>
@@ -24,8 +25,12 @@ const TaskCards = ({ columnName }) => {
       {filteredTasks
         .filter((task) => task.columnName === columnName)
         .map((task, index) => (
-          <div key={task.originalIndex}>
-            <TaskCard task={task} index={task.originalIndex} />
+          <div key={task.id}>
+            <TaskCard
+              task={task}
+              index={task.originalIndex}
+              idColumn={idColumn}
+            />
             <DropAreaCard onDrop={() => onDrop(columnName, index + 1)} />
           </div>
         ))}

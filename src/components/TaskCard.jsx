@@ -12,7 +12,7 @@ import DropdownMenu from "./DropdownMenu";
 import TaskEditDescription from "./TaskEditDescription";
 import TaskEditName from "./TaskEditName";
 
-const TaskCard = ({ task, index }) => {
+const TaskCard = ({ task, index, idColumn }) => {
   const [isSelectDeadline, setIsDeadline] = useState(false);
   const [deadlineValue, setDeadlineValue] = useState(task.deadline || "");
   const [isDeadlineDeleteDisabled, setIsDeadlineDeleteDisabled] = useState(
@@ -125,6 +125,7 @@ const TaskCard = ({ task, index }) => {
                   isDeadlineAddDisabled={isDeadlineAddDisabled}
                   handleSelectDeadline={handleSelectDeadline}
                   setIsEditingDescription={setIsEditingDescription}
+                  idColumn={idColumn}
                 />
               ) : (
                 <IoEllipsisVerticalOutline

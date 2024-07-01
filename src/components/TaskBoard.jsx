@@ -1,14 +1,17 @@
+import {
+  SortableContext,
+  horizontalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 import {
   addColumn,
   cancelAdding,
-  dropColumn,
   setIsAddingColumn,
   setSelectValue,
 } from "../redux/slices/columnSlice";
 import "../styles/TaskBoard.css";
-import DropAreaColumn from "./DropAreaColumn";
 import TaskColumn from "./TaskColumn";
 
 const TaskBoard = () => {
@@ -20,7 +23,7 @@ const TaskBoard = () => {
   const handleAddTaskColumn = (e) => {
     e.preventDefault();
     if (selectValue) {
-      dispatch(addColumn(selectValue));
+      dispatch(addColumn({ selectValue, idColumn: uuidv4() }));
     }
   };
 
@@ -36,25 +39,23 @@ const TaskBoard = () => {
     dispatch(setIsAddingColumn(true));
   };
 
-  const onDrop = (position) => {
-    dispatch(dropColumn(position));
-  };
-
   const isOptionDisabled = (option) => {
-    return columns.includes(option);
+    return columns.find((column) => column.name === option);
   };
 
   return (
     <div className="board__wrapper">
-      <DropAreaColumn onDrop={() => onDrop(0)} />
-      {columns &&
-        columns.length > 0 &&
-        columns.map((item, index) => (
-          <React.Fragment key={index}>
-            <TaskColumn title={item} columnIndex={index} />
-            <DropAreaColumn onDrop={() => onDrop(index + 1)} />
-          </React.Fragment>
-        ))}
+      <SortableContext items={columns} strategy={horizontalListSortingStrategy}>
+        {columns &&
+          columns.length > 0 &&
+          columns.map((column) => (
+            <TaskColumn
+              key={column.id}
+              title={column.name}
+              idColumn={column.id}
+            />
+          ))}
+      </SortableContext>
       <div>
         {isAddingColumn ? (
           <>

@@ -15,17 +15,23 @@ export const cardSlice = createSlice({
     addTask: (state, action) => {
       state.tasks = [...state.tasks, action.payload];
     },
+    // updateTaskName: (state, action) => {
+    //   // const { id, editedTask } = action.payload;
+    //   // const updatedTasks = state.tasks.map((item) => {
+    //   //   if (item.id === id) {
+    //   //     item.name = editedTask;
+    //   //   }
+    //   //   return item;
+    //   // });
+    //   // state.tasks = updatedTasks;
+
+    // },
     updateTaskName: (state, action) => {
       const { id, editedTask } = action.payload;
-      const updatedTasks = state.tasks.map((item) => {
-        if (item.id === id) {
-          item.name = editedTask;
-        }
-        return item;
-      });
-      state.tasks = updatedTasks;
+      state.tasks = state.tasks.map((item) =>
+        item.id === id ? { ...item, name: editedTask } : item
+      );
     },
-
     updateTaskDescription: (state, action) => {
       const { id, description } = action.payload;
       const updatedTasks = state.tasks.map((item) => {
@@ -59,15 +65,21 @@ export const cardSlice = createSlice({
       );
       state.tasks = updatedTasks;
     },
+    // setColor: (state, action) => {
+    //   const { id, selectedColor } = action.payload;
+    //   const updatedSelectedColor = state.tasks.map((item) => {
+    //     if (item.id === id) {
+    //       item.selectedColor = selectedColor;
+    //     }
+    //     return item;
+    //   });
+    //   state.tasks = updatedSelectedColor;
+    // },
     setColor: (state, action) => {
       const { id, selectedColor } = action.payload;
-      const updatedSelectedColor = state.tasks.map((item) => {
-        if (item.id === id) {
-          item.selectedColor = selectedColor;
-        }
-        return item;
-      });
-      state.tasks = updatedSelectedColor;
+      state.tasks = state.tasks.map((item) =>
+        item.id === id ? { ...item, selectedColor: selectedColor } : item
+      );
     },
     dropCard: (state, action) => {
       const { category, position } = action.payload;

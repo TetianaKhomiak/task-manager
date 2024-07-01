@@ -1,7 +1,8 @@
-import React, { useId, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask } from "../redux/slices/cardSlice";
 import "../styles/TaskForm.css";
+import { v4 as uuidv4 } from "uuid";
 
 const TaskForm = ({ setIsAddingTask, columnName }) => {
   const dispatch = useDispatch();
@@ -9,7 +10,6 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
   const [taskDescription, setTaskDescription] = useState("");
   const [charCount, setCharCount] = useState(30);
   const [isError, setIsError] = useState(false);
-  const id = useId();
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
       dispatch(
         addTask({
           name: taskName,
-          id,
+          id: uuidv4(),
           description: taskDescription,
           columnName,
           deadline: null,

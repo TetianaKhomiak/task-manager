@@ -22,6 +22,7 @@ const DropdownMenu = ({
   isDeadlineAddDisabled,
   handleSelectDeadline,
   setIsEditingDescription,
+  idColumn,
 }) => {
   const dispatch = useDispatch();
   const [isMovingTask, setIsMovingTask] = useState(false);
@@ -33,9 +34,14 @@ const DropdownMenu = ({
 
   const tasks = useSelector((state) => state.card.tasks);
   const currentTask = tasks.find((item) => item.id === task.id);
-  const currentColumn = currentTask ? currentTask.columnName : "";
+  const currentColumnName = currentTask ? currentTask.columnName : "";
   const columns = useSelector((state) => state.column.columns);
-  const currentIndexColumn = columns.indexOf(currentColumn);
+
+  const currentIndexColumn = columns.findIndex(
+    (column) => column.name === currentColumnName
+  );
+
+  console.log(currentIndexColumn);
 
   useEffect(() => {
     const updateTaskProp = () => {
@@ -79,7 +85,7 @@ const DropdownMenu = ({
   return (
     <div
       className={
-        currentIndexColumn == 3 ? "dropdown-menu__last" : "dropdown-menu"
+        currentIndexColumn === 3 ? "dropdown-menu__last" : "dropdown-menu"
       }>
       <ColorSelector task={task} />
       <DropdownMenuItem
@@ -128,10 +134,11 @@ const DropdownMenu = ({
         {isMovingTask && (
           <SubDropdownMenu
             tasks={tasks}
-            currentColumn={currentColumn}
+            currentColumnName={currentColumnName}
             currentIndexColumn={currentIndexColumn}
             currentTask={currentTask}
             columns={columns}
+            idColumn={idColumn}
           />
         )}
       </div>

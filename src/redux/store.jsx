@@ -8,13 +8,12 @@ import columnReducer, {
   setSelectValue,
   addColumn,
   cancelAdding,
-  dropColumn,
-  setActiveColumn,
   deleteColumn,
+  updateColumns,
+  moveColumn,
   columnsKey,
   isAddingColumnKey,
   selectValueKey,
-  activeColumnKey,
 } from "./slices/columnSlice";
 import cardReducer, {
   addTask,
@@ -38,9 +37,9 @@ localStorageMiddleware.startListening({
     setSelectValue,
     addColumn,
     cancelAdding,
-    dropColumn,
-    setActiveColumn,
     deleteColumn,
+    updateColumns,
+    moveColumn,
     addTask,
     updateTasks,
     setActiveCard,
@@ -62,10 +61,7 @@ localStorageMiddleware.startListening({
       selectValueKey,
       JSON.stringify(state.column.selectValue)
     );
-    localStorage.setItem(
-      activeColumnKey,
-      JSON.stringify(state.column.activeColumn)
-    );
+
     localStorage.setItem(tasksKey, JSON.stringify(state.card.tasks));
     localStorage.setItem(activeCardKey, JSON.stringify(state.card.activeCard));
   },

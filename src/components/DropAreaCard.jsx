@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import "../styles/DropAreaCard.css";
 
 const DropAreaCard = ({ onDrop }) => {
-  const [showDrop, setShowDrop] = useState(false);
+  const [showDropCard, setShowDropCard] = useState(false);
 
   const handleDragEnter = (e) => {
     e.preventDefault();
-    setShowDrop(true);
+    setShowDropCard(true);
   };
 
   const handleDragLeave = () => {
-    setShowDrop(false);
+    setShowDropCard(false);
   };
 
   const handleDrop = (e) => {
     e.preventDefault();
     onDrop();
-    setShowDrop(false);
+    setShowDropCard(false);
   };
 
   const handleDragOver = (e) => {
@@ -29,7 +29,7 @@ const DropAreaCard = ({ onDrop }) => {
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
-      className={showDrop ? "card__drop_area" : "card__hide_drop"}>
+      className={showDropCard ? "card__drop_area" : "card__hide_drop"}>
       Drop Here
     </section>
   );
