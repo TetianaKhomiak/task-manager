@@ -25,6 +25,7 @@ const TaskColumn = ({ title, idColumn }) => {
     transition,
     transform: CSS.Transform.toString(transform),
   };
+
   const handleDeleteColumn = () => {
     if (!columns || !tasks) {
       console.error("Columns or tasks are undefined");
