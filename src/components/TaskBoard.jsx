@@ -56,6 +56,7 @@ const TaskBoard = () => {
             />
           ))}
       </SortableContext>
+
       <div>
         {isAddingColumn ? (
           <>

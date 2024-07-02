@@ -1,4 +1,11 @@
-import { useSortable } from "@dnd-kit/sortable";
+import {
+  DndContext,
+  PointerSensor,
+  closestCorners,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import { arrayMove, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import React, { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
@@ -25,7 +32,19 @@ const TaskColumn = ({ title, idColumn }) => {
     transition,
     transform: CSS.Transform.toString(transform),
   };
+  const getTaskPos = (id) => tasks.findIndex((task) => task.id === id);
 
+  const handleDragEndTask = (event) => {
+    const { active, over } = event;
+
+    if (active.id === over.id) return;
+    const originalPos = getTaskPos(active.id);
+    const newPos = getTaskPos(over.id);
+
+    const newTasks = arrayMove(tasks, originalPos, newPos);
+
+    dispatch(updateTasks(newTasks));
+  };
   const handleDeleteColumn = () => {
     if (!columns || !tasks) {
       console.error("Columns or tasks are undefined");
@@ -40,35 +59,44 @@ const TaskColumn = ({ title, idColumn }) => {
     dispatch(deleteColumn(filteredTaskColumnList));
     dispatch(updateTasks(filteredTaskCards));
   };
-
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: { distance: 100 },
+    })
+  );
   return (
-    <div
-      className="column__wrapper"
-      ref={setNodeRef}
-      {...attributes}
-      style={style}>
-      <div className="wrapper">
-        <div className="column__title" {...listeners}>
-          <h3>{title}</h3>
-        </div>
+    <DndContext
+      sensors={sensors}
+      onDragEnd={handleDragEndTask}
+      collisionDetection={closestCorners}>
+      <div
+        className="column__wrapper"
+        ref={setNodeRef}
+        {...attributes}
+        style={style}>
+        <div className="column__wrapper_title">
+          <div className="column__title" {...listeners}>
+            <h3>{title}</h3>
+          </div>
 
-        {title !== "To Do" && (
-          <button onClick={handleDeleteColumn} className="column__delete-btn">
-            <RxCross2 className="column__delete-icon" />
-          </button>
-        )}
+          {title !== "To Do" && (
+            <button onClick={handleDeleteColumn} className="column__delete-btn">
+              <RxCross2 className="column__delete-icon" />
+            </button>
+          )}
+        </div>
+        <div>
+          <TaskCards columnName={title} idColumn={idColumn} />
+          {isAddingTask ? (
+            <TaskForm setIsAddingTask={setIsAddingTask} columnName={title} />
+          ) : (
+            <button className="column__create-btn" onClick={handleCreateTask}>
+              + Create Task
+            </button>
+          )}
+        </div>
       </div>
-      <div>
-        <TaskCards columnName={title} idColumn={idColumn} />
-        {isAddingTask ? (
-          <TaskForm setIsAddingTask={setIsAddingTask} columnName={title} />
-        ) : (
-          <button className="column__create-btn" onClick={handleCreateTask}>
-            + Create Task
-          </button>
-        )}
-      </div>
-    </div>
+    </DndContext>
   );
 };
 

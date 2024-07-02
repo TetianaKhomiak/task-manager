@@ -44,6 +44,13 @@ const TaskEditName = ({ task }) => {
     setCharactersLengh();
   }, [editedName]);
 
+  useEffect(() => {
+    // Reset isHovered when exiting edit mode
+    if (!isEditingName) {
+      setIsHovered(false);
+    }
+  }, [isEditingName]);
+
   const handleEditName = () => {
     setIsEditingName(true);
   };
@@ -82,7 +89,7 @@ const TaskEditName = ({ task }) => {
               </button>
             </form>
             <p className="edit__char-counter">
-              Remaining Characters: <bold> {leftCharacterLenght}</bold>
+              Remaining Characters: {leftCharacterLenght}
             </p>
           </>
         ) : (

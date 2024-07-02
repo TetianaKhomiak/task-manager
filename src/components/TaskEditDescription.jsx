@@ -37,6 +37,13 @@ const TaskEditDescription = ({
   };
 
   useEffect(() => {
+    // Reset isHovered when exiting edit mode
+    if (!isEditingDescription) {
+      setIsHovered(false);
+    }
+  }, [isEditingDescription]);
+
+  useEffect(() => {
     const updateTaskProp = () => {
       setEditedDescription(task.description);
     };
