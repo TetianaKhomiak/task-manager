@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateTaskDescription } from "../redux/slices/cardSlice";
 import "../styles/TaskEditDescription.css";
 import "../styles/TaskEditName.css"; //for style of .edit__textarea
+import Tiptap from "./Tiptap";
 
 const TaskEditDescription = ({
   task,
@@ -28,13 +29,13 @@ const TaskEditDescription = ({
     setIsEditingDescription(true);
   };
 
-  const handleSaveEditedDescription = (e) => {
-    e.preventDefault();
-    setIsEditingDescription(false);
-    dispatch(
-      updateTaskDescription({ id: task.id, description: editedDescription })
-    );
-  };
+  // const handleSaveEditedDescription = (e) => {
+  //   e.preventDefault();
+  //   setIsEditingDescription(false);
+  //   dispatch(
+  //     updateTaskDescription({ id: task.id, description: editedDescription })
+  //   );
+  // };
 
   useEffect(() => {
     // Reset isHovered when exiting edit mode
@@ -50,27 +51,35 @@ const TaskEditDescription = ({
     updateTaskProp();
   }, [task, setEditedDescription]);
 
+  const handleEditorContentSave = (html) => {
+    updateTaskDescription({ id: task.id, description: parse(html) });
+  };
+
   return (
     <div>
       {isEditingDescription ? (
         <>
-          <form
+          <div className="edit__form_descr">
+            {/* <form
             className="edit__form_descr"
             onSubmit={handleSaveEditedDescription}>
             <textarea
               className="edit__textarea edit__textarea_descr"
               type="text"
               value={editedDescription}
-              onChange={(e) => setEditedDescription(e.target.value)}></textarea>
-            <button
+            onChange={(e) => setEditedDescription(e.target.value)}
+            ></textarea> */}
+            <Tiptap onEditorContentSave={handleEditorContentSave} />
+            {/* <button
               className="edit__btn"
               type="submit"
               style={buttonStyle}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}>
               SAVE
-            </button>
-          </form>
+            </button> */}
+          </div>
+          {/* </form> */}
         </>
       ) : (
         <>
