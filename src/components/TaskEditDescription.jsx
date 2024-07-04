@@ -1,3 +1,4 @@
+import parse from "html-react-parser";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTaskDescription } from "../redux/slices/cardSlice";
@@ -9,8 +10,6 @@ const TaskEditDescription = ({
   task,
   isEditingDescription,
   setIsEditingDescription,
-  editedDescription,
-  setEditedDescription,
 }) => {
   const selectedColor = useSelector((state) => {
     const currentTask = state.card.tasks.find((item) => item.id === task.id);
@@ -29,13 +28,9 @@ const TaskEditDescription = ({
     setIsEditingDescription(true);
   };
 
-  // const handleSaveEditedDescription = (e) => {
-  //   e.preventDefault();
-  //   setIsEditingDescription(false);
-  //   dispatch(
-  //     updateTaskDescription({ id: task.id, description: editedDescription })
-  //   );
-  // };
+  const handleEditorContent = (html) => {
+    dispatch(updateTaskDescription({ id: task.id, description: html }));
+  };
 
   useEffect(() => {
     // Reset isHovered when exiting edit mode
@@ -44,47 +39,29 @@ const TaskEditDescription = ({
     }
   }, [isEditingDescription]);
 
-  useEffect(() => {
-    const updateTaskProp = () => {
-      setEditedDescription(task.description);
-    };
-    updateTaskProp();
-  }, [task, setEditedDescription]);
-
-  const handleEditorContentSave = (html) => {
-    updateTaskDescription({ id: task.id, description: parse(html) });
-  };
-
   return (
     <div>
       {isEditingDescription ? (
         <>
           <div className="edit__form_descr">
-            {/* <form
-            className="edit__form_descr"
-            onSubmit={handleSaveEditedDescription}>
-            <textarea
-              className="edit__textarea edit__textarea_descr"
-              type="text"
-              value={editedDescription}
-            onChange={(e) => setEditedDescription(e.target.value)}
-            ></textarea> */}
-            <Tiptap onEditorContentSave={handleEditorContentSave} />
-            {/* <button
+            <Tiptap onEditorContentSave={handleEditorContent} task={task} />
+            <button
               className="edit__btn"
-              type="submit"
+              type="button"
               style={buttonStyle}
+              onClick={() => setIsEditingDescription(false)}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}>
               SAVE
-            </button> */}
+            </button>
           </div>
-          {/* </form> */}
         </>
       ) : (
         <>
           <div className="edit__descr" onDoubleClick={handleEditDescription}>
-            <div className="edit__descr_text">{task.description}</div>
+            <div className="edit__descr_text">
+              {task.description ? parse(task.description) : ""}
+            </div>
           </div>
         </>
       )}

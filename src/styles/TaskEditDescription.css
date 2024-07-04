@@ -19,6 +19,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     margin: 13px;
+    padding-left: 10px;
 }
 
 .edit__descr_text {
@@ -26,6 +27,10 @@
     font-size: 18px;
     font-weight: 500;
     margin: 0 5px 0 10px;
+}
+
+.edit__descr_text p:not(:is(ul p, ol p)) {
+    margin-left: -20px;
 }
 
 .edit__descr::-webkit-scrollbar-track {
@@ -66,9 +71,17 @@
     cursor: auto;
 }
 
-.ProseMirror p {
-    margin: 0;
-    margin-right: 10px;
+.ProseMirror {
+    margin-left: 5px;
+}
+
+.ProseMirror p:not(:is(ul p, ol p)) {
+    margin-left: -15px;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+    margin-left: 5px;
 }
 
 .ProseMirror::-webkit-scrollbar-track {

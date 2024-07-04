@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { addTask } from "../redux/slices/cardSlice";
 import "../styles/TaskForm.css";
 import { v4 as uuidv4 } from "uuid";
+import Tiptap from "./Tiptap";
 
 const TaskForm = ({ setIsAddingTask, columnName }) => {
   const dispatch = useDispatch();
@@ -35,6 +36,10 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
     }
   };
 
+  const handleEditorContent = (html) => {
+    setTaskDescription(html);
+  };
+
   const handleCancel = () => {
     setIsAddingTask(false);
   };
@@ -43,10 +48,6 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
     setTaskName(e.target.value);
     setCharCount(30 - e.target.value.length);
     setIsError(e.target.value === "");
-  };
-
-  const handleDescriptionChange = (e) => {
-    setTaskDescription(e.target.value);
   };
 
   return (
@@ -59,11 +60,12 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
           placeholder={isError ? "Title is required" : "Title"}
           onChange={handleNameChange}></textarea>
         <div className="form__char-count">Characters left: {charCount}</div>
-        <textarea
-          className="form__textarea form__textarea_big"
-          value={taskDescription}
-          placeholder="Description"
-          onChange={handleDescriptionChange}></textarea>
+
+        <Tiptap
+          onEditorContentSave={handleEditorContent}
+          description={taskDescription}
+        />
+
         <div className="form__btn_wrapper">
           <button className="form__btn" type="submit">
             Add

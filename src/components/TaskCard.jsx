@@ -10,7 +10,7 @@ import DropdownMenu from "./DropdownMenu";
 import TaskEditDescription from "./TaskEditDescription";
 import TaskEditName from "./TaskEditName";
 
-const TaskCard = ({ task, index, idColumn }) => {
+const TaskCard = ({ task, idColumn }) => {
   const [isSelectDeadline, setIsDeadline] = useState(false);
   const [deadlineValue, setDeadlineValue] = useState(task.deadline || "");
   const [isDeadlineDeleteDisabled, setIsDeadlineDeleteDisabled] = useState(
@@ -21,7 +21,6 @@ const TaskCard = ({ task, index, idColumn }) => {
   );
 
   const [isEditingDescription, setIsEditingDescription] = useState(false);
-  const [editedDescription, setEditedDescription] = useState(task.description);
 
   const [isDropdownMenu, setIsDropdownMenu] = useState(false);
 
@@ -142,8 +141,6 @@ const TaskCard = ({ task, index, idColumn }) => {
           task={task}
           isEditingDescription={isEditingDescription}
           setIsEditingDescription={setIsEditingDescription}
-          editedDescription={editedDescription}
-          setEditedDescription={setEditedDescription}
         />
         <div className="card__deadline_wrapper">
           {isSelectDeadline ? (
