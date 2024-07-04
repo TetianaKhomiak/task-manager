@@ -30,3 +30,7 @@ button.is-active {
 .clear-formatting__icon {
     vertical-align: -3px;
 }
+
+u {
+    text-underline-offset: 2px;
+}
