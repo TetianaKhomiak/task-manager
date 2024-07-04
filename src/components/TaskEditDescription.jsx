@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTaskDescription } from "../redux/slices/cardSlice";
 import "../styles/TaskEditDescription.css";
-import "../styles/TaskEditName.css"; //for style of .edit__textarea
 import Tiptap from "./Tiptap";
 
 const TaskEditDescription = ({

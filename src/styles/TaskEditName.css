@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 .edit__textarea {
-    width: 75%;
-    margin: 10px 0;
+    width: 210px;
+    margin: 10px 15px 10px 0;
     padding: 3px 5px;
     background-color: #fbf7f7;
     line-height: 1.5;

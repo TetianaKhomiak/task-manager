@@ -4,16 +4,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 95%;
-    margin: auto;
-}
-
-.edit__textarea_descr {
-    height: 250px;
+    width: 190px;
+    margin-left: 10px;
 }
 
 .edit__descr {
-
     height: 145px;
     word-break: break-word;
     overflow-y: auto;
@@ -56,9 +51,9 @@
     word-break: break-word;
     overflow-y: auto;
     overflow-x: hidden;
-    width: 200px;
+    width: 190px;
     background-color: #fbf7f7;
-    margin: 10px 0;
+    margin: 10px 15px 10px 0;
     padding: 3px 5px 3px 20px;
     line-height: 1.5;
     border-radius: 5px;
