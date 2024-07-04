@@ -26,11 +26,18 @@ const TaskColumn = ({ title, idColumn }) => {
     setIsAddingTask(true);
   };
 
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: idColumn });
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: idColumn });
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
+    opacity: isDragging ? 0.5 : 1,
   };
   const getTaskPos = (id) => tasks.findIndex((task) => task.id === id);
 
@@ -61,7 +68,7 @@ const TaskColumn = ({ title, idColumn }) => {
   };
   const sensors = useSensors(
     useSensor(PointerSensor, {
-      activationConstraint: { distance: 100 },
+      activationConstraint: { distance: 10 },
     })
   );
   return (

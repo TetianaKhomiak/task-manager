@@ -66,6 +66,11 @@ const TaskEditName = ({ task }) => {
     }
   };
 
+  const handleMouseDown = (event) => {
+    //to prevent selection of text in edit____name while doubleclick
+    event.preventDefault();
+  };
+
   return (
     <div className="edit__wrapper">
       <>
@@ -96,6 +101,7 @@ const TaskEditName = ({ task }) => {
           <>
             <div
               className="edit__name"
+              onMouseDown={handleMouseDown}
               onDoubleClick={handleEditName}
               style={{
                 backgroundColor: selectedColor ? selectedColor : "#CDC5C5",

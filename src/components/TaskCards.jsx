@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { SearchContext } from "../context/SearchProvider";
-// import { dropCard } from "../redux/slices/cardSlice";
-// import DropAreaCard from "./DropAreaCard";
 import TaskCard from "./TaskCard";
 import {
   SortableContext,
@@ -23,7 +21,7 @@ const TaskCards = ({ columnName, idColumn }) => {
       <SortableContext items={tasks} strategy={verticalListSortingStrategy}>
         {filteredTasks
           .filter((task) => task.columnName === columnName)
-          .map((task, index) => (
+          .map((task) => (
             <div key={task.id}>
               <TaskCard
                 task={task}

@@ -26,6 +26,13 @@ const TaskEditDescription = ({
 
   const handleEditDescription = () => {
     setIsEditingDescription(true);
+    //Clear text selection - after double click the text in Tiptap is selected
+    window.getSelection().removeAllRanges();
+  };
+
+  const handleMouseDown = (event) => {
+    //to prevent selection of text in edit__descr while doubleclick
+    event.preventDefault();
   };
 
   const handleEditorContent = (html) => {
@@ -58,7 +65,10 @@ const TaskEditDescription = ({
         </>
       ) : (
         <>
-          <div className="edit__descr" onDoubleClick={handleEditDescription}>
+          <div
+            className="edit__descr"
+            onMouseDown={handleMouseDown}
+            onDoubleClick={handleEditDescription}>
             <div className="edit__descr_text">
               {task.description ? parse(task.description) : ""}
             </div>

@@ -13,7 +13,7 @@
 }
 
 .edit__descr {
-    cursor: pointer;
+
     height: 145px;
     word-break: break-word;
     overflow-y: auto;
@@ -27,6 +27,7 @@
     font-size: 18px;
     font-weight: 500;
     margin: 0 5px 0 10px;
+    cursor: pointer;
 }
 
 .edit__descr_text p:not(:is(ul p, ol p)) {

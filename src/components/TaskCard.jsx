@@ -34,11 +34,19 @@ const TaskCard = ({ task, idColumn }) => {
   const dropdownRef = useRef(null);
   const deadlineRef = useRef(null);
 
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: task.id });
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: task.id });
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
+    opacity: isDragging ? 0.5 : 1,
+    // userSelect: isDragging ? "none" : "auto",
   };
 
   useEffect(() => {
@@ -91,7 +99,7 @@ const TaskCard = ({ task, idColumn }) => {
     <div
       ref={setNodeRef}
       {...attributes}
-      {...listeners}
+      {...(isEditingDescription ? {} : listeners)}
       style={style}
       className="card__listeners">
       <div
