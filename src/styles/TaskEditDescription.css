@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
-.edit__form_descr {
+.edit__wrapper_descr {
     display: flex;
     justify-content: space-between;
     align-items: center;

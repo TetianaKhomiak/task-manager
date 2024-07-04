@@ -18,15 +18,12 @@ import columnReducer, {
 import cardReducer, {
   addTask,
   updateTasks,
-  // setActiveCard,
   deleteCard,
-  // updateTaskName,
+  updateTaskName,
   updateDeadline,
   updateTaskDescription,
   setColor,
-  // dropCard,
   tasksKey,
-  // activeCardKey,
 } from "./slices/cardSlice";
 
 const localStorageMiddleware = createListenerMiddleware();
@@ -42,13 +39,11 @@ localStorageMiddleware.startListening({
     moveColumn,
     addTask,
     updateTasks,
-    // setActiveCard,
     deleteCard,
-    // updateTaskName,
+    updateTaskName,
     updateDeadline,
     updateTaskDescription,
     setColor
-    // dropCard
   ),
   effect: (action, listenerApi) => {
     const state = listenerApi.getState();
@@ -63,7 +58,6 @@ localStorageMiddleware.startListening({
     );
 
     localStorage.setItem(tasksKey, JSON.stringify(state.card.tasks));
-    // localStorage.setItem(activeCardKey, JSON.stringify(state.card.activeCard));
   },
 });
 

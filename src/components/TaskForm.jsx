@@ -60,12 +60,10 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
           placeholder={isError ? "Title is required" : "Title"}
           onChange={handleNameChange}></textarea>
         <div className="form__char-count">Characters left: {charCount}</div>
-
         <Tiptap
           onEditorContentSave={handleEditorContent}
           description={taskDescription}
         />
-
         <div className="form__btn_wrapper">
           <button className="form__btn" type="submit">
             Add

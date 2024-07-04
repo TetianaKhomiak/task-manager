@@ -78,7 +78,6 @@ const Tiptap = ({ onEditorContentSave, task = {}, description = "" }) => {
       <div>
         <EditorContent editor={editor} />
       </div>
-      {/* <button onClick={handleEditorContent}>save</button> */}
     </div>
   );
 };

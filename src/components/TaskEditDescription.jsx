@@ -43,7 +43,7 @@ const TaskEditDescription = ({
     <div>
       {isEditingDescription ? (
         <>
-          <div className="edit__form_descr">
+          <div className="edit__wrapper_descr">
             <Tiptap onEditorContentSave={handleEditorContent} task={task} />
             <button
               className="edit__btn"
