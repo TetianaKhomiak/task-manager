@@ -11,7 +11,6 @@ import { ImUndo2 } from "react-icons/im";
 const extensions = [StarterKit, Underline];
 
 const Tiptap = ({ onEditorContentSave, task = {}, description = "" }) => {
-  console.log(typeof onEditorContentSave);
   const content = task.description ? task.description : description;
   const editor = useEditor({
     extensions,
@@ -57,9 +56,7 @@ const Tiptap = ({ onEditorContentSave, task = {}, description = "" }) => {
             className={editor.isActive("underline") ? "is-active" : ""}>
             <u>U</u>
           </button>
-          <button
-            type="button"
-            onClick={() => editor.chain().focus().clearNodes().run()}>
+          <button type="button" onClick={() => editor.commands.unsetAllMarks()}>
             <TbClearFormatting className="clear-formatting__icon" />
           </button>
         </div>
