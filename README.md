@@ -3,7 +3,7 @@
 ## Webpage Preview
 > https://task-manager-flame-eta.vercel.app/
 
- # Tools📋                                                                                                                                                          
+ ## Tools📋                                                                                                                                                          
  ⚡️ React Vite                                                                                                                                                     
  ⚡️ Redux Toolkit                                                                                                                                                          
  ⚡️ dnd kit                                                                                                                                                        
