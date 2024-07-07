@@ -1,15 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import App from "./App.jsx";
+import SearchProvider from "./context/SearchProvider.jsx";
 import "./index.css";
 import { store } from "./redux/store.jsx";
-import { Provider } from "react-redux";
-import SearchProvider from "./context/SearchProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <SearchProvider>
+  <SearchProvider>
+    <Provider store={store}>
       <App />
-    </SearchProvider>
-  </Provider>
+    </Provider>
+  </SearchProvider>
 );

@@ -24,18 +24,18 @@ const DropdownMenu = ({
   setIsEditingDescription,
   idColumn,
 }) => {
+  const tasks = useSelector((state) => state.card.tasks);
+  const currentTask = tasks.find((item) => item.id === task.id);
+  const columns = useSelector((state) => state.column.columns);
+  const currentColumnName = currentTask ? currentTask.columnName : "";
   const dispatch = useDispatch();
+
   const [isMovingTask, setIsMovingTask] = useState(false);
   const [isDescriptionDeleteDisabled, setIsDescriptionDeleteDisabled] =
     useState(!task.description);
   const [isDescriptionAddDisabled, setIsDescriptionAddDisabled] = useState(
     task.description
   );
-
-  const tasks = useSelector((state) => state.card.tasks);
-  const currentTask = tasks.find((item) => item.id === task.id);
-  const currentColumnName = currentTask ? currentTask.columnName : "";
-  const columns = useSelector((state) => state.column.columns);
 
   const currentIndexColumn = columns.findIndex(
     (column) => column.name === currentColumnName
@@ -137,7 +137,6 @@ const DropdownMenu = ({
             currentColumnName={currentColumnName}
             currentIndexColumn={currentIndexColumn}
             currentTask={currentTask}
-            columns={columns}
             idColumn={idColumn}
           />
         )}

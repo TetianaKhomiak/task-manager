@@ -6,11 +6,11 @@ import { setColor } from "../redux/slices/cardSlice";
 import "../styles/ColorSelector.css";
 
 const ColorSelector = ({ task }) => {
+  const tasks = useSelector((state) => state.card.tasks);
   const dispatch = useDispatch();
-  const selectedColor = useSelector((state) => {
-    const currentTask = state.card.tasks.find((item) => item.id === task.id);
-    return currentTask ? currentTask.selectedColor : null;
-  });
+
+  const selectedColor =
+    tasks.find((item) => item.id === task.id)?.selectedColor || null;
 
   const handleColorChange = (color) => {
     dispatch(setColor({ id: task.id, selectedColor: color }));
@@ -28,7 +28,7 @@ const ColorSelector = ({ task }) => {
           </summary>
           <div className="color-changer__wrapper ">
             <div className="summary-content">
-              <button
+              <div
                 className="color-option"
                 onClick={() => handleColorChange("#87B69D")}>
                 <FaRegCircleDot
@@ -36,8 +36,8 @@ const ColorSelector = ({ task }) => {
                     selectedColor === "#87B69D" ? "active" : ""
                   }`}
                 />
-              </button>
-              <button
+              </div>
+              <div
                 className="color-option"
                 onClick={() => handleColorChange("#ab91c7")}>
                 <FaRegCircleDot
@@ -45,8 +45,8 @@ const ColorSelector = ({ task }) => {
                     selectedColor === "#ab91c7" ? "active" : ""
                   }`}
                 />
-              </button>
-              <button
+              </div>
+              <div
                 className="color-option"
                 onClick={() => handleColorChange("#96d0f2")}>
                 <FaRegCircleDot
@@ -54,8 +54,8 @@ const ColorSelector = ({ task }) => {
                     selectedColor === "#96d0f2" ? "active" : ""
                   }`}
                 />
-              </button>
-              <button
+              </div>
+              <div
                 className="color-option"
                 onClick={() => handleColorChange("#cdc5c5")}>
                 <FaRegCircleDot
@@ -63,9 +63,9 @@ const ColorSelector = ({ task }) => {
                     selectedColor === "#cdc5c5" ? "active" : ""
                   }`}
                 />
-              </button>
+              </div>
 
-              <button
+              <div
                 className="color-option"
                 onClick={() => handleColorChange("#f8a9b2")}>
                 <FaRegCircleDot
@@ -73,9 +73,9 @@ const ColorSelector = ({ task }) => {
                     selectedColor === "#f8a9b2" ? "active" : ""
                   }`}
                 />
-              </button>
+              </div>
 
-              <button
+              <div
                 className="color-option"
                 onClick={() => handleColorChange("#EAF68E")}>
                 <FaRegCircleDot
@@ -83,7 +83,7 @@ const ColorSelector = ({ task }) => {
                     selectedColor === "#EAF68E" ? "active" : ""
                   }`}
                 />
-              </button>
+              </div>
             </div>
           </div>
           <div className="summary-chevron-down">

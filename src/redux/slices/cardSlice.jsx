@@ -13,7 +13,6 @@ export const cardSlice = createSlice({
     addTask: (state, action) => {
       state.tasks = [...state.tasks, action.payload];
     },
-
     updateTaskName: (state, action) => {
       const { id, editedTask } = action.payload;
       state.tasks = state.tasks.map((item) =>

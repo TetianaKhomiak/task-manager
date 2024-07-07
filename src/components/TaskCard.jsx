@@ -10,8 +10,14 @@ import DropdownMenu from "./DropdownMenu";
 import TaskEditDescription from "./TaskEditDescription";
 import TaskEditName from "./TaskEditName";
 
-const TaskCard = ({ task, idColumn }) => {
+const TaskCard = ({ task }) => {
+  const tasks = useSelector((state) => state.card.tasks);
+  const dispatch = useDispatch();
   const [isSelectDeadline, setIsDeadline] = useState(false);
+  const [isEditingDescription, setIsEditingDescription] = useState(false);
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [isDropdownMenu, setIsDropdownMenu] = useState(false);
+
   const [deadlineValue, setDeadlineValue] = useState(task.deadline || "");
   const [isDeadlineDeleteDisabled, setIsDeadlineDeleteDisabled] = useState(
     !task.deadline
@@ -20,17 +26,11 @@ const TaskCard = ({ task, idColumn }) => {
     task.deadline
   );
 
-  const [isEditingDescription, setIsEditingDescription] = useState(false);
+  const selectedColor =
+    tasks.find((item) => item.id === task.id)?.selectedColor || null;
 
-  const [isDropdownMenu, setIsDropdownMenu] = useState(false);
-
-  const selectedColor = useSelector((state) => {
-    const currentTask = state.card.tasks.find((item) => item.id === task.id);
-    return currentTask ? currentTask.selectedColor : null;
-  });
   const transformedColor = transformColor(selectedColor);
 
-  const dispatch = useDispatch();
   const dropdownRef = useRef(null);
   const deadlineRef = useRef(null);
 
@@ -90,22 +90,26 @@ const TaskCard = ({ task, idColumn }) => {
     setIsDeadlineDeleteDisabled(false);
   };
 
-  const handleDropdownMenu = (event) => {
-    event.stopPropagation();
+  const handleDropdownMenu = () => {
     setIsDropdownMenu(!isDropdownMenu);
+  };
+
+  const handleDeleteCard = () => {
+    dispatch(deleteCard(task.id));
   };
 
   return (
     <div
       ref={setNodeRef}
       {...attributes}
-      {...(isEditingDescription ? {} : listeners)}
+      {...(isEditingDescription || isEditingName ? {} : listeners)}
       style={style}
       className="card__listeners">
       <div
         className="card__container"
         style={{
           backgroundColor: transformedColor ? transformedColor : "#F5F6F8",
+          cursor: isEditingDescription || isEditingName ? "auto" : "all-scroll",
         }}>
         <div>
           {isDropdownMenu && (
@@ -113,13 +117,16 @@ const TaskCard = ({ task, idColumn }) => {
               className="card__overlay"
               onClick={() => setIsDropdownMenu(false)}></div>
           )}
-
           <div
             className="card__wrapper"
             style={{
               backgroundColor: selectedColor ? selectedColor : "#CDC5C5",
             }}>
-            <TaskEditName task={task} />
+            <TaskEditName
+              task={task}
+              isEditingName={isEditingName}
+              setIsEditingName={setIsEditingName}
+            />
             <div className="card__header_wrapper">
               <div ref={dropdownRef} className="card__dropdown-container">
                 {isDropdownMenu ? (
@@ -128,12 +135,11 @@ const TaskCard = ({ task, idColumn }) => {
                     task={task}
                     setIsDropdownMenu={setIsDropdownMenu}
                     deadlineValue={deadlineValue}
-                    handleDeleteCard={() => dispatch(deleteCard(task.id))}
+                    handleDeleteCard={handleDeleteCard}
                     isDeadlineDeleteDisabled={isDeadlineDeleteDisabled}
                     isDeadlineAddDisabled={isDeadlineAddDisabled}
                     handleSelectDeadline={handleSelectDeadline}
                     setIsEditingDescription={setIsEditingDescription}
-                    idColumn={idColumn}
                   />
                 ) : (
                   <IoEllipsisVerticalOutline

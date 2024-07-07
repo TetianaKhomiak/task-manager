@@ -1,20 +1,19 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 import { updateTasks } from "../redux/slices/cardSlice";
 import { moveColumn } from "../redux/slices/columnSlice";
 import "../styles/SubDropdownMenu.css";
-import { v4 as uuidv4 } from "uuid";
 
 const SubDropdownMenu = ({
   tasks,
   currentIndexColumn,
   currentColumnName,
   currentTask,
-  columns,
-  idColumn,
 }) => {
-  const dispatch = useDispatch();
   const buttonsText = ["To Do", "In Progress", "On Hold", "Completed"];
+  const columns = useSelector((state) => state.column.columns);
+  const dispatch = useDispatch();
 
   const handleMoveTask = (currentTask, newColumnName) => {
     const columnExists = columns.some(

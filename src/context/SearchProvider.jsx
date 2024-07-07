@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { createContext, useState } from "react";
 
 export const SearchContext = createContext(null);
@@ -6,10 +6,14 @@ export const SearchContext = createContext(null);
 const SearchProvider = ({ children }) => {
   const [searchTask, setSearchTask] = useState("");
 
-  const searchValues = {
-    searchTask,
-    setSearchTask,
-  };
+  const searchValues = useMemo(
+    () => ({
+      searchTask,
+      setSearchTask,
+    }),
+    [searchTask, setSearchTask]
+  );
+
   return (
     <SearchContext.Provider value={searchValues}>
       {children}

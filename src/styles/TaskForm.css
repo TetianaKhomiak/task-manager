@@ -12,6 +12,7 @@
 }
 
 .form__textarea {
+    background-color: #FBF7F7;
     padding: 10px;
     max-width: 100%;
     line-height: 1.5;

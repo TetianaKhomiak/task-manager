@@ -4,20 +4,19 @@ import { transformColor } from "../../utils";
 import { updateTaskName } from "../redux/slices/cardSlice";
 import "../styles/TaskEditName.css";
 
-const TaskEditName = ({ task }) => {
-  const dispatch = useDispatch();
-  const [isEditingName, setIsEditingName] = useState(false);
+const TaskEditName = ({ task, isEditingName, setIsEditingName }) => {
+  const tasks = useSelector((state) => state.card.tasks);
   const [editedName, setEditedName] = useState(task.name);
-
-  const [leftCharacterLenght, setLeftCharacterLenght] = useState(30);
-  const selectedColor = useSelector((state) => {
-    const currentTask = state.card.tasks.find((item) => item.id === task.id);
-    return currentTask ? currentTask.selectedColor : null;
-  });
-  const transformedColor = transformColor(selectedColor);
-
+  const [leftCharacterLenght, setLeftCharacterLenght] = useState(20);
+  const dispatch = useDispatch();
+  //const [isEditingName, setIsEditingName] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
+  const selectedColor =
+    tasks.find((item) => item.id === task.id)?.selectedColor || null;
+
+  const transformedColor = transformColor(selectedColor);
 
   const buttonStyle = {
     backgroundColor: isHovered
@@ -39,13 +38,13 @@ const TaskEditName = ({ task }) => {
 
   useEffect(() => {
     const setCharactersLengh = () => {
-      setLeftCharacterLenght(30 - editedName.length);
+      setLeftCharacterLenght(20 - editedName.length);
     };
     setCharactersLengh();
   }, [editedName]);
 
   useEffect(() => {
-    // Reset isHovered when exiting edit mode
+    // reset isHovered when exiting edit mode
     if (!isEditingName) {
       setIsHovered(false);
     }
@@ -67,7 +66,7 @@ const TaskEditName = ({ task }) => {
   };
 
   const handleMouseDown = (event) => {
-    //to prevent selection of text in edit____name while doubleclick
+    //prevent selection of text in edit____name while doubleclick
     event.preventDefault();
   };
 
@@ -80,7 +79,7 @@ const TaskEditName = ({ task }) => {
               <textarea
                 className="edit__textarea"
                 type="text"
-                maxLength={30}
+                maxLength={20}
                 value={editedName}
                 placeholder={isError ? "Title is required" : ""}
                 onChange={(e) => setEditedName(e.target.value)}></textarea>

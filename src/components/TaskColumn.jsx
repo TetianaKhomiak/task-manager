@@ -17,11 +17,12 @@ import TaskCards from "./TaskCards";
 import TaskForm from "./TaskForm";
 
 const TaskColumn = ({ title, idColumn }) => {
-  const dispatch = useDispatch();
-  const [isAddingTask, setIsAddingTask] = useState(false);
-  const { columns } = useSelector((state) => state.column);
+  const columns = useSelector((state) => state.column.columns);
   const tasks = useSelector((state) => state.card.tasks);
-  console.log(columns);
+  const dispatch = useDispatch();
+
+  const [isAddingTask, setIsAddingTask] = useState(false);
+
   const handleCreateTask = () => {
     setIsAddingTask(true);
   };
@@ -47,30 +48,28 @@ const TaskColumn = ({ title, idColumn }) => {
     if (active.id === over.id) return;
     const originalPos = getTaskPos(active.id);
     const newPos = getTaskPos(over.id);
-
     const newTasks = arrayMove(tasks, originalPos, newPos);
 
     dispatch(updateTasks(newTasks));
   };
+
   const handleDeleteColumn = () => {
     if (!columns || !tasks) {
       console.error("Columns or tasks are undefined");
       return;
     }
-
-    const filteredTaskColumnList = columns.filter(
-      (column) => column.id !== idColumn
-    );
     const filteredTaskCards = tasks.filter((task) => task.columnName !== title);
 
-    dispatch(deleteColumn(filteredTaskColumnList));
+    dispatch(deleteColumn(idColumn));
     dispatch(updateTasks(filteredTaskCards));
   };
+
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: { distance: 10 },
     })
   );
+
   return (
     <DndContext
       sensors={sensors}

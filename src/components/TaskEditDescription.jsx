@@ -10,27 +10,29 @@ const TaskEditDescription = ({
   isEditingDescription,
   setIsEditingDescription,
 }) => {
-  const selectedColor = useSelector((state) => {
-    const currentTask = state.card.tasks.find((item) => item.id === task.id);
-    return currentTask ? currentTask.selectedColor : null;
-  });
+  const tasks = useSelector((state) => state.card.tasks);
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
+
+  const selectedColor =
+    tasks.find((item) => item.id === task.id)?.selectedColor || null;
+
   const buttonStyle = {
     backgroundColor: isHovered ? (selectedColor ? selectedColor : "") : "",
     transition: "background-color 0.3s ease",
   };
+
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
   const handleEditDescription = () => {
     setIsEditingDescription(true);
-    //Clear text selection - after double click the text in Tiptap is selected
+    //clear text selection - because after double click the text in Tiptap is selected
     window.getSelection().removeAllRanges();
   };
 
   const handleMouseDown = (event) => {
-    //to prevent selection of text in edit__descr while doubleclick
+    //prevent selection of text in edit__descr while doubleclick
     event.preventDefault();
   };
 
@@ -39,7 +41,7 @@ const TaskEditDescription = ({
   };
 
   useEffect(() => {
-    // Reset isHovered when exiting edit mode
+    // reset isHovered when exiting edit mode
     if (!isEditingDescription) {
       setIsHovered(false);
     }

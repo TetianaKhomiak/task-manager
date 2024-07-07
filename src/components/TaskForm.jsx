@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 import { addTask } from "../redux/slices/cardSlice";
 import "../styles/TaskForm.css";
-import { v4 as uuidv4 } from "uuid";
 import Tiptap from "./Tiptap";
 
 const TaskForm = ({ setIsAddingTask, columnName }) => {
-  const dispatch = useDispatch();
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [charCount, setCharCount] = useState(30);
   const [isError, setIsError] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSubmitForm = (e) => {
     e.preventDefault();

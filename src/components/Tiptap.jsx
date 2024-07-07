@@ -1,12 +1,12 @@
-import React from "react";
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
-import "../styles/Tiptap.css";
-import { TbClearFormatting } from "react-icons/tb";
-import { VscListOrdered } from "react-icons/vsc";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import React from "react";
 import { HiListBullet } from "react-icons/hi2";
 import { ImUndo2 } from "react-icons/im";
+import { TbClearFormatting } from "react-icons/tb";
+import { VscListOrdered } from "react-icons/vsc";
+import "../styles/Tiptap.css";
 
 const extensions = [StarterKit, Underline];
 
@@ -15,7 +15,7 @@ const Tiptap = ({ onEditorContentSave, task = {}, description = "" }) => {
   const editor = useEditor({
     extensions,
     content,
-    onUpdate: ({ editor }) => {
+    onBlur: ({ editor }) => {
       onEditorContentSave(editor.getHTML());
     },
   });

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { memo, useContext } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { SearchContext } from "../context/SearchProvider";
 import "../styles/TaskSearch.css";
@@ -24,4 +24,4 @@ const TaskSearch = () => {
   );
 };
 
-export default TaskSearch;
+export default memo(TaskSearch);
