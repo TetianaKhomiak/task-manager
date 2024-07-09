@@ -3,9 +3,9 @@
 ## Webpage Preview
 > https://task-manager-flame-eta.vercel.app/
 
- ## Tools📋                                                                                                                                                          
- ⚡️ React Vite                                                                                                                                                     
- ⚡️ Redux Toolkit                                                                                                                                                          
+ ## Toolkit💻                                                                                                                                                        
+ ⚡️ React                                                                                                                                                     
+ ⚡️ Redux Toolkit                                                                                                                                                         ⚡ CSS3 
  ⚡️ dnd kit                                                                                                                                                        
  ⚡️ Tiptap
 
