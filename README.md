@@ -5,7 +5,8 @@
 
  ## Toolkit💻                                                                                                                                                        
  ⚡️ React                                                                                                                                                     
- ⚡️ Redux Toolkit                                                                                                                                                         ⚡ CSS3 
- ⚡️ dnd kit                                                                                                                                                        
+ ⚡️ Redux Toolkit                                                                                                                                                        
+ ⚡ CSS3                                                                                                                                                     
+ ⚡️ dnd kit                                                                                                                                                   
  ⚡️ Tiptap
 
