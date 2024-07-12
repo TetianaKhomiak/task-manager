@@ -5,7 +5,7 @@ import { addTask } from "../redux/slices/cardSlice";
 import "../styles/TaskForm.css";
 import Tiptap from "./Tiptap";
 
-const TaskForm = ({ setIsAddingTask, columnName }) => {
+const TaskForm = ({ setIsAddingTask, columnName, columnId }) => {
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [charCount, setCharCount] = useState(30);
@@ -24,6 +24,7 @@ const TaskForm = ({ setIsAddingTask, columnName }) => {
           id: uuidv4(),
           description: taskDescription,
           columnName,
+          columnId,
           deadline: null,
           selectedColor: "#CDC5C5",
         })

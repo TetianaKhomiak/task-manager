@@ -35,18 +35,21 @@ const TaskCard = ({ task }) => {
   const deadlineRef = useRef(null);
 
   const {
+    setNodeRef,
     attributes,
     listeners,
-    setNodeRef,
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: task.id });
+  } = useSortable({
+    id: task.id,
+    data: { type: "Task", task },
+  });
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
     opacity: isDragging ? 0.5 : 1,
-    // userSelect: isDragging ? "none" : "auto",
+    userSelect: isDragging ? "none" : "auto",
   };
 
   useEffect(() => {
@@ -100,10 +103,11 @@ const TaskCard = ({ task }) => {
 
   return (
     <div
-      ref={setNodeRef}
       {...attributes}
-      {...(isEditingDescription || isEditingName ? {} : listeners)}
+      //  {...listeners}
+      ref={setNodeRef}
       style={style}
+      {...(isEditingDescription || isEditingName ? {} : listeners)}
       className="card__listeners">
       <div
         className="card__container"
