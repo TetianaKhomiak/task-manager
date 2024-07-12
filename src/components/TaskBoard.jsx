@@ -41,7 +41,17 @@ const TaskBoard = () => {
     setActiveTask(null);
     const { active, over } = event;
     if (!over) return;
+    if (
+      active.data.current?.type === "Column" &&
+      over.data.current?.type === "Column"
+    ) {
+      const activeIndex = columns.findIndex((col) => col.id === active.id);
+      const overIndex = columns.findIndex((col) => col.id === over.id);
 
+      const reorderedColumns = arrayMove(columns, activeIndex, overIndex);
+      dispatch(updateColumns(reorderedColumns));
+      return;
+    }
     if (
       active.data.current?.type === "Task" &&
       over.data.current?.type === "Task"
