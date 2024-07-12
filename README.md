@@ -1,1 +1,12 @@
-//https://tkhomiak8889.atlassian.net/jira/software/projects/KAN/boards/1
+# task-manager
+
+## Webpage Preview
+> https://task-manager-flame-eta.vercel.app/
+
+ ## Toolkit💻                                                                                                                                                        
+ ⚡️ React                                                                                                                                                     
+ ⚡️ Redux Toolkit                                                                                                                                                        
+ ⚡ CSS3                                                                                                                                                     
+ ⚡️ dnd kit                                                                                                                                                   
+ ⚡️ Tiptap
+
