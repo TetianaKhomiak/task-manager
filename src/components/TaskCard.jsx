@@ -104,7 +104,6 @@ const TaskCard = ({ task }) => {
   return (
     <div
       {...attributes}
-      //  {...listeners}
       ref={setNodeRef}
       style={style}
       {...(isEditingDescription || isEditingName ? {} : listeners)}

@@ -41,8 +41,6 @@ const DropdownMenu = ({
     (column) => column.name === currentColumnName
   );
 
-  console.log(currentIndexColumn);
-
   useEffect(() => {
     const updateTaskProp = () => {
       setIsDescriptionDeleteDisabled(!task.description);

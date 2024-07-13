@@ -100,6 +100,7 @@ const TaskBoard = () => {
 
     if (!isActiveATask) return;
 
+    // Dropping a task over another task
     if (isActiveATask && isOverATask) {
       const activeIndex = tasks.findIndex((t) => t.id === activeId);
       const overIndex = tasks.findIndex((t) => t.id === overId);
@@ -141,8 +142,6 @@ const TaskBoard = () => {
       dispatch(updateTasks(newTasks));
     }
   }
-
-  console.log(tasks);
 
   return (
     <DndContext

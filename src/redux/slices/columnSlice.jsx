@@ -29,7 +29,7 @@ export const columnSlice = createSlice({
     updateColumns: (state, action) => {
       state.columns = action.payload;
     },
-    moveColumn: (state, action) => {
+    moveTaskToNewColumn: (state, action) => {
       const { id, name } = action.payload;
 
       if (!state.columns.some((column) => column.name === name)) {
@@ -40,5 +40,5 @@ export const columnSlice = createSlice({
 });
 
 export default columnSlice.reducer;
-export const { addColumn, deleteColumn, updateColumns, moveColumn } =
+export const { addColumn, deleteColumn, updateColumns, moveTaskToNewColumn } =
   columnSlice.actions;

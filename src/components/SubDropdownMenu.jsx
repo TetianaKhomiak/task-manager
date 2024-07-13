@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { updateTasks } from "../redux/slices/cardSlice";
-import { moveColumn } from "../redux/slices/columnSlice";
+import { moveTaskToNewColumn } from "../redux/slices/columnSlice";
 import "../styles/SubDropdownMenu.css";
 
 const SubDropdownMenu = ({
@@ -19,9 +19,9 @@ const SubDropdownMenu = ({
     const columnExists = columns.some(
       (column) => column.name === newColumnName
     );
-    console.log(columnExists);
+
     if (!columnExists) {
-      dispatch(moveColumn({ id: uuidv4(), name: newColumnName }));
+      dispatch(moveTaskToNewColumn({ id: uuidv4(), name: newColumnName }));
     }
 
     const updatedTasks = tasks.map((task) =>

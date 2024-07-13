@@ -7,7 +7,7 @@ import columnReducer, {
   addColumn,
   deleteColumn,
   updateColumns,
-  moveColumn,
+  moveTaskToNewColumn,
   columnsKey,
 } from "./slices/columnSlice";
 import cardReducer, {
@@ -28,7 +28,7 @@ localStorageMiddleware.startListening({
     addColumn,
     deleteColumn,
     updateColumns,
-    moveColumn,
+    moveTaskToNewColumn,
     addTask,
     updateTasks,
     deleteCard,
