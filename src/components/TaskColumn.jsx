@@ -53,9 +53,14 @@ const TaskColumn = ({ title, idColumn, column }) => {
   };
 
   return (
-    <div className="column__wrapper" ref={setNodeRef} style={style}>
-      <div className="column__wrapper_title" {...attributes}>
-        <div className="column__title" {...listeners}>
+    <div
+      className="column__wrapper"
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}>
+      <div className="column__wrapper_title">
+        <div className="column__title">
           <h3>{title}</h3>
         </div>
 

@@ -23,12 +23,12 @@ const TaskBoard = () => {
   const [activeColumn, setActiveColumn] = useState(null);
   const [activeTask, setActiveTask] = useState(null);
   const columnsId = useMemo(() => columns.map((col) => col.id), [columns]);
-  console.log(columns);
-  // const sensors = useSensors(
-  //   useSensor(PointerSensor, {
-  //     activationConstraint: { distance: 0 },
-  //   })
-  // );
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: { distance: 5 },
+    })
+  );
 
   function onDragStart(event) {
     if (event.active.data.current?.type === "Column") {
@@ -46,6 +46,7 @@ const TaskBoard = () => {
     setActiveTask(null);
     const { active, over } = event;
     if (!over) return;
+
     if (
       active.data.current?.type === "Column" &&
       over.data.current?.type === "Column"
@@ -57,6 +58,7 @@ const TaskBoard = () => {
       dispatch(updateColumns(reorderedColumns));
       return;
     }
+
     if (
       active.data.current?.type === "Task" &&
       over.data.current?.type === "Task"
@@ -150,7 +152,7 @@ const TaskBoard = () => {
 
   return (
     <DndContext
-      // sensors={sensors}
+      sensors={sensors}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
       onDragOver={onDragOver}>
@@ -169,23 +171,6 @@ const TaskBoard = () => {
         </SortableContext>
         <AddColumnForm />
       </div>
-
-      {createPortal(
-        <DragOverlay>
-          {activeTask ? (
-            <TaskCard task={activeTask} />
-          ) : activeColumn ? (
-            <div className="column__drag-overlay">
-              <TaskColumn
-                title={activeColumn.name}
-                idColumn={activeColumn.id}
-                column={activeColumn}
-              />
-            </div>
-          ) : null}
-        </DragOverlay>,
-        document.body
-      )}
     </DndContext>
   );
 };
