@@ -17,6 +17,7 @@ const TaskCard = ({ task }) => {
   const [isEditingDescription, setIsEditingDescription] = useState(false);
   const [isEditingName, setIsEditingName] = useState(false);
   const [isDropdownMenu, setIsDropdownMenu] = useState(false);
+  const [hoveringButton, setHoveringButton] = useState(false); //
 
   const [deadlineValue, setDeadlineValue] = useState(task.deadline || "");
   const [isDeadlineDeleteDisabled, setIsDeadlineDeleteDisabled] = useState(
@@ -65,23 +66,28 @@ const TaskCard = ({ task }) => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownMenu(false);
+        setHoveringButton(false);
       }
       if (deadlineRef.current && !deadlineRef.current.contains(event.target)) {
         setIsDeadline(false);
+        setHoveringButton(false);
       }
     };
 
-    const addEvent = () => {
+    if (isDropdownMenu || isSelectDeadline) {
       document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-    addEvent();
-  }, [dropdownRef, deadlineRef]);
+  }, [isDropdownMenu, isSelectDeadline, dropdownRef, deadlineRef]);
 
   const handleSelectDeadline = () => {
     setIsDeadline(true);
+    setHoveringButton(false);
   };
 
   const handleDateChange = (e) => {
@@ -91,22 +97,30 @@ const TaskCard = ({ task }) => {
     setIsDeadline(false);
     dispatch(updateDeadline({ id: task.id, deadline: formattedDate }));
     setIsDeadlineDeleteDisabled(false);
+    setHoveringButton(false);
   };
 
   const handleDropdownMenu = () => {
-    setIsDropdownMenu(!isDropdownMenu);
+    setIsDropdownMenu(true);
+    setHoveringButton(false);
   };
 
   const handleDeleteCard = () => {
     dispatch(deleteCard(task.id));
+    setHoveringButton(false);
   };
 
   return (
     <div
-      {...attributes}
       ref={setNodeRef}
+      {...attributes}
+      {...(isEditingDescription ||
+      isEditingName ||
+      isDropdownMenu ||
+      hoveringButton
+        ? {}
+        : listeners)}
       style={style}
-      {...(isEditingDescription || isEditingName ? {} : listeners)}
       className="card__listeners">
       <div
         className="card__container"
@@ -145,10 +159,14 @@ const TaskCard = ({ task }) => {
                     setIsEditingDescription={setIsEditingDescription}
                   />
                 ) : (
-                  <IoEllipsisVerticalOutline
+                  <button
+                    type="button"
                     className="card__dots"
                     onClick={handleDropdownMenu}
-                  />
+                    onMouseEnter={() => setHoveringButton(true)}
+                    onMouseLeave={() => setHoveringButton(false)}>
+                    <IoEllipsisVerticalOutline />
+                  </button>
                 )}
               </div>
             </div>
@@ -174,7 +192,10 @@ const TaskCard = ({ task }) => {
             </div>
           ) : (
             <button
+              type="button"
               onClick={handleSelectDeadline}
+              onMouseEnter={() => setHoveringButton(true)}
+              onMouseLeave={() => setHoveringButton(false)}
               className={
                 deadlineValue
                   ? "card__deadline-btn_show"

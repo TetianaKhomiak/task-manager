@@ -8,15 +8,12 @@ const DropdownMenuItem = ({
   children,
 }) => {
   return (
-    <div>
-      <button
-        type="button"
-        className={className}
-        disabled={disabled}
-        onClick={onClick}
-        style={style}>
-        {children}
-      </button>
+    <div
+      className={className}
+      disabled={disabled}
+      onClick={onClick}
+      style={style}>
+      {children}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  DragOverlay,
 } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import React, { useMemo, useState } from "react";
@@ -12,6 +13,8 @@ import { updateColumns } from "../redux/slices/columnSlice";
 import "../styles/TaskBoard.css";
 import AddColumnForm from "./AddColumnForm";
 import TaskColumn from "./TaskColumn";
+import TaskCard from "./TaskCard";
+import { createPortal } from "react-dom";
 
 const TaskBoard = () => {
   const columns = useSelector((state) => state.column.columns);
@@ -22,7 +25,7 @@ const TaskBoard = () => {
   const columnsId = useMemo(() => columns.map((col) => col.id), [columns]);
   const sensors = useSensors(
     useSensor(PointerSensor, {
-      activationConstraint: { distance: 3 },
+      activationConstraint: { distance: 0 },
     })
   );
 
@@ -36,6 +39,7 @@ const TaskBoard = () => {
       return;
     }
   }
+
   function onDragEnd(event) {
     setActiveColumn(null);
     setActiveTask(null);
@@ -164,6 +168,19 @@ const TaskBoard = () => {
         </SortableContext>
         <AddColumnForm />
       </div>
+      {/* {createPortal(
+        <DragOverlay>
+          {activeColumn && (
+            <TaskColumn
+              column={activeColumn}
+              title={activeColumn.name}
+              tasks={tasks.filter((task) => task.columnId === activeColumn.id)}
+            />
+          )}
+          {activeTask && <TaskCard task={activeTask} />}
+        </DragOverlay>,
+        document.body
+      )} */}
     </DndContext>
   );
 };
