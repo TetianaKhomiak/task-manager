@@ -23,11 +23,12 @@ const TaskBoard = () => {
   const [activeColumn, setActiveColumn] = useState(null);
   const [activeTask, setActiveTask] = useState(null);
   const columnsId = useMemo(() => columns.map((col) => col.id), [columns]);
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: { distance: 0 },
-    })
-  );
+  console.log(columns);
+  // const sensors = useSensors(
+  //   useSensor(PointerSensor, {
+  //     activationConstraint: { distance: 0 },
+  //   })
+  // );
 
   function onDragStart(event) {
     if (event.active.data.current?.type === "Column") {
@@ -149,7 +150,7 @@ const TaskBoard = () => {
 
   return (
     <DndContext
-      sensors={sensors}
+      // sensors={sensors}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
       onDragOver={onDragOver}>
@@ -168,19 +169,23 @@ const TaskBoard = () => {
         </SortableContext>
         <AddColumnForm />
       </div>
-      {/* {createPortal(
+
+      {createPortal(
         <DragOverlay>
-          {activeColumn && (
-            <TaskColumn
-              column={activeColumn}
-              title={activeColumn.name}
-              tasks={tasks.filter((task) => task.columnId === activeColumn.id)}
-            />
-          )}
-          {activeTask && <TaskCard task={activeTask} />}
+          {activeTask ? (
+            <TaskCard task={activeTask} />
+          ) : activeColumn ? (
+            <div className="column__drag-overlay">
+              <TaskColumn
+                title={activeColumn.name}
+                idColumn={activeColumn.id}
+                column={activeColumn}
+              />
+            </div>
+          ) : null}
         </DragOverlay>,
         document.body
-      )} */}
+      )}
     </DndContext>
   );
 };

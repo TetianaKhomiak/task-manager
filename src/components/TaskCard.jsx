@@ -46,6 +46,7 @@ const TaskCard = ({ task }) => {
     id: task.id,
     data: { type: "Task", task },
   });
+
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
