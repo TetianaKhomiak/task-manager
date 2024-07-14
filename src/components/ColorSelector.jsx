@@ -48,10 +48,10 @@ const ColorSelector = ({ task }) => {
               </div>
               <div
                 className="color-option"
-                onClick={() => handleColorChange("#96d0f2")}>
+                onClick={() => handleColorChange("#9ACDFC")}>
                 <FaRegCircleDot
                   className={`circle-dot__sky-blue ${
-                    selectedColor === "#96d0f2" ? "active" : ""
+                    selectedColor === "#9ACDFC" ? "active" : ""
                   }`}
                 />
               </div>
