@@ -1,6 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTasks } from "../redux/slices/cardSlice";
@@ -31,10 +31,6 @@ const TaskColumn = ({ title, idColumn, column }) => {
     dispatch(updateTasks(filteredTaskCards));
   };
 
-  const tasksIds = useMemo(() => {
-    return tasks.map((task) => task.id);
-  }, [tasks]);
-
   const {
     setNodeRef,
     attributes,
@@ -53,13 +49,8 @@ const TaskColumn = ({ title, idColumn, column }) => {
   };
 
   return (
-    <div
-      className="column__wrapper"
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}>
-      <div className="column__wrapper_title">
+    <div className="column__wrapper" ref={setNodeRef} style={style}>
+      <div className="column__wrapper_title" {...attributes} {...listeners}>
         <div className="column__title">
           <h3>{title}</h3>
         </div>
