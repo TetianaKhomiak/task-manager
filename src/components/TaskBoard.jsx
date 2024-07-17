@@ -1,20 +1,20 @@
 import {
   DndContext,
+  DragOverlay,
   PointerSensor,
   useSensor,
   useSensors,
-  DragOverlay,
 } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import React, { useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTasks } from "../redux/slices/cardSlice";
 import { updateColumns } from "../redux/slices/columnSlice";
 import "../styles/TaskBoard.css";
 import AddColumnForm from "./AddColumnForm";
-import TaskColumn from "./TaskColumn";
 import TaskCard from "./TaskCard";
-import { createPortal } from "react-dom";
+import TaskColumn from "./TaskColumn";
 
 const TaskBoard = () => {
   const columns = useSelector((state) => state.column.columns);
@@ -26,71 +26,18 @@ const TaskBoard = () => {
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
-      activationConstraint: { distance: 5 },
+      activationConstraint: { distance: 3 },
     })
   );
 
   function onDragStart(event) {
     if (event.active.data.current?.type === "Column") {
       setActiveColumn(event.active.data.current.column);
-      return;
+      // return;
     }
     if (event.active.data.current?.type === "Task") {
       setActiveTask(event.active.data.current.task);
-      return;
-    }
-  }
-
-  function onDragEnd(event) {
-    setActiveColumn(null);
-    setActiveTask(null);
-    const { active, over } = event;
-    if (!over) return;
-
-    if (
-      active.data.current?.type === "Column" &&
-      over.data.current?.type === "Column"
-    ) {
-      const activeIndex = columns.findIndex((col) => col.id === active.id);
-      const overIndex = columns.findIndex((col) => col.id === over.id);
-
-      const reorderedColumns = arrayMove(columns, activeIndex, overIndex);
-      dispatch(updateColumns(reorderedColumns));
-      return;
-    }
-
-    if (
-      active.data.current?.type === "Task" &&
-      over.data.current?.type === "Task"
-    ) {
-      const activeIndex = tasks.findIndex((task) => task.id === active.id);
-      const overIndex = tasks.findIndex((task) => task.id === over.id);
-
-      // Update task position within the same column
-      if (tasks[activeIndex].columnId === tasks[overIndex].columnId) {
-        const reorderedTasks = arrayMove(tasks, activeIndex, overIndex);
-        dispatch(updateTasks(reorderedTasks));
-      }
-    } else if (
-      active.data.current?.type === "Task" &&
-      over.data.current?.type === "Column"
-    ) {
-      const activeIndex = tasks.findIndex((task) => task.id === active.id);
-      const newColumnId = over.id;
-      const newColumnName = columns.find((col) => col.id === newColumnId)?.name;
-
-      const updatedTasks = tasks.map((task, index) => {
-        if (index === activeIndex) {
-          return {
-            ...task,
-            columnId: newColumnId,
-            columnName: newColumnName,
-          };
-        }
-        return task;
-      });
-
-      dispatch(updateTasks(updatedTasks));
+      // return;
     }
   }
 
@@ -150,27 +97,88 @@ const TaskBoard = () => {
     }
   }
 
+  function onDragEnd(event) {
+    //  console.log("Drag End:", event);
+    setActiveColumn(null);
+    setActiveTask(null);
+    const { active, over } = event;
+    if (!over) return;
+    const activeColumnId = active.id;
+    const overColumnId = over.id;
+    if (activeColumnId === overColumnId) return;
+
+    if (
+      active.data.current?.type === "Column" &&
+      over.data.current?.type === "Column"
+    ) {
+      const activeIndex = columns.findIndex((col) => col.id === active.id);
+      const overIndex = columns.findIndex((col) => col.id === over.id);
+
+      const reorderedColumns = arrayMove(columns, activeIndex, overIndex);
+      dispatch(updateColumns(reorderedColumns));
+      //return;
+    }
+
+    if (
+      active.data.current?.type === "Task" &&
+      over.data.current?.type === "Task"
+    ) {
+      const activeIndex = tasks.findIndex((task) => task.id === active.id);
+      const overIndex = tasks.findIndex((task) => task.id === over.id);
+
+      // Update task position within the same column
+      if (tasks[activeIndex].columnId === tasks[overIndex].columnId) {
+        const reorderedTasks = arrayMove(tasks, activeIndex, overIndex);
+        dispatch(updateTasks(reorderedTasks));
+      }
+    } else if (
+      active.data.current?.type === "Task" &&
+      over.data.current?.type === "Column"
+    ) {
+      const activeIndex = tasks.findIndex((task) => task.id === active.id);
+      const newColumnId = over.id;
+      const newColumnName = columns.find((col) => col.id === newColumnId)?.name;
+
+      const updatedTasks = tasks.map((task, index) => {
+        if (index === activeIndex) {
+          return {
+            ...task,
+            columnId: newColumnId,
+            columnName: newColumnName,
+          };
+        }
+        return task;
+      });
+
+      dispatch(updateTasks(updatedTasks));
+    }
+  }
+
   return (
     <DndContext
       sensors={sensors}
       onDragStart={onDragStart}
-      onDragEnd={onDragEnd}
-      onDragOver={onDragOver}>
+      onDragOver={onDragOver}
+      onDragEnd={onDragEnd}>
       <div className="board__wrapper">
         <SortableContext items={columnsId}>
           {columns &&
             columns.length > 0 &&
             columns.map((column) => (
-              <TaskColumn
-                key={column.id}
-                title={column.name}
-                idColumn={column.id}
-                column={column}
-              />
+              <TaskColumn key={column.id} column={column} />
             ))}
         </SortableContext>
         <AddColumnForm />
       </div>
+      {createPortal(
+        <DragOverlay>
+          {activeColumn && activeColumn.name && (
+            <TaskColumn column={activeColumn} />
+          )}
+          {activeTask && <TaskCard task={activeTask} />}
+        </DragOverlay>,
+        document.body
+      )}
     </DndContext>
   );
 };

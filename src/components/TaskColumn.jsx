@@ -9,7 +9,7 @@ import "../styles/TaskColumn.css";
 import TaskCards from "./TaskCards";
 import TaskForm from "./TaskForm";
 
-const TaskColumn = ({ title, idColumn, column }) => {
+const TaskColumn = ({ column }) => {
   const columns = useSelector((state) => state.column.columns);
   const tasks = useSelector((state) => state.card.tasks);
   const dispatch = useDispatch();
@@ -25,9 +25,11 @@ const TaskColumn = ({ title, idColumn, column }) => {
       console.error("Columns or tasks are undefined");
       return;
     }
-    const filteredTaskCards = tasks.filter((task) => task.columnName !== title);
+    const filteredTaskCards = tasks.filter(
+      (task) => task.columnName !== column.name
+    );
 
-    dispatch(deleteColumn(idColumn));
+    dispatch(deleteColumn(column.id));
     dispatch(updateTasks(filteredTaskCards));
   };
 
@@ -50,23 +52,23 @@ const TaskColumn = ({ title, idColumn, column }) => {
 
   return (
     <div className="column__wrapper" ref={setNodeRef} style={style}>
-      <div className="column__wrapper_title" {...attributes} {...listeners}>
-        <div className="column__title">
-          <h3>{title}</h3>
+      <div className="column__wrapper_title">
+        <div className="column__title" {...attributes} {...listeners}>
+          <h3>{column.name}</h3>
         </div>
 
-        {title !== "To Do" && (
+        {column.name !== "To Do" && (
           <button onClick={handleDeleteColumn} className="column__delete-btn">
             <RxCross2 className="column__delete-icon" />
           </button>
         )}
       </div>
       <div>
-        <TaskCards columnName={title} idColumn={idColumn} />
+        <TaskCards columnName={column.name} idColumn={column.id} />
         {isAddingTask ? (
           <TaskForm
             setIsAddingTask={setIsAddingTask}
-            columnName={title}
+            columnName={column.name}
             columnId={column.id}
           />
         ) : (
