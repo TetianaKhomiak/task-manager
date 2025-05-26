@@ -7,6 +7,5 @@
  ⚡️ React                                                                                                                                                     
  ⚡️ Redux Toolkit                                                                                                                                                        
  ⚡ CSS3                                                                                                                                                     
- ⚡️ dnd kit                                                                                                                                                   
- ⚡️ Tiptap
+ ⚡️ dnd kit (drag-and-drop)                                                                                                                                               ⚡️ Tiptap (text editor)
 
